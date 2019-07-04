@@ -4,11 +4,11 @@ SickZil-Machine
 
 SickZil-Machine **automates texts removal** during manga/comics translation(Scanlation) process.
 
-![SeisinkiVulnus_028](docs/1.jpg)
+![SeisinkiVulnus_028](doc/1.jpg)
 
-![LoveHina_vol14_003](docs/2.jpg)
+![LoveHina_vol14_003](doc/2.jpg)
 
-![AkkeraKanjinchou_031](docs/3.jpg)
+![AkkeraKanjinchou_031](doc/3.jpg)
 All of the above images were edited automatically without human intervention.\
 <sup>(source:  [manga109](http://www.manga109.org), © Shimazaki Yuzuru, © Akamatsu Ken, © Kobayashi Yuki)</sup>
 
@@ -36,11 +36,11 @@ coming soon!
 
 식질머신은 식자 작업에서 **글자 제거 작업**을 **자동화**합니다.
 
-![SeisinkiVulnus_028](docs/1.jpg)
+![SeisinkiVulnus_028](doc/1.jpg)
 
-![LoveHina_vol14_003](docs/2.jpg)
+![LoveHina_vol14_003](doc/2.jpg)
 
-![AkkeraKanjinchou_031](docs/3.jpg)
+![AkkeraKanjinchou_031](doc/3.jpg)
 위 이미지들은 모두 사람의 개입 없이 자동으로 편집되었습니다.\
 <sup>(출처: [manga109](http://www.manga109.org), © Shimazaki Yuzuru, © Akamatsu Ken, © Kobayashi Yuki)</sup>
 

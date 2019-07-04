@@ -23,3 +23,9 @@ def set_project(prj_dirpath):
         img_paths
     ))
     cursor = 0
+
+def clear_all():
+    global img_paths, mask_paths, cursor
+    img_paths = ()
+    mask_paths = ()
+    cursor = 0

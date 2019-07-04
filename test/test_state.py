@@ -7,7 +7,7 @@ import unittest
 import utils.fp as fp
 
 class TestState(unittest.TestCase):
-    def test_set_init_set(self):
+    def test_set_project(self):
         state.set_project('fixture/prj_3file_I/')
         self.assertEqual( 
             state.img_paths,
@@ -21,6 +21,12 @@ class TestState(unittest.TestCase):
              'fixture/prj_3file_I/masks/2', 
              'fixture/prj_3file_I/masks/3')
         )
+
+    def test_clear_all(self):
+        state.set_project('fixture/prj_3file_I/')
+        state.clear_all()
+        self.assertEqual( state.img_paths, () )
+        self.assertEqual( state.mask_paths,() )
 
 if __name__ == '__main__':
     unittest.main()

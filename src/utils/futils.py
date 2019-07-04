@@ -9,9 +9,6 @@ from pathlib import PurePosixPath, Path
 def children(dirpath):
     ''' Return children file path list of `dirpath` '''
     parent = Path(dirpath)
-    print('dirpath', dirpath)
-    print('parent', parent)
-    print('children?', list(parent.iterdir()))
     return list(map(
         lambda child_path: str(parent / child_path.name),
         parent.iterdir()
@@ -55,4 +52,3 @@ if __name__ == '__main__':
     print('----')
     assert replace1('a','n', 'asd/ab/a') == 'asd/ab/n'
     assert replace1('asd','new', '//asd/ab/a') == '//new/ab/a'
-    unittest.main()

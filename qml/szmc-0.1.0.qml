@@ -17,13 +17,13 @@ ApplicationWindow {
         id: msgDialog
     }
     //-------------------------------------------------------------
-    /*
     Connections {
         target: main
         onImageUpdate: {
-            console.log('received signal', impath)
-            im.source = "image://imp/" + impath
+            console.log('received signal', type_path)
+            im.source = "image://imageUpdater/"+type_path
         }
+    /*
         onWarning: {
             console.log('received warning:', msg)
             msgDialog.title = "project format error"
@@ -52,8 +52,8 @@ ApplicationWindow {
             canvas.loadImage(url)
             canvas.impath = url // how to unable cacheing?
         }
-    }
     */
+    }
 
     //=============================================================
     FileDialog {
@@ -169,7 +169,7 @@ ApplicationWindow {
             Image { 
                 id: "im"
                 objectName: "image"
-                source: "image://imp/req.png"
+                source: "image://imageUpdater/I?../resource/startup.png"
                 Canvas {
                     id: canvas
                     anchors.fill: parent

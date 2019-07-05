@@ -7,6 +7,6 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
 
     engine = QQmlApplicationEngine()
-    mainWindow = gui.MainWindow(engine)
+    main_window = gui.MainWindow(engine)
     
     sys.exit(app.exec_())

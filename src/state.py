@@ -12,9 +12,8 @@ def set_project(prj_dirpath):
     global img_paths, mask_paths, cursor
     img_paths = fp.go(
         Path(prj_dirpath) / 'images',
-        #F.tap(Path(prj_dirpath) / 'images'),
         fu.children, 
-        F.tap,
+        #F.tap,
         fu.human_sorted, 
         tuple
     )

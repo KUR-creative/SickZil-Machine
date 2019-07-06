@@ -30,16 +30,18 @@ class MainWindow(QObject):
         QObject.__init__(self)
 
         engine.rootContext().setContextProperty(
-            config.main_qml_context, self
+            config.MAIN_CONTEXT_NAME, self
         )
         engine.addImageProvider(
             'imageUpdater', ImageUpdater()
         )
-        engine.load(config.main_qml)
+        engine.load(config.MAIN_QML)
 
         self.window = engine.rootObjects()[0]
 
     @pyqtSlot(QUrl)
     def open_project(self, dir_url):
         dirpath = dir_url.toLocalFile()
+        # get type of dirpath
+        # set or.. 
         state.set_project(dirpath)

@@ -1,4 +1,8 @@
-main_qml = '../qml/szmc-0.1.0.qml'
-main_qml_context = 'main'
+STARTUP_IMAGE = '../resource/startup.png'
 
-startup_image = '../resource/startup.png'
+###### DO NOT CHANGE BELOW! ######
+MAIN_CONTEXT_NAME = 'main'
+MAIN_QML = '../qml/szmc-0.1.0.qml'
+
+IMGDIR = 'images'
+MASKDIR = 'masks'

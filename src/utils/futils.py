@@ -12,8 +12,7 @@ def children(dirpath):
     return tuple(map(
         lambda child_path: str(parent / child_path.name),
         parent.iterdir()
-    ))
-
+    )) if parent.exists() else ()
 
 def descendants(root_dirpath):
     ''' Return descendants file path list of `root_dirpath` ''' 
@@ -53,4 +52,5 @@ if __name__ == '__main__':
     print('----')
     assert replace1('a','n', 'asd/ab/a') == 'asd/ab/n'
     assert replace1('asd','new', '//asd/ab/a') == '//new/ab/a'
+    assert children('nowhere') == ()
     assert descendants('nowhere') == ()

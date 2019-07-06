@@ -14,8 +14,8 @@ _cursor = 0 # NOTE: private! DO NOT ACCESS!!!!
 def dir_type(dirpath):
     parent = Path(dirpath)
 
-    prjdir = ((parent / 'images').exists()
-          and (parent / 'masks').exists())
+    prjdir = ((parent / config.IMGDIR).exists()
+          and (parent / config.MASKDIR).exists())
     imgdir = any(fp.map(
         iu.is_img_file, fu.children(parent)
     ))

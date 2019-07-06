@@ -1,7 +1,9 @@
 from pathlib import Path
+import funcy as F
+
+import config
 import utils.fp as fp
 import utils.futils as fu
-import funcy as F
 
 # DO NOT ASSIGN DIRECTLY!
 img_paths = () 
@@ -11,14 +13,14 @@ cursor = 0 # NOTE: private! DO NOT ACCESS!!!!
 def set_project(prj_dirpath):
     global img_paths, mask_paths, cursor
     img_paths = fp.go(
-        Path(prj_dirpath) / 'images',
+        Path(prj_dirpath, config.IMGDIR),
         fu.children, 
         #F.tap,
         fu.human_sorted, 
         tuple
     )
     mask_paths = tuple(fp.map(
-        fu.replace1('images', 'masks'),
+        fu.replace1(config.IMGDIR, config.MASKDIR),
         img_paths
     ))
     cursor = 0

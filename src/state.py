@@ -11,6 +11,9 @@ mask_paths= ()
 cursor = 0 # NOTE: private! DO NOT ACCESS!!!!
 
 def set_project(prj_dirpath):
+    assert Path(prj_dirpath,config.IMGDIR).exists()
+    assert Path(prj_dirpath,config.MASKDIR).exists()
+
     global img_paths, mask_paths, cursor
     img_paths = fp.go(
         Path(prj_dirpath, config.IMGDIR),

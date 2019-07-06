@@ -25,7 +25,7 @@ def assert_init_state():
     assert state.img_paths == ()
     assert state.cursor == 0
 
-@pytest.mark.skip(reason="no way of currently testing this")
+#@pytest.mark.skip(reason="no way of currently testing this")
 def test_open_project_with_prj3file_then_open_folder(clear_state):
     dir_type = main_window.open_project(QUrl(
         'file://' + os.path.abspath('./fixture/prj_3file_I')
@@ -47,7 +47,7 @@ def test_open_project_with_prj3file_then_open_folder(clear_state):
 
     assert state.img_paths == expected_imgs
     assert state.mask_paths == expected_masks
-    assert dir_type == config.UNSUPPORT_DIR
+    assert dir_type == config.PRJDIR
 
 def test_open_project_not_prjdir_nor_imgdir_then_no_state_change(clear_state):
     dir_type = main_window.open_project(QUrl(

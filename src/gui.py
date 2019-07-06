@@ -3,6 +3,7 @@ from PyQt5.QtQuick import QQuickImageProvider
 import config
 import state
 import utils.imutils as iu
+import utils.futils as fu
 import utils.fp as fp
 
 def unpack_request(type_path):
@@ -58,10 +59,8 @@ class MainWindow(QObject):
                 config.WARN_MSGS[config.FLAT_IMGDIR]
             )
         else:
-            pass
-
+            state.set_project(dirpath)
+            print(state.img_paths)
+            print(state.mask_paths)
 
         return dir_type # for test
-        # get type of dirpath
-        # set or.. 
-        state.set_project(dirpath)

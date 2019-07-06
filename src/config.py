@@ -16,5 +16,3 @@ WARN_MSGS = {
     UNSUPPORT_DIR:'This is neither project nor image folder.',
     FLAT_IMGDIR: "it's img directory. not yet implemented!",
 }
-
-

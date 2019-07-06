@@ -6,7 +6,7 @@ import utils.fp as fp
 import utils.imutils as iu
 import utils.futils as fu
 
-# DO NOT ASSIGN DIRECTLY!
+# NOTE: DO NOT ASSIGN DIRECTLY!
 img_paths = () 
 mask_paths= ()
 cursor = 0 # NOTE: private! DO NOT ACCESS!!!!

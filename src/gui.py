@@ -50,6 +50,10 @@ class MainWindow(QObject):
                 config.WARN_MSGS[config.UNSUPPORT_DIR]
             )
         elif dir_type == config.FLAT_IMGDIR:
+            #TODO: create project directory structure
+            #      and then copy images into 'images'
+            #      and then reset dirpath
+            #      and then below: use project directory
             self.warning.emit(
                 config.WARN_MSGS[config.FLAT_IMGDIR]
             )

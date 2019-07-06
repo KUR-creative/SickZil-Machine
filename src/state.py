@@ -22,7 +22,7 @@ def dir_type(dirpath):
 
     return(config.PRJDIR       if prjdir 
       else config.NAIVE_IMGDIR if imgdir 
-      else None)
+      else config.UNSUPPORT_DIR)
 
 def set_project(prj_dirpath):
     assert Path(prj_dirpath,config.IMGDIR).exists()

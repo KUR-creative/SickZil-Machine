@@ -33,8 +33,8 @@ def test_dir_type():
     naive_imgdir = str(Path('fixture/prj_3file_I', config.IMGDIR)) 
     project_dir = 'fixture/prj_3file_I/'
 
-    assert state.dir_type(nowhere_dir) == None
-    assert state.dir_type(unsupport_dir) == None
+    assert state.dir_type(nowhere_dir) == config.UNSUPPORT_DIR
+    assert state.dir_type(unsupport_dir) == config.UNSUPPORT_DIR
     assert state.dir_type(naive_imgdir) == config.NAIVE_IMGDIR
     assert state.dir_type(project_dir) == config.PRJDIR
 

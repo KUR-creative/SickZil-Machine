@@ -6,17 +6,13 @@ import utils.imutils as iu
 import utils.futils as fu
 import utils.fp as fp
 
-def unpack_request(type_path):
-    return type_path.split('?',1)
-
 class ImageUpdater(QQuickImageProvider):
     def __init__(self):
         super(ImageUpdater, self).__init__(
             QQuickImageProvider.Image 
         ) 
 
-    def requestImage(self, type_path, size):
-        im_type,path = unpack_request(type_path)
+    def requestImage(self, path, size):
         return fp.go(
             path,
             iu.imread,
@@ -26,7 +22,7 @@ class ImageUpdater(QQuickImageProvider):
         )
 
 class MainWindow(QObject):
-    imageUpdate = pyqtSignal(str, arguments=['type_path']) 
+    imageUpdate = pyqtSignal(str, arguments=['path']) 
     warning = pyqtSignal(str, arguments=['msg'])
     def __init__(self,engine):
         QObject.__init__(self)
@@ -62,6 +58,6 @@ class MainWindow(QObject):
             state.set_project(dirpath)
             print(state.img_paths)
             print(state.mask_paths)
-            self.imageUpdate.emit('i?'+state.now_image())
+            self.imageUpdate.emit(state.now_image())
 
         return dir_type # for test

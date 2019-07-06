@@ -20,8 +20,8 @@ ApplicationWindow {
     Connections {
         target: main
         onImageUpdate: {
-            console.log('received signal', type_path)
-            im.source = "image://imageUpdater/"+type_path
+            console.log('received signal', path)
+            im.source = "image://imageUpdater/" + path
         }
         onWarning: {
             console.log('received warning:', msg)
@@ -169,7 +169,7 @@ ApplicationWindow {
             Image { 
                 id: "im"
                 objectName: "image"
-                source: "image://imageUpdater/I?../resource/startup.png"
+                source: "../resource/startup.png"
                 Canvas {
                     id: canvas
                     anchors.fill: parent

@@ -5,8 +5,11 @@ import pytest
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtQml import QQmlApplicationEngine
 from PyQt5.QtCore import QUrl
+from pathlib import Path
+
 import gui
 import state
+import config
 import utils.fp as fp
 
 app = QApplication(sys.argv)

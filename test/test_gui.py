@@ -57,14 +57,14 @@ def test_open_project_not_prjdir_nor_imgdir_then_no_state_change(clear_state):
     assert state.mask_paths == () 
     assert dir_type == config.UNSUPPORT_DIR
 
-def test_open_project_is_naive_imgdir_then_no_state_change(clear_state):
-    naive_imgdir = str(Path('fixture/prj_3file_I', config.IMGDIR)) 
+def test_open_project_is_flat_imgdir_then_no_state_change(clear_state):
+    flat_imgdir = str(Path('fixture/prj_3file_I', config.IMGDIR)) 
     dir_type = main_window.open_project(QUrl(
-        'file://' + os.path.abspath(naive_imgdir)
+        'file://' + os.path.abspath(flat_imgdir)
     ))
-    assert state.img_paths == () 
+
     assert state.mask_paths == () 
-    assert dir_type == config.NAIVE_IMGDIR
+    assert dir_type == config.FLAT_IMGDIR
 
 
 app.quit()

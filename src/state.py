@@ -21,7 +21,7 @@ def dir_type(dirpath):
     ))
 
     return(config.PRJDIR       if prjdir 
-      else config.NAIVE_IMGDIR if imgdir 
+      else config.FLAT_IMGDIR if imgdir 
       else config.UNSUPPORT_DIR)
 
 def set_project(prj_dirpath):

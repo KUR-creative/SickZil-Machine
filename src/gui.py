@@ -49,9 +49,9 @@ class MainWindow(QObject):
             self.warning.emit(
                 config.WARN_MSGS[config.UNSUPPORT_DIR]
             )
-        elif dir_type == config.NAIVE_IMGDIR:
+        elif dir_type == config.FLAT_IMGDIR:
             self.warning.emit(
-                config.WARN_MSGS[config.NAIVE_IMGDIR]
+                config.WARN_MSGS[config.FLAT_IMGDIR]
             )
         else:
             pass

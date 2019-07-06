@@ -30,12 +30,12 @@ def test_dir_type():
     def fpath(*ps): return str(Path(*ps))
     unsupport_dir = 'fixture'
     nowhere_dir = 'nowhere'
-    naive_imgdir = str(Path('fixture/prj_3file_I', config.IMGDIR)) 
+    flat_imgdir = str(Path('fixture/prj_3file_I', config.IMGDIR)) 
     project_dir = 'fixture/prj_3file_I/'
 
     assert state.dir_type(nowhere_dir) == config.UNSUPPORT_DIR
     assert state.dir_type(unsupport_dir) == config.UNSUPPORT_DIR
-    assert state.dir_type(naive_imgdir) == config.NAIVE_IMGDIR
+    assert state.dir_type(flat_imgdir) == config.FLAT_IMGDIR
     assert state.dir_type(project_dir) == config.PRJDIR
 
 if __name__ == '__main__':

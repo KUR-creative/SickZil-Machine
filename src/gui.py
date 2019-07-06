@@ -49,6 +49,13 @@ class MainWindow(QObject):
             self.warning.emit(
                 config.WARN_MSGS[config.UNSUPPORT_DIR]
             )
+        elif dir_type == config.NAIVE_IMGDIR:
+            self.warning.emit(
+                config.WARN_MSGS[config.NAIVE_IMGDIR]
+            )
+        else:
+            pass
+
 
         return dir_type # for test
         # get type of dirpath

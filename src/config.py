@@ -13,7 +13,8 @@ UNSUPPORT_DIR= 'unsupport_dir'
 PRJDIR = 'prjdir'
 
 WARN_MSGS = {
-    UNSUPPORT_DIR : 'This is neither project nor image folder.',
+    UNSUPPORT_DIR:'This is neither project nor image folder.',
+    NAIVE_IMGDIR: "it's img directory. not yet implemented!",
 }
 
 

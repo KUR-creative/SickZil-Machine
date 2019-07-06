@@ -26,6 +26,7 @@ class ImageUpdater(QQuickImageProvider):
 
 class MainWindow(QObject):
     imageUpdate = pyqtSignal(str, arguments=['type_path']) 
+    warning = pyqtSignal(str, arguments=['msg'])
     def __init__(self,engine):
         QObject.__init__(self)
 
@@ -42,6 +43,14 @@ class MainWindow(QObject):
     @pyqtSlot(QUrl)
     def open_project(self, dir_url):
         dirpath = dir_url.toLocalFile()
+
+        dir_type = state.dir_type(dirpath)
+        if dir_type == config.UNSUPPORT_DIR: 
+            self.warning.emit(
+                config.WARN_MSGS[config.UNSUPPORT_DIR]
+            )
+
+        return dir_type # for test
         # get type of dirpath
         # set or.. 
         state.set_project(dirpath)

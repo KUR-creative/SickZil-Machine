@@ -23,13 +23,13 @@ ApplicationWindow {
             console.log('received signal', type_path)
             im.source = "image://imageUpdater/"+type_path
         }
-    /*
         onWarning: {
             console.log('received warning:', msg)
             msgDialog.title = "project format error"
             msgDialog.text = msg;
             msgDialog.visible = true;
         }
+    /*
         onImListUpdate: {
             console.log('received 2 list:')
             console.log('--------------')

@@ -6,7 +6,7 @@ import funcy as F
 # DO NOT ASSIGN DIRECTLY!
 img_paths = () 
 mask_paths= ()
-cursor = 0     
+cursor = 0 # NOTE: private! DO NOT ACCESS!!!!
 
 def set_project(prj_dirpath):
     global img_paths, mask_paths, cursor

@@ -24,6 +24,10 @@ def dir_type(dirpath):
       else config.FLAT_IMGDIR if imgdir 
       else config.UNSUPPORT_DIR)
 
+def now_image():
+    global img_paths, _cursor
+    return img_paths[_cursor]
+
 def set_project(prj_dirpath):
     assert Path(prj_dirpath,config.IMGDIR).exists()
     assert Path(prj_dirpath,config.MASKDIR).exists()

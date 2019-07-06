@@ -62,5 +62,6 @@ class MainWindow(QObject):
             state.set_project(dirpath)
             print(state.img_paths)
             print(state.mask_paths)
+            self.imageUpdate.emit('i?'+state.now_image())
 
         return dir_type # for test

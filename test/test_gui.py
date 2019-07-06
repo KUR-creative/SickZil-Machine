@@ -23,20 +23,26 @@ def assert_init_state():
     assert state.cursor == 0
 
 def test_open_project_with_prj3file_then_open_folder(clear_state):
-    assert_init_state()
-
     main_window.open_project(QUrl(
         'file://' + os.path.abspath('./fixture/prj_3file_I')
     ))
 
-    expected = tuple(fp.map(
+    expected_imgs = tuple(fp.map(
         os.path.abspath,
         ('fixture/prj_3file_I/images/1', 
          'fixture/prj_3file_I/images/2', 
          'fixture/prj_3file_I/images/3'),
     ))
+    expected_masks = tuple(fp.map(
+        os.path.abspath,
+        ('fixture/prj_3file_I/masks/1', 
+         'fixture/prj_3file_I/masks/2', 
+         'fixture/prj_3file_I/masks/3'),
+    ))
 
-    assert state.img_paths == expected
+    assert state.img_paths == expected_imgs
+    assert state.mask_paths == expected_masks
+
 
 app.quit()
 

@@ -63,6 +63,7 @@ def test_open_project_is_flat_imgdir_then_no_state_change(clear_state):
         'file://' + os.path.abspath(flat_imgdir)
     ))
 
+    assert state.img_paths == () 
     assert state.mask_paths == () 
     assert dir_type == config.FLAT_IMGDIR
 

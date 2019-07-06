@@ -1,8 +1,9 @@
+from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot, QUrl
+from PyQt5.QtQuick import QQuickImageProvider
 import config
+import state
 import utils.imutils as iu
 import utils.fp as fp
-from PyQt5.QtCore import QObject, pyqtSignal
-from PyQt5.QtQuick import QQuickImageProvider
 
 def unpack_request(type_path):
     return type_path.split('?',1)
@@ -37,3 +38,8 @@ class MainWindow(QObject):
         engine.load(config.main_qml)
 
         self.window = engine.rootObjects()[0]
+
+    @pyqtSlot(QUrl)
+    def open_project(self, dir_url):
+        dirpath = dir_url.toLocalFile()
+        state.set_project(dirpath)

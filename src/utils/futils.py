@@ -9,19 +9,20 @@ from pathlib import PurePosixPath, Path
 def children(dirpath):
     ''' Return children file path list of `dirpath` '''
     parent = Path(dirpath)
-    return list(map(
+    return tuple(map(
         lambda child_path: str(parent / child_path.name),
         parent.iterdir()
     ))
+
 
 def descendants(root_dirpath):
     ''' Return descendants file path list of `root_dirpath` ''' 
     fpaths = []
     it = os.walk(root_dirpath)
     for root,dirs,files in it:
-        for path in map(lambda name:PurePosixPath(root) / name,files):
+        for path in map(lambda name:PurePosixPath(root) / name, files):
             fpaths.append(str(path))
-    return fpaths
+    return tuple(fpaths)
 
 def human_sorted(iterable):
     ''' Sorts the given iterable in the way that is expected. '''
@@ -52,3 +53,4 @@ if __name__ == '__main__':
     print('----')
     assert replace1('a','n', 'asd/ab/a') == 'asd/ab/n'
     assert replace1('asd','new', '//asd/ab/a') == '//new/ab/a'
+    assert descendants('nowhere') == ()

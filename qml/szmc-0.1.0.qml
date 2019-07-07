@@ -29,22 +29,6 @@ ApplicationWindow {
             msgDialog.text = msg;
             msgDialog.visible = true;
         }
-        onImListUpdate: {
-            console.log('received 2 list:')
-            console.log('--------------')
-            console.log('img')
-
-            console.log(imgs[0])
-            console.log(imgs[1])
-            for(var img in imgs){
-                console.log(img)
-            }
-            console.log('--------------')
-            console.log('masks')
-            for(var mask in masks){
-                console.log(mask)
-            }
-        }
     /*
         onLoadToCanvas: {
             console.log('load', impath)

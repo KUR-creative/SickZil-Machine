@@ -25,9 +25,6 @@ class ImageUpdater(QQuickImageProvider):
 class MainWindow(QObject):
     imageUpdate = pyqtSignal(str, arguments=['path']) 
     warning = pyqtSignal(str, arguments=['msg'])
-    imListUpdate = pyqtSignal(
-        tuple,tuple, arguments=['imgs','masks']
-    ) 
 
     def __init__(self,engine):
         QObject.__init__(self)
@@ -68,8 +65,7 @@ class MainWindow(QObject):
         else:
             state.set_project(dirpath)
             # Update gui
-            self.imageUpdate.emit(  state.now_image())
-            self.imListUpdate.emit(*state.project())
-            self.im_model.update(  *state.project())
+            self.imageUpdate.emit(state.now_image())
+            self.im_model.update(*state.project())
 
         return dir_type # for test

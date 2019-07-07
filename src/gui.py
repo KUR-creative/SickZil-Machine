@@ -2,6 +2,7 @@ from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot, QUrl
 from PyQt5.QtQuick import QQuickImageProvider
 import config
 import state
+from ImListModel import ImListModel#, update_im_model
 import utils.imutils as iu
 import utils.futils as fu
 import utils.fp as fp
@@ -24,6 +25,10 @@ class ImageUpdater(QQuickImageProvider):
 class MainWindow(QObject):
     imageUpdate = pyqtSignal(str, arguments=['path']) 
     warning = pyqtSignal(str, arguments=['msg'])
+    imListUpdate = pyqtSignal(
+        tuple,tuple, arguments=['imgs','masks']
+    ) 
+
     def __init__(self,engine):
         QObject.__init__(self)
 
@@ -33,8 +38,13 @@ class MainWindow(QObject):
         engine.addImageProvider(
             'imageUpdater', ImageUpdater()
         )
-        engine.load(config.MAIN_QML)
 
+        self.im_model = ImListModel()
+        engine.rootContext().setContextProperty(
+            'ImModel', self.im_model
+        )
+
+        engine.load(config.MAIN_QML)
         self.window = engine.rootObjects()[0]
 
     @pyqtSlot(QUrl)
@@ -46,7 +56,8 @@ class MainWindow(QObject):
             self.warning.emit(
                 config.WARN_MSGS[config.UNSUPPORT_DIR]
             )
-        elif dir_type == config.FLAT_IMGDIR:
+            return dir_type # for test
+        if dir_type == config.FLAT_IMGDIR:
             #TODO: create project directory structure
             #      and then copy images into 'images'
             #      and then reset dirpath
@@ -58,6 +69,11 @@ class MainWindow(QObject):
             state.set_project(dirpath)
             print(state.img_paths)
             print(state.mask_paths)
+
             self.imageUpdate.emit(state.now_image())
+            self.imListUpdate.emit(
+                state.img_paths, state.mask_paths)
+            self.im_model.update(
+                state.img_paths, state.mask_paths)
 
         return dir_type # for test

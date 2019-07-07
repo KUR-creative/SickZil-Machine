@@ -11,7 +11,7 @@ ApplicationWindow {
     id: window
     visible: true
     width: 850; height: 750
-    visibility: Window.Maximized
+    //visibility: Window.Maximized
 
     MessageDialog {
         id: msgDialog
@@ -29,7 +29,6 @@ ApplicationWindow {
             msgDialog.text = msg;
             msgDialog.visible = true;
         }
-    /*
         onImListUpdate: {
             console.log('received 2 list:')
             console.log('--------------')
@@ -46,6 +45,7 @@ ApplicationWindow {
                 console.log(mask)
             }
         }
+    /*
         onLoadToCanvas: {
             console.log('load', impath)
             var url = "image://mask_provider/" + impath
@@ -226,7 +226,7 @@ ApplicationWindow {
             ListView {
                 width: 200; height: 200
                 //anchors.fill: parent
-                model: Model    
+                model: ImModel    
                 delegate: Item {
                     width: 200
                     height: 20

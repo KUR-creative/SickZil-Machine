@@ -67,13 +67,9 @@ class MainWindow(QObject):
             )
         else:
             state.set_project(dirpath)
-            print(state.img_paths)
-            print(state.mask_paths)
-
-            self.imageUpdate.emit(state.now_image())
-            self.imListUpdate.emit(
-                state.img_paths, state.mask_paths)
-            self.im_model.update(
-                state.img_paths, state.mask_paths)
+            # Update gui
+            self.imageUpdate.emit(  state.now_image())
+            self.imListUpdate.emit(*state.project())
+            self.im_model.update(  *state.project())
 
         return dir_type # for test

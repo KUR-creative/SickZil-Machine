@@ -1,4 +1,5 @@
 from pathlib import Path
+from collections import namedtuple
 import funcy as F
 
 import config
@@ -10,6 +11,14 @@ import utils.futils as fu
 img_paths = () 
 mask_paths= ()
 _cursor = 0 # NOTE: private! DO NOT ACCESS!!!!
+
+def project():
+    global img_paths, mask_paths, _cursor
+    return namedtuple(
+        'Project', 
+        'img_paths mask_paths')(
+         img_paths,mask_paths
+    )
 
 def dir_type(dirpath):
     parent = Path(dirpath)

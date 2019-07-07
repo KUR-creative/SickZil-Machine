@@ -21,10 +21,6 @@ main_window = gui.MainWindow(
 def clear_state():
     state.clear_all()
 
-def assert_init_state():
-    assert state.img_paths == ()
-    assert state.cursor == 0
-
 #@pytest.mark.skip(reason="no way of currently testing this")
 def test_open_project_with_prj3file_then_open_folder(clear_state):
     dir_type = main_window.open_project(QUrl(
@@ -45,16 +41,14 @@ def test_open_project_with_prj3file_then_open_folder(clear_state):
          fpath('fixture/prj_3file_I',config.MASKDIR,'3'))
     ))
 
-    assert state.img_paths == expected_imgs
-    assert state.mask_paths == expected_masks
+    assert state.project() == (expected_imgs,expected_masks)
     assert dir_type == config.PRJDIR
 
 def test_open_project_not_prjdir_nor_imgdir_then_no_state_change(clear_state):
     dir_type = main_window.open_project(QUrl(
         'file://' + os.path.abspath('./fixture')
     ))
-    assert state.img_paths == () 
-    assert state.mask_paths == () 
+    assert state.project() == ((),())
     assert dir_type == config.UNSUPPORT_DIR
 
 def test_open_project_is_flat_imgdir_then_no_state_change(clear_state):
@@ -63,8 +57,7 @@ def test_open_project_is_flat_imgdir_then_no_state_change(clear_state):
         'file://' + os.path.abspath(flat_imgdir)
     ))
 
-    assert state.img_paths == () 
-    assert state.mask_paths == () 
+    assert state.project() == ((),())
     assert dir_type == config.FLAT_IMGDIR
 
 

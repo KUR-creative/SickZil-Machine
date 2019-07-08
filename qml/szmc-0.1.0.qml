@@ -4,6 +4,7 @@ import QtQuick 2.5
 import QtQuick.Layouts 1.3
 import QtQuick.Dialogs 1.1
 import QtQuick.Controls 1.4
+import QtQuick.Controls.Styles 1.4
 import QtQuick.Window 2.2
 
 
@@ -211,17 +212,17 @@ ApplicationWindow {
                 width: 200; height: 200
                 //anchors.fill: parent
                 model: ImModel    
-                delegate: Item {
-                    width: 200
+                delegate: 
+                Button {
+                    width: 400
                     height: 20
-                    Row {
-                        Text {
-                            width: 60
-                            text: image + "      " + mask
-                            //horizontalAlignment: Text.AlignHCenter
-                            //anchors.verticalCenter: parent.verticalCenter
+                    text: image + "      " + mask
+                    style: ButtonStyle {
+                        background: Rectangle {
+                            color: {displayed ? "red" : "white"}//"yellow"
                         }
                     }
+                    onClicked: { console.log(displayed); }
                 }
             }
         }

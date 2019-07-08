@@ -1,11 +1,13 @@
 from pathlib import Path
 from PyQt5.QtCore import Qt, QAbstractListModel, QModelIndex # ImListModel
 import utils.fp as fp
+import state
 
 
 class ImListModel(QAbstractListModel):
     imagePath= Qt.UserRole + 1
     maskPath = Qt.UserRole + 2
+    displayed= Qt.UserRole + 3
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -24,11 +26,15 @@ class ImListModel(QAbstractListModel):
         self.endInsertRows()
 
     def data(self, index, role=Qt.DisplayRole):
+        #print('data called! index =', index, 'role =', role)
         y = index.row()
         if role == ImListModel.imagePath:
             return self.images[y]
         if role == ImListModel.maskPath:
             return self.masks[y]
+        if role == ImListModel.displayed: 
+            #print('what?',state._cursor)
+            return y == state._cursor
 
     def rowCount(self, parent=QModelIndex()):
         return len(self.images)
@@ -37,5 +43,6 @@ class ImListModel(QAbstractListModel):
         ''' specify role names in qml '''
         return {
             ImListModel.imagePath: b'image',
-            ImListModel.maskPath: b'mask'
+            ImListModel.maskPath: b'mask',
+            ImListModel.displayed: b'displayed'
         }

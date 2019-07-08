@@ -73,4 +73,5 @@ class MainWindow(QObject):
     @pyqtSlot()
     def next_image(self):
         state.next_image()
+        self.im_model.update()
 

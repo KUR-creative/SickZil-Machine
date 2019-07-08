@@ -25,7 +25,14 @@ Of course, if you want, you can also specify text area you want to erase.
 
 Release
 -----
-coming soon!
+Now I'm working on GUI.
+Version 0.1.0 coming soon! 
+
+future works
+-----
+- Increase text segmentation performance
+- Open manga text segmentation mask dataset
+- Automate typesetting(calligraphy style learning)
 
 
 식질머신
@@ -55,11 +62,12 @@ coming soon!
 
 Release
 -----
-곧 배포합니다!
-
+현재 GUI 작업을 진행 중입니다.
+0.1.0 버전이 곧 배포됩니다!
 
 
 future works
 -----
-- Increase text segmentation performance
-- Automate typesetting
+- 만화 텍스트 세그멘테이션 성능 높이기
+- 만화 텍스트 세그멘테이션 마스크 데이터셋 공개하기
+- "식자" 자동화하기(손글씨 스타일 학습)

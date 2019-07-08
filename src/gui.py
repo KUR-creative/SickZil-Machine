@@ -44,6 +44,12 @@ class MainWindow(QObject):
         engine.load(config.MAIN_QML)
         self.window = engine.rootObjects()[0]
 
+    def update_gui(self):
+        now_imgpath = state.now_image()
+        if now_imgpath:
+            self.imageUpdate.emit(now_imgpath)
+            self.im_model.update()
+
     @pyqtSlot(QUrl)
     def open_project(self, dir_url):
         dirpath = dir_url.toLocalFile()
@@ -64,21 +70,17 @@ class MainWindow(QObject):
             )
         else:
             state.set_project(dirpath)
-            # Update gui
-            self.imageUpdate.emit(state.now_image())
-            self.im_model.open(*state.project())
+            self.update_gui()
 
         return dir_type # for test
 
     @pyqtSlot()
     def next_image(self):
         state.next_image()
-        self.imageUpdate.emit(state.now_image())
-        self.im_model.update()
+        self.update_gui()
 
     @pyqtSlot()
     def prev_image(self):
         state.prev_image()
-        self.imageUpdate.emit(state.now_image())
-        self.im_model.update()
+        self.update_gui()
 

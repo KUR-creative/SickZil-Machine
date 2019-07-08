@@ -14,8 +14,8 @@ class ImListModel(QAbstractListModel):
         self.images = ()
         self.masks = ()
 
-    def open(self, img_paths, mask_paths):
-        self.update(img_paths, mask_paths)
+    #def open(self, img_paths, mask_paths):
+    #    self.update(img_paths, mask_paths)
 
     def update(self, img_paths=None, mask_paths=None):
         if (img_paths is None and mask_paths is None):

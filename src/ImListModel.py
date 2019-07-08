@@ -12,7 +12,7 @@ class ImListModel(QAbstractListModel):
         self.images = ()
         self.masks = ()
 
-    def update(self, img_paths, mask_paths):
+    def open(self, img_paths, mask_paths):
         self.beginInsertRows(
             QModelIndex(), 0, len(img_paths) - 1
         )

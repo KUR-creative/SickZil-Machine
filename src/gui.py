@@ -66,6 +66,6 @@ class MainWindow(QObject):
             state.set_project(dirpath)
             # Update gui
             self.imageUpdate.emit(state.now_image())
-            self.im_model.update(*state.project())
+            self.im_model.open(*state.project())
 
         return dir_type # for test

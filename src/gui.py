@@ -73,10 +73,12 @@ class MainWindow(QObject):
     @pyqtSlot()
     def next_image(self):
         state.next_image()
+        self.imageUpdate.emit(state.now_image())
         self.im_model.update()
 
     @pyqtSlot()
     def prev_image(self):
         state.prev_image()
+        self.imageUpdate.emit(state.now_image())
         self.im_model.update()
 

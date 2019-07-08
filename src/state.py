@@ -14,11 +14,11 @@ _cursor = 0 # NOTE: private! DO NOT ACCESS!!!!
 
 def next_image():
     global _cursor
-    if fp.is_empty(img_paths):
+    if img_paths:
         _cursor = (_cursor + 1) % len(img_paths)
 def prev_image():
     global _cursor
-    if fp.is_empty(img_paths):
+    if img_paths:
         _cursor = (_cursor - 1) % len(img_paths)
 
 def project():
@@ -44,7 +44,8 @@ def dir_type(dirpath):
 
 def now_image():
     global img_paths, _cursor
-    return img_paths[_cursor]
+    if img_paths:
+        return img_paths[_cursor]
 
 def set_project(prj_dirpath):
     assert Path(prj_dirpath,config.IMGDIR).exists()

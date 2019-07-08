@@ -22,6 +22,10 @@ def next_image():
     global _cursor
     if is_empty(img_paths):
         _cursor = (_cursor + 1) % len(img_paths)
+def prev_image():
+    global _cursor
+    if is_empty(img_paths):
+        _cursor = (_cursor - 1) % len(img_paths)
 
 def project():
     global img_paths, mask_paths, _cursor

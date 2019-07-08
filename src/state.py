@@ -12,6 +12,18 @@ img_paths = ()
 mask_paths= ()
 _cursor = 0 # NOTE: private! DO NOT ACCESS!!!!
 
+def is_empty(coll):
+    if coll:
+        return True
+    else:
+        return False
+
+def next_image():
+    global _cursor
+    if is_empty(img_paths):
+        _cursor = (_cursor + 1) % len(img_paths)
+    print(_cursor)
+
 def project():
     global img_paths, mask_paths, _cursor
     return namedtuple(

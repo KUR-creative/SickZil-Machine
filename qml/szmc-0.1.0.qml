@@ -125,7 +125,7 @@ ApplicationWindow {
                 Layout.preferredHeight: w_icon
                 Layout.preferredWidth:  h_icon
                 onClicked: {
-                    //main.rm_txt()
+                    main.next_image()
                 }
             }
             ToolButton {

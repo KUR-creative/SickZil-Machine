@@ -69,3 +69,8 @@ class MainWindow(QObject):
             self.im_model.open(*state.project())
 
         return dir_type # for test
+
+    @pyqtSlot()
+    def next_image(self):
+        state.next_image()
+

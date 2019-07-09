@@ -125,7 +125,7 @@ ApplicationWindow {
                 Layout.preferredHeight: w_icon
                 Layout.preferredWidth:  h_icon
                 onClicked: {
-                    main.prev_image()
+                    //main.prev_image()
                 }
             }
             ToolButton {
@@ -137,7 +137,7 @@ ApplicationWindow {
                 Layout.preferredHeight: w_icon
                 Layout.preferredWidth:  h_icon
                 onClicked: {
-                    main.next_image()
+                    //main.next_image()
                 }
             }
         }
@@ -152,6 +152,10 @@ ApplicationWindow {
         Keys.onPressed: {
              if(event.key == Qt.Key_Up)   { main.prev_image(); }
         else if(event.key == Qt.Key_Down) { main.next_image(); }
+        else if(event.key == Qt.Key_Space){ 
+                canvas.visible = !(canvas.visible)
+                // TODO: inform canvas visibility to user.
+            }
         }
 
         ScrollView {

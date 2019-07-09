@@ -147,14 +147,23 @@ ApplicationWindow {
     RowLayout {
         anchors.fill: parent
         spacing: 6
+
+        focus: true
+        Keys.onPressed: {
+             if(event.key == Qt.Key_Up)   { main.prev_image(); }
+        else if(event.key == Qt.Key_Down) { main.next_image(); }
+        }
+
         ScrollView {
             objectName: "view"
             Layout.fillWidth: true
             Layout.fillHeight: true
+
             Image { 
                 id: "im"
                 objectName: "image"
                 source: "../resource/startup.png"
+
                 Canvas {
                     id: canvas
                     anchors.fill: parent

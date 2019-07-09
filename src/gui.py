@@ -50,6 +50,7 @@ class MainWindow(QObject):
             self.imageUpdate.emit(now_imgpath)
             self.im_model.update()
 
+    #---------------------------------------------------
     @pyqtSlot(QUrl)
     def open_project(self, dir_url):
         dirpath = dir_url.toLocalFile()
@@ -84,3 +85,9 @@ class MainWindow(QObject):
         state.prev_image()
         self.update_gui()
 
+    @pyqtSlot(int)
+    def display_image_at(self, index):
+        state.cursor(index)
+        self.update_gui()
+
+    #---------------------------------------------------

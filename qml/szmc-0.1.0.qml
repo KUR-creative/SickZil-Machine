@@ -210,7 +210,6 @@ ApplicationWindow {
             horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOff
             ListView {
                 width: 200; height: 200
-                //anchors.fill: parent
                 model: ImModel    
                 delegate: 
                 Button {
@@ -219,10 +218,14 @@ ApplicationWindow {
                     text: image + "      " + mask
                     style: ButtonStyle {
                         background: Rectangle {
-                            color: {displayed ? "red" : "white"}//"yellow"
+                            color: {
+                                displayed ? "yellow" : "white"
+                            }
                         }
                     }
-                    onClicked: { console.log(index); }
+                    onClicked: { 
+                        main.display_image_at(index); 
+                    }
                 }
             }
         }

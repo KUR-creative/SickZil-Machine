@@ -24,7 +24,7 @@ def test_clear_all():
     state.set_project('fixture/prj_3file_I/')
     state.clear_all()
     assert state.project() == ((),())
-    assert state._cursor == 0
+    assert state.cursor() == 0
 
 def test_dir_type():
     def fpath(*ps): return str(Path(*ps))

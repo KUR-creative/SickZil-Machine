@@ -12,6 +12,13 @@ img_paths = ()
 mask_paths= ()
 _cursor = 0 # NOTE: private! DO NOT ACCESS!!!!
 
+def cursor(new=None):
+    global _cursor
+    if new is None: # getter
+        return _cursor
+    elif img_paths: # setter
+        _cursor = new % len(img_paths)
+
 def next_image():
     global _cursor
     if img_paths:

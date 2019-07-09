@@ -1,3 +1,4 @@
+# Remove self.state or not..?
 from pathlib import Path
 from PyQt5.QtCore import Qt, QAbstractListModel, QModelIndex # ImListModel
 import utils.fp as fp
@@ -35,7 +36,7 @@ class ImListModel(QAbstractListModel):
         return {
             self.imagePath: self.images[y],
             self.maskPath : self.masks[y],
-            self.displayed: y == state._cursor 
+            self.displayed: y == state.cursor()
         }[role]
 
     def rowCount(self, parent=QModelIndex()):

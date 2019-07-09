@@ -222,7 +222,7 @@ ApplicationWindow {
                             color: {displayed ? "red" : "white"}//"yellow"
                         }
                     }
-                    onClicked: { console.log(displayed); }
+                    onClicked: { console.log(index); }
                 }
             }
         }

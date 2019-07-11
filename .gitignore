@@ -6,5 +6,6 @@
 __pycache__/
 *.taghl
 tags
+*.pb
 
 !.gitignore

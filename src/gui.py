@@ -76,17 +76,17 @@ class MainWindow(QObject):
         return dir_type # for test
 
     @pyqtSlot()
-    def next_image(self):
-        state.next_image()
+    def display_next(self):
+        state.next()
         self.update_gui()
 
     @pyqtSlot()
-    def prev_image(self):
-        state.prev_image()
+    def display_prev(self):
+        state.prev()
         self.update_gui()
 
     @pyqtSlot(int)
-    def display_image_at(self, index):
+    def display(self, index):
         state.cursor(index)
         self.update_gui()
 

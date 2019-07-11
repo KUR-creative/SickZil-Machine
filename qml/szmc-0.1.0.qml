@@ -124,9 +124,7 @@ ApplicationWindow {
                 }
                 Layout.preferredHeight: w_icon
                 Layout.preferredWidth:  h_icon
-                onClicked: {
-                    //main.prev_image()
-                }
+                onClicked: { }
             }
             ToolButton {
                 Image {
@@ -136,9 +134,7 @@ ApplicationWindow {
                 }
                 Layout.preferredHeight: w_icon
                 Layout.preferredWidth:  h_icon
-                onClicked: {
-                    //main.next_image()
-                }
+                onClicked: { }
             }
         }
     }
@@ -150,8 +146,8 @@ ApplicationWindow {
 
         focus: true
         Keys.onPressed: {
-             if(event.key == Qt.Key_Up)   { main.prev_image(); }
-        else if(event.key == Qt.Key_Down) { main.next_image(); }
+             if(event.key == Qt.Key_Up)   { main.display_prev(); }
+        else if(event.key == Qt.Key_Down) { main.display_next(); }
         else if(event.key == Qt.Key_Space){ 
                 canvas.visible = !(canvas.visible)
                 // TODO: inform canvas visibility to user.
@@ -237,7 +233,7 @@ ApplicationWindow {
                         }
                     }
                     onClicked: { 
-                        main.display_image_at(index); 
+                        main.display(index); 
                     }
                 }
             }

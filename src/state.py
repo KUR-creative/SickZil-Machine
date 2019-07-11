@@ -19,11 +19,11 @@ def cursor(new=None):
     elif img_paths: # setter
         _cursor = new % len(img_paths)
 
-def next_image():
+def next():
     global _cursor
     if img_paths:
         _cursor = (_cursor + 1) % len(img_paths)
-def prev_image():
+def prev():
     global _cursor
     if img_paths:
         _cursor = (_cursor - 1) % len(img_paths)

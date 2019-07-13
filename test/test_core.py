@@ -5,8 +5,8 @@ import core
 import cv2
 
 def test_segment_input_output_spec_check():
-    img1= cv2.imread('../test/fixture/real_imgs/bw1.png')
-    img2= cv2.imread('../test/fixture/real_imgs/bgr1.png')
+    img1= cv2.imread('./fixture/real_proj/images/bw1.png')
+    img2= cv2.imread('./fixture/real_proj/images/bgr1.png')
     ret1= core.segmap(img1)
     ret2= core.segmap(img2)
 

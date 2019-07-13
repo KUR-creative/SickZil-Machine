@@ -76,4 +76,8 @@ def test_gen_segmap():
     assert np.array_equal(actual, expected)
     assert np.array_equal(saved, expected)
 
+def test_gen_segmap_empty_state_then_no_action(clear_state):
+    assert main_window.gen_segmap() is None
+    # expected no error.
+
 app.quit()

@@ -89,8 +89,11 @@ class MainWindow(QObject):
     #---------------------------------------------------
     @pyqtSlot()
     def gen_segmap(self):
+        imgpath = state.now_image()
+        if imgpath is None: return None
+
         segmap = fp.go(
-            state.now_image(),
+            imgpath,
             io.load,
             core.segmap
         )

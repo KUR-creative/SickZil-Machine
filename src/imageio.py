@@ -3,9 +3,7 @@ import utils.fp as fp
 
 def load(path):
     # it can be cached..
-    return fp.go( 
-        path,
-        iu.imread,
-        iu.channel3img,
-        iu.nparr2qimg,
-    )
+    return iu.imread(path)
+
+def load_qimg(path):
+    return iu.nparr2qimg(load(path))

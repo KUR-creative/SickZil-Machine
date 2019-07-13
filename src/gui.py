@@ -13,7 +13,7 @@ class ImageUpdater(QQuickImageProvider):
         ) 
 
     def requestImage(self, path, size):
-        img = io.load(path)
+        img = io.load_qimg(path)
         return img, img.size()
 
 class MainWindow(QObject):

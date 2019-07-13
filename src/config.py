@@ -8,10 +8,11 @@ IMGDIR = 'images'
 MASKDIR = 'masks'
 
 # core config
-TF_CPP_MIN_LOG_LEVEL = '1' #'3'
+#TF_CPP_MIN_LOG_LEVEL = '1' #'3'
+TF_CPP_MIN_LOG_LEVEL = '3'
 SNETPATH = '../resource/snet/snet-0.1.0.pb'
 CNETPATH = '../resource/cnet/cnet-0.1.0.pb'
-#TODO: it.. some... smell...
+#TODO: it.. has.. some... smell...
 def model_name(mpath, version):
     return {
         '0.1.0': 'snet' if mpath == SNETPATH else ''

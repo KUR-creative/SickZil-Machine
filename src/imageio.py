@@ -7,8 +7,8 @@ def load(path):
     # it can be cached..
     return iu.imread(path)
 
-def save(img, path): #TODO: multimethod..?
-    cv2.imwrite(img, path)
+def save(path, img): #TODO: multimethod..?
+    cv2.imwrite(path, img)
 
 def load_qimg(path):
     return QImage(path)

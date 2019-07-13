@@ -2,15 +2,18 @@ import os,sys
 sys.path.append( os.path.abspath('../src') )
 
 import pytest
+import numpy as np
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtQml import QQmlApplicationEngine
 from PyQt5.QtCore import QUrl
 from pathlib import Path
+import cv2
 
+import utils.fp as fp
 import gui
 import state
 import config
-import utils.fp as fp
+import core
 
 app = QApplication(sys.argv)
 main_window = gui.MainWindow(
@@ -60,5 +63,14 @@ def test_open_project_is_flat_imgdir_then_no_state_change(clear_state):
     assert state.project() == ((),())
     assert dir_type == config.FLAT_IMGDIR
 
+def test_gen_segmap():
+    main_window.open_project(QUrl(
+        'file://' + os.path.abspath('./fixture/real_proj/')
+    ))
+    actual = main_window.gen_segmap()
+    expected = core.segmap(cv2.imread(
+        './fixture/real_proj/images/bgr1.png'))
+
+    assert np.array_equal(actual, expected)
 
 app.quit()

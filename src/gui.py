@@ -1,10 +1,12 @@
 from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot, QUrl
 from PyQt5.QtQuick import QQuickImageProvider
 
+import utils.fp as fp
 from ImListModel import ImListModel
 import imageio as io
 import config
 import state
+import core
 
 class ImageUpdater(QQuickImageProvider):
     def __init__(self):
@@ -85,3 +87,14 @@ class MainWindow(QObject):
         self.update_gui()
 
     #---------------------------------------------------
+    @pyqtSlot()
+    def gen_segmap(self):
+        ''' Generate, Save, Display segmap of current image '''
+        segmap = fp.go(
+            state.now_image(),
+            io.load,
+            core.segmap
+        )
+        return segmap
+
+

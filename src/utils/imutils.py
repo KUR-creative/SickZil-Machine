@@ -50,14 +50,12 @@ def imread(path):
     (cv2.imread cannott work with unicode and windows path)
     If no file or can't decode with cv2.imdecode, then return None.
     '''
-    if path != '': # no image selected
-        with open(path,'rb') as stream: 
-            bytes = bytearray(stream.read())
-            nparr = np.asarray(bytes, dtype=np.uint8)
-            img = cv2.imdecode(nparr, cv2.IMREAD_UNCHANGED)
-            if img is not None:
-                return img
-                #return channel3img(img)
+    with open(path,'rb') as stream: 
+        bytes = bytearray(stream.read())
+        nparr = np.asarray(bytes, dtype=np.uint8)
+        img = cv2.imdecode(nparr, cv2.IMREAD_UNCHANGED)
+        if img is not None:
+            return img
 
 def nparr2qimg(cvimg):
     ''' convert cv2 bgr image -> rgb qimg '''

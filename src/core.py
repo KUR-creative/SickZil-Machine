@@ -1,27 +1,35 @@
 import tensorflow as tf
 import numpy as np
-from imutils import binarization, modulo_padded
+import utils.imutils as iu
+import utils.fp as fp
+import config
 import os
-#os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = config.TF_CPP_MIN_LOG_LEVEL
 
-# Segmentation Network
-def load_model(model_path, is_snet=True):
-    graph_def = tf.GraphDef()
-    with tf.gfile.GFile(model_path, 'rb') as f:
+def load_model(mpath, version):
+    #graph_def = tf.GraphDef()
+    graph_def = tf.compat.v1.GraphDef()
+    #with tf.gfile.GFile(mpath, 'rb') as f:
+    with tf.io.gfile.GFile(mpath, 'rb') as f:
         graph_def.ParseFromString(f.read())
         tf.import_graph_def(
             graph_def, 
-            name = 'snet' if is_snet else ''
+            name = config.model_name(mpath, version)
         )
+
+load_model(config.SNETPATH, '0.1.0')
+load_model(config.CNETPATH, '0.1.0')
+
 
 #def unload_model(): # Maybe useless
     #tf.reset_default_graph()
 
+#----------------------------------------------------------------
 def segment_or_oom(segnet, inp, modulo=16):
     ''' If image is too big, return None '''
     h,w = inp.shape[:2]
 
-    img = modulo_padded(inp, modulo) 
+    img = iu.modulo_padded(inp, modulo) 
     img_bat = np.expand_dims(img,0) 
     segmap = segnet(img_bat)
     segmap = np.squeeze(segmap[:,:h,:w,:], 0) 
@@ -66,6 +74,34 @@ def segment(segnet, inp, modulo=16):
     print('segmented', result.shape)
     return result # image segmented successfully!
 
+def segmap(image):
+    '''
+    return: uint8 mask image, bg=black.
+
+    If image is not float32 nor bgr-3channel image, convert it.
+    But snet input img(float32) pixel range: 0 ~ 1 is mandatory.
+    '''
+    def assert_img_range(img):
+        assert (1.0 >= img).all(), img.max()
+        assert (img >= 0.0).all(), img.min()
+        return img
+    def decategorize(mask): 
+        return iu.decategorize(mask, iu.rgb2wk_map)
+
+    with tf.Session() as sess:
+        snet_in  = config.snet_in('0.1.0', sess)
+        snet_out = config.snet_out('0.1.0', sess)
+        def snet(img): 
+            return sess.run(snet_out, feed_dict={snet_in:img})
+
+        return fp.go(
+            image,
+            iu.channel3img, iu.float32, # preprocess
+            assert_img_range,
+            lambda img: segment(snet,img),
+            iu.map_max_row, decategorize, iu.uint8, # postprocess
+        )
+#----------------------------------------------------------------
 # Completion Network
 def inpaint_or_oom(complnet, image, segmap):
     ''' If image is too big, return None '''
@@ -75,8 +111,8 @@ def inpaint_or_oom(complnet, image, segmap):
 
     h,w = image.shape[:2] # 1 image, not batch.
 
-    image = modulo_padded(image,8)
-    mask  = modulo_padded(mask,8)
+    image = iu.modulo_padded(image,8)
+    mask  = iu.modulo_padded(mask,8)
 
     image = np.expand_dims(image, 0) # [h,w,c] -> [1,h,w,c]
     mask  = np.expand_dims(mask, 0)

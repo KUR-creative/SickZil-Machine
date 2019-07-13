@@ -25,9 +25,9 @@ def foreach(f,*seq):
 
 def is_empty(coll):
     if coll:
-        return True
-    else:
         return False
+    else:
+        return True
 
 if __name__ == '__main__':
     print( lmap(tup(pow))( [(2,5),(3,2),(10,3)] ) )

@@ -3,7 +3,7 @@ from PyQt5.QtQuick import QQuickImageProvider
 import config
 import state
 from ImListModel import ImListModel#, update_im_model
-import utils.imutils as iu
+import utils.imutils as iu #TODO: make imutils minimal.
 import utils.futils as fu
 import utils.fp as fp
 
@@ -14,7 +14,7 @@ class ImageUpdater(QQuickImageProvider):
         ) 
 
     def requestImage(self, path, size):
-        return fp.go(
+        return fp.go( #TODO: move to imageio
             path,
             iu.imread,
             iu.channel3img,

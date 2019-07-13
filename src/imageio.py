@@ -6,4 +6,11 @@ def load(path):
     return iu.imread(path)
 
 def load_qimg(path):
-    return iu.nparr2qimg(load(path))
+    return fp.go(
+        path,
+        load,
+        iu.channel3img,
+        iu.nparr2qimg
+    )
+
+#def load_mask(path)

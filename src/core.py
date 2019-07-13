@@ -1,10 +1,11 @@
+import os
+import config
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = config.TF_CPP_MIN_LOG_LEVEL
+# NOTE: above only work before tf was imported.
 import tensorflow as tf
 import numpy as np
 import utils.imutils as iu
 import utils.fp as fp
-import config
-import os
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = config.TF_CPP_MIN_LOG_LEVEL
 
 def load_model(mpath, version):
     #graph_def = tf.GraphDef()

@@ -54,6 +54,11 @@ def now_image():
     if img_paths:
         return img_paths[_cursor]
 
+def now_mask():
+    global mask_paths, _cursor
+    if mask_paths:
+        return mask_paths[_cursor]
+
 def set_project(prj_dirpath):
     assert Path(prj_dirpath,config.IMGDIR).exists()
     assert Path(prj_dirpath,config.MASKDIR).exists()

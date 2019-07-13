@@ -92,8 +92,7 @@ ApplicationWindow {
                 Layout.preferredHeight: w_icon
                 Layout.preferredWidth:  h_icon
                 onClicked: { 
-                    var img = main.gen_segmap()
-                    console.log(img)
+                    main.gen_segmap()
                     /*
                     canvas.grabToImage( #TODO: get smap from mask after edit..
                         function(img) {

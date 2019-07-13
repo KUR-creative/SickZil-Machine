@@ -67,10 +67,13 @@ def test_gen_segmap():
     main_window.open_project(QUrl(
         'file://' + os.path.abspath('./fixture/real_proj/')
     ))
-    actual = main_window.gen_segmap()
+
     expected = core.segmap(cv2.imread(
         './fixture/real_proj/images/bgr1.png'))
+    actual = main_window.gen_segmap()
+    saved  = cv2.imread('./fixture/real_proj/masks/bgr1.png')
 
     assert np.array_equal(actual, expected)
+    assert np.array_equal(saved, expected)
 
 app.quit()

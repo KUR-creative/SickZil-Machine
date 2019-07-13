@@ -89,12 +89,13 @@ class MainWindow(QObject):
     #---------------------------------------------------
     @pyqtSlot()
     def gen_segmap(self):
-        ''' Generate, Save, Display segmap of current image '''
         segmap = fp.go(
             state.now_image(),
             io.load,
             core.segmap
         )
+        io.save(state.now_mask(), segmap)
+        # make bg(black) transparent qt img
         return segmap
 
 

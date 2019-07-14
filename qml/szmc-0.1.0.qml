@@ -30,14 +30,12 @@ ApplicationWindow {
             msgDialog.text = msg;
             msgDialog.visible = true;
         }
-    /*
-        onLoadToCanvas: {
-            console.log('load', impath)
-            var url = "image://mask_provider/" + impath
+        onMaskProvide: {
+            console.log('load', path)
+            var url = "image://maskProvider/" + path
             canvas.loadImage(url)
-            canvas.impath = url // how to unable cacheing?
+            canvas.imgpath = url // TODO: how to unable cacheing?
         }
-    */
     }
 
     //=============================================================
@@ -169,7 +167,7 @@ ApplicationWindow {
 
                     property int lastX: 0
                     property int lastY: 0
-                    property string impath: ""
+                    property string imgpath: ""
 
                     MouseArea {
                         id: area
@@ -189,7 +187,7 @@ ApplicationWindow {
                         var ctx = getContext("2d");
                         //ctx.closePath();
                         ctx.clearRect(0,0, width,height)
-                        ctx.drawImage(impath, 0, 0);
+                        ctx.drawImage(imgpath, 0, 0);
                         requestPaint();
                     }
                     onPaint: {

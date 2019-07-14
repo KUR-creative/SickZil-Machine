@@ -70,7 +70,6 @@ def set_project(prj_dirpath):
     img_paths = fp.go(
         Path(prj_dirpath) / config.IMGDIR,
         fu.children, 
-        #F.tap,
         fu.human_sorted, 
         tuple
     )

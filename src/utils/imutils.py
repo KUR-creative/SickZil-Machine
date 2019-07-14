@@ -216,4 +216,4 @@ if __name__ == '__main__':
     assert is_img_file('.') == False
     assert is_img_file('./test/bigimg.png') 
     
-    print(QImage('./test_imgs/test_project/masks/2900045.png').format())
+    #print(QImage('./test_imgs/test_project/masks/2900045.png').format())

@@ -17,13 +17,8 @@ def load_model(mpath, version):
             graph_def, 
             name = config.model_name(mpath, version)
         )
-
 load_model(config.SNETPATH, '0.1.0')
 load_model(config.CNETPATH, '0.1.0')
-
-
-#def unload_model(): # Maybe useless
-    #tf.reset_default_graph()
 
 #----------------------------------------------------------------
 def segment_or_oom(segnet, inp, modulo=16):

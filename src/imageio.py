@@ -28,14 +28,3 @@ def segmap2mask(segmap):
 
 def save(path, img): #TODO: multimethod..?
     cv2.imwrite(path, img)
-
-def load_qimg(path):
-    return QImage(path)
-    '''
-    return fp.go(
-        path,
-        load,
-        iu.channel3img,
-        iu.nparr2qimg
-    )
-    '''

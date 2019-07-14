@@ -67,7 +67,7 @@ class MainWindow(QObject):
             state.set_project(dirpath)
             self.update_gui()
 
-        return dir_type # for test
+        return dir_type
 
     @pyqtSlot()
     def display_next(self):

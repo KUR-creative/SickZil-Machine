@@ -8,14 +8,15 @@ import config
 import state
 import core
 
+# TODO: refactor img-providers into 1 class 
+#       parameterized by io.load(path,xxx)
 class ImageUpdater(QQuickImageProvider):
     def __init__(self):
         super(ImageUpdater, self).__init__(
-            QQuickImageProvider.Image 
-        ) 
+            QQuickImageProvider.Image) 
 
     def requestImage(self, path, size):
-        img = io.load_qimg(path)
+        img = io.load(path)
         return img, img.size()
 
 class MainWindow(QObject):
@@ -94,7 +95,7 @@ class MainWindow(QObject):
 
         segmap = fp.go(
             imgpath,
-            io.load,
+            lambda p: io.load(p,io.NDARR),
             core.segmap
         )
         io.save(state.now_mask(), segmap)

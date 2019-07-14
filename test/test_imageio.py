@@ -9,9 +9,8 @@ import imageio as io
 def test_load():
     path = './fixture/real_proj/masks/bgr1.png'
     expected_qimg = QImage(path)
-    expected_ndarr= cv2.imread(path)
+    expected_ndarr= cv2.imread(path, cv2.IMREAD_UNCHANGED)
     print(type(io.load(path)))
     assert io.load(path) == expected_qimg
     assert np.array_equal(io.load(path,io.NDARR),expected_ndarr)
     assert np.array_equal(io.load(path,io.MASK),expected_ndarr)
-

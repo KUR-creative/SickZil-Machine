@@ -103,13 +103,13 @@ class MainWindow(QObject):
         imgpath = state.now_image()
         if imgpath is None: return None
 
-        segmap = fp.go(
+        mask = fp.go(
             imgpath,
-            lambda p: io.load(p,io.NDARR),
-            core.segmap
+            lambda path: io.load(path, io.NDARR),
+            core.segmap,
+            io.segmap2mask
         )
-        io.save(state.now_mask(), segmap)
-        # make bg(black) transparent qt img
-        return segmap
+        io.save(state.now_mask(), mask)
+        self.update_gui()
 
-
+        return mask

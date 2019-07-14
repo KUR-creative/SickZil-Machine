@@ -2,11 +2,11 @@ import os,sys
 sys.path.append( os.path.abspath('../src') )
 
 import pytest
-import numpy as np
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtQml import QQmlApplicationEngine
 from PyQt5.QtCore import QUrl
 from pathlib import Path
+import numpy as np
 import cv2
 
 import utils.fp as fp
@@ -14,6 +14,7 @@ import gui
 import state
 import config
 import core
+import imageio as io
 
 app = QApplication(sys.argv)
 main_window = gui.MainWindow(
@@ -68,13 +69,16 @@ def test_gen_segmap():
         'file://' + os.path.abspath('./fixture/real_proj/')
     ))
 
-    expected = core.segmap(cv2.imread(
-        './fixture/real_proj/images/bgr1.png'))
-    actual = main_window.gen_segmap()
-    saved  = cv2.imread('./fixture/real_proj/masks/bgr1.png')
+    expected = fp.go(
+        './fixture/real_proj/images/bgr1.png',
+        cv2.imread, core.segmap, io.segmap2mask
+    )
+    main_window.gen_segmap()
+    actual = cv2.imread(
+        './fixture/real_proj/masks/bgr1.png',
+        cv2.IMREAD_UNCHANGED) #NOTE: rgba -> 4channel, wb -> 1ch..
 
     assert np.array_equal(actual, expected)
-    assert np.array_equal(saved, expected)
 
 def test_gen_segmap_empty_state_then_no_action(clear_state):
     assert main_window.gen_segmap() is None

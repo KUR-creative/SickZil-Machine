@@ -8,25 +8,12 @@ import config
 import state
 import core
 
-# TODO: refactor img-providers into 1 class 
-#       parameterized by io.load(path,xxx)
-class ImageUpdater(QQuickImageProvider):
+class ImageProvider(QQuickImageProvider):
     def __init__(self):
-        super(ImageUpdater, self).__init__(
+        super(ImageProvider, self).__init__(
             QQuickImageProvider.Image) 
-
     def requestImage(self, path, size):
         img = io.load(path)
-        return img, img.size()
-
-class MaskProvider(QQuickImageProvider):
-    def __init__(self):
-        super(MaskProvider, self).__init__(
-            QQuickImageProvider.Image) 
-
-    def requestImage(self, path, size):
-        img = io.load(path)
-        print(img, img.size(),'------------------- *')
         return img, img.size()
 
 class MainWindow(QObject):
@@ -42,8 +29,10 @@ class MainWindow(QObject):
             config.MAIN_CONTEXT_NAME, self)
         engine.rootContext().setContextProperty(
             'ImModel', self.im_model)
-        engine.addImageProvider('imageUpdater', ImageUpdater())
-        engine.addImageProvider('maskProvider', MaskProvider())
+        engine.addImageProvider(
+            'imageUpdater', ImageProvider())
+        engine.addImageProvider(
+            'maskProvider', ImageProvider())
 
         engine.load(config.MAIN_QML)
         self.window = engine.rootObjects()[0]
@@ -52,9 +41,7 @@ class MainWindow(QObject):
         now_imgpath = state.now_image()
         if now_imgpath:
             self.imageUpdate.emit(now_imgpath)
-            import funcy as F
-            self.maskProvide.emit(F.tap(state.now_mask(),'****'))
-            print('called')
+            self.maskProvide.emit(state.now_mask())
             self.im_model.update()
 
     #---------------------------------------------------

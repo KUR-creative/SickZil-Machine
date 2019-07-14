@@ -28,14 +28,6 @@ class MaskProvider(QQuickImageProvider):
         img = io.load(path)
         print(img, img.size(),'------------------- *')
         return img, img.size()
-        '''
-        #cv2.imshow('mask', iu.imread(mask_path)); cv2.waitKey(0)
-        # TODO: mask have to save in bgr..
-        mask = iu.imread(mask_path) # bgra
-        mask = wb2rb(mask)
-        mask = iu.np_bgra2qimg(mask)
-        #mask = QImage(mask_path)
-        '''
 
 class MainWindow(QObject):
     imageUpdate = pyqtSignal(str, arguments=['path']) 
@@ -45,20 +37,13 @@ class MainWindow(QObject):
     def __init__(self,engine):
         QObject.__init__(self)
 
-        engine.rootContext().setContextProperty(
-            config.MAIN_CONTEXT_NAME, self
-        )
-        engine.addImageProvider(
-            'imageUpdater', ImageUpdater()
-        )
-        engine.addImageProvider(
-            'maskProvider', MaskProvider()
-        )
-
         self.im_model = ImListModel()
         engine.rootContext().setContextProperty(
-            'ImModel', self.im_model
-        )
+            config.MAIN_CONTEXT_NAME, self)
+        engine.rootContext().setContextProperty(
+            'ImModel', self.im_model)
+        engine.addImageProvider('imageUpdater', ImageUpdater())
+        engine.addImageProvider('maskProvider', MaskProvider())
 
         engine.load(config.MAIN_QML)
         self.window = engine.rootObjects()[0]

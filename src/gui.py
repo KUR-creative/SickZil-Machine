@@ -52,7 +52,9 @@ class MainWindow(QObject):
         now_imgpath = state.now_image()
         if now_imgpath:
             self.imageUpdate.emit(now_imgpath)
-            self.maskProvide.emit(state.now_mask())
+            import funcy as F
+            self.maskProvide.emit(F.tap(state.now_mask(),'****'))
+            print('called')
             self.im_model.update()
 
     #---------------------------------------------------

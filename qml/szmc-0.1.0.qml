@@ -32,9 +32,11 @@ ApplicationWindow {
         }
         onMaskProvide: {
             console.log('load', path)
+            var old_url = canvas.imgpath
             var url = "image://maskProvider/" + path
-            canvas.loadImage(url)
+            canvas.unloadImage(old_url) // unload prev image
             canvas.imgpath = url // TODO: how to unable cacheing?
+            canvas.loadImage(url) // load image *
         }
     }
 
@@ -183,7 +185,7 @@ ApplicationWindow {
 
                     }
                     onImageLoaded: {
-                        console.log('loaded?')
+                        // it didn't called. why? cached?
                         var ctx = getContext("2d");
                         //ctx.closePath();
                         ctx.clearRect(0,0, width,height)

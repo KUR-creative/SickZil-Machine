@@ -1,3 +1,6 @@
+#TODO: save mask & image in `png` format!
+#      and warn it to user: converted to png..
+#      (After conversion, all jpgs are deleted)
 from pathlib import Path
 from collections import namedtuple
 import funcy as F

@@ -19,6 +19,13 @@ def lstarmap(f,*seq):
     return list(I.starmap(f,*seq)) if seq \
     else lambda *xs: list(I.starmap(f,*xs))
 
+def filter(f,*seq):
+    return F.filter(f,*seq) if seq \
+    else lambda *xs: F.filter(f,*xs)
+def lfilter(f,*seq):
+    return F.lfilter(f,*seq) if seq \
+    else lambda *xs: F.lfilter(f,*xs)
+
 def foreach(f,*seq):
     F.lmap(f,*seq)
     return None

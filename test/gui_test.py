@@ -35,14 +35,14 @@ def test_open_project_with_prj3file_then_open_folder(clear_state):
     expected_imgs = tuple(fp.map(
         os.path.abspath,
         (fpath('fixture/prj_3file_I',config.IMGDIR,'1'), 
-         fpath('fixture/prj_3file_I',config.IMGDIR,'2'), 
-         fpath('fixture/prj_3file_I',config.IMGDIR,'3'))
+         fpath('fixture/prj_3file_I',config.IMGDIR,'2.png'), 
+         fpath('fixture/prj_3file_I',config.IMGDIR,'3.jpg'))
     ))
     expected_masks = tuple(fp.map(
         os.path.abspath,
-        (fpath('fixture/prj_3file_I',config.MASKDIR,'1'), 
-         fpath('fixture/prj_3file_I',config.MASKDIR,'2'), 
-         fpath('fixture/prj_3file_I',config.MASKDIR,'3'))
+        (fpath('fixture/prj_3file_I',config.MASKDIR,'1.png'), 
+         fpath('fixture/prj_3file_I',config.MASKDIR,'2.png'), 
+         fpath('fixture/prj_3file_I',config.MASKDIR,'3.png'))
     ))
 
     assert state.project() == (expected_imgs,expected_masks)

@@ -11,13 +11,13 @@ def test_set_project():
     def fpath(*ps): return str(Path(*ps))
     assert state.img_paths  == (
         fpath('fixture/prj_3file_I',config.IMGDIR,'1'), 
-        fpath('fixture/prj_3file_I',config.IMGDIR,'2'), 
-        fpath('fixture/prj_3file_I',config.IMGDIR,'3')
+        fpath('fixture/prj_3file_I',config.IMGDIR,'2.png'), 
+        fpath('fixture/prj_3file_I',config.IMGDIR,'3.jpg')
     )
     assert state.mask_paths == (
-        fpath('fixture/prj_3file_I',config.MASKDIR,'1'), 
-        fpath('fixture/prj_3file_I',config.MASKDIR,'2'), 
-        fpath('fixture/prj_3file_I',config.MASKDIR,'3')
+        fpath('fixture/prj_3file_I',config.MASKDIR,'1.png'), 
+        fpath('fixture/prj_3file_I',config.MASKDIR,'2.png'), 
+        fpath('fixture/prj_3file_I',config.MASKDIR,'3.png')
     )
 
 def test_clear_all():

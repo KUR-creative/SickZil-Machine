@@ -1,5 +1,10 @@
+# KUR-dev-machine
 #map <F8> :wa<CR>:lcd /home/kur/dev/SickZil-Machine/src<CR>:!python main.py<CR>
 #map <F5> :wa<CR>:lcd /home/kur/dev/SickZil-Machine/test<CR>:!pytest -v<CR>
+# KUR-LAB-MACHINE
+#map <F8> :wa<CR>:lcd /home/kur/dev/szmc/SickZil-Machine/src<CR>:!python main.py<CR>
+#map <F5> :wa<CR>:lcd /home/kur/dev/szmc/SickZil-Machine/test<CR>:!pytest -v<CR>
+
 import sys
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtQml import QQmlApplicationEngine

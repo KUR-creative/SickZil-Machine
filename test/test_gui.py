@@ -14,7 +14,7 @@ import gui
 import state
 import config
 import core
-import imageio as io
+import imgio as io
 
 app = QApplication(sys.argv)
 main_window = gui.MainWindow(

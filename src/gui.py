@@ -3,7 +3,7 @@ from PyQt5.QtQuick import QQuickImageProvider
 
 import utils.fp as fp
 from ImListModel import ImListModel
-import imageio as io
+import imgio as io
 import config
 import state
 import core

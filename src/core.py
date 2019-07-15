@@ -155,3 +155,21 @@ def inpaint(complnet, img, mask):
     print('inpainted', result.shape)
     return result # image inpainted successfully!
 
+def inpainted(image, segmap):
+    '''
+    return: uint8 text removed image.
+
+    image:  uint8 bgr manga image.
+    segmap: uint8 bgr mask image, bg=black.
+    '''
+    assert (255 >= image).all(), image.max()
+    assert   (image >= 0).all(), image.min()
+    with tf.Session() as sess:
+        cnet_in  = config.cnet_in('0.1.0',sess)
+        cnet_out = config.cnet_out('0.1.0',sess)
+        return inpaint(
+            lambda img:sess.run(
+                cnet_out, feed_dict={cnet_in:img}
+            ), 
+            image, segmap
+        )

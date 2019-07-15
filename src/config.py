@@ -17,6 +17,7 @@ def model_name(mpath, version):
     return {
         '0.1.0': 'snet' if mpath == SNETPATH else ''
     }[version]
+
 def snet_in(version, sess):
     return {
         '0.1.0': sess.graph.get_tensor_by_name('snet/input_1:0')
@@ -24,6 +25,15 @@ def snet_in(version, sess):
 def snet_out(version, sess):
     return {
         '0.1.0': sess.graph.get_tensor_by_name('snet/conv2d_19/truediv:0')
+    }[version]
+
+def cnet_in(version, sess):
+    return {
+        '0.1.0': sess.graph.get_tensor_by_name('INPUT:0')
+    }[version]
+def cnet_out(version, sess):
+    return {
+        '0.1.0': sess.graph.get_tensor_by_name('OUTPUT:0')
     }[version]
 
 # open_project(TYPE)s

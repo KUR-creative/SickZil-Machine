@@ -43,12 +43,13 @@ def set_project(prj_dirpath):
     img_paths = fp.go(
         Path(prj_dirpath) / config.IMGDIR,
         fu.children, 
+        fp.filter(iu.is_img_file),
         fu.human_sorted, 
         tuple
     )
     mask_paths = tuple(fp.map(
         fp.pipe(
-            fu.replace1(config.IMGDIR,config.MASKDIR),
+            fu.replace1(config.IMGDIR, config.MASKDIR),
             Path, lambda p:p.with_suffix('.png'), str 
         ),
         img_paths

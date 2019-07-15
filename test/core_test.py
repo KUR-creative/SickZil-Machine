@@ -10,9 +10,9 @@ def test_segment_input_output_spec_check():
     ret1= core.segmap(img1)
     ret2= core.segmap(img2)
 
-    # look & feel
-    cv2.imshow('img1',img1); cv2.imshow('img2',img2);
-    cv2.imshow('ret1',ret1); cv2.imshow('ret2',ret2);
-    cv2.waitKey(0)
+    # look & feel TODO:turn on..
+    #cv2.imshow('img1',img1); cv2.imshow('img2',img2);
+    #cv2.imshow('ret1',ret1); cv2.imshow('ret2',ret2);
+    #cv2.waitKey(0)
 
 # test different data(robustness)

@@ -47,7 +47,10 @@ def set_project(prj_dirpath):
         tuple
     )
     mask_paths = tuple(fp.map(
-        fu.replace1(config.IMGDIR, config.MASKDIR),
+        fp.pipe(
+            fu.replace1(config.IMGDIR,config.MASKDIR),
+            Path, lambda p:p.with_suffix('.png'), str 
+        ),
         img_paths
     ))
     _cursor = 0

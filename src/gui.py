@@ -100,3 +100,22 @@ class MainWindow(QObject):
         self.update_gui()
 
         return mask
+
+    @pyqtSlot()
+    def rm_txt(self):
+        #TODO: no segmap case
+        imgpath  = state.now_image()
+        maskpath = state.now_mask()
+        if imgpath is None: return None
+
+        image = io.load(imgpath, io.IMAGE)
+        mask  = io.load(maskpath, io.MASK)
+        rmtxt = core.inpainted(image, mask)
+        import cv2
+        cv2.imshow('i',image); 
+        #cv2.imshow('m',mask); 
+        cv2.imshow('r',rmtxt); 
+        cv2.waitKey(0)
+
+        #io.save(state.now_image(), image)
+        #io.save(state.now_mask(), image)

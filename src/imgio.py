@@ -6,12 +6,15 @@ from PyQt5.QtGui import QImage
 
 load = fp.multi(lambda p,s=None: s)
 NDARR = 'ndarr'
+IMAGE = 'image'
 MASK  = 'mask' 
 
 @fp.mmethod(load, None)
 def load(path, type=None): return QImage(path)
 @fp.mmethod(load, NDARR)
 def load(path, type): return iu.imread(path)
+@fp.mmethod(load, IMAGE)
+def load(path, type): return iu.channel3img(iu.imread(path))
 @fp.mmethod(load, MASK)
 def load(path, type): return mask2segmap(iu.imread(path))
 

@@ -13,6 +13,14 @@ def test_load():
     assert io.load(path) == expected_qimg
     assert np.array_equal(io.load(path,io.NDARR),expected_ndarr)
 
+def test_load_image():
+    for path in ['./fixture/real_proj/masks/bgr1.png',
+                 './fixture/real_proj/images/bgr1.png',
+                 './fixture/real_proj/images/bw1.png']:
+        actual = io.load(path, io.IMAGE)
+        expected = cv2.imread(path, cv2.IMREAD_COLOR)
+        assert np.array_equal(actual,expected)
+
 def test_load_mask():
     path = './fixture/real_proj/masks/bgr1.png'
     h,w = cv2.imread(path, cv2.IMREAD_UNCHANGED).shape[:2]

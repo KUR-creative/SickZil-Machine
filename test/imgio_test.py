@@ -2,15 +2,23 @@ import os,sys
 sys.path.append( os.path.abspath('../src') )
 
 import cv2
-import numpy as np
 from PyQt5.QtGui import QImage
+import numpy as np
 import imgio as io
 
 def test_load():
-    io.load
     path = './fixture/real_proj/masks/bgr1.png'
     expected_qimg = QImage(path)
     expected_ndarr= cv2.imread(path, cv2.IMREAD_UNCHANGED)
     assert io.load(path) == expected_qimg
     assert np.array_equal(io.load(path,io.NDARR),expected_ndarr)
-    assert np.array_equal(io.load(path,io.MASK),expected_ndarr)
+
+def test_load_mask():
+    path = './fixture/real_proj/masks/bgr1.png'
+    h,w = cv2.imread(path, cv2.IMREAD_UNCHANGED).shape[:2]
+    b,g,r = cv2.split(io.load(path,io.MASK))
+    assert h == b.shape[0]
+    assert w == g.shape[1]
+    assert(np.array_equal(b,g) 
+       and np.array_equal(g,r)
+       and np.array_equal(r,b))

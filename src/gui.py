@@ -7,6 +7,7 @@ import imgio as io
 import config
 import state
 import core
+from pathlib import Path
 
 class ImageProvider(QQuickImageProvider):
     def __init__(self):
@@ -86,7 +87,7 @@ class MainWindow(QObject):
 
     #---------------------------------------------------
     @pyqtSlot()
-    def gen_segmap(self):
+    def gen_segmap(self): # gen_mask
         imgpath = state.now_image()
         if imgpath is None: return None
 
@@ -109,7 +110,10 @@ class MainWindow(QObject):
         if imgpath is None: return None
 
         image = io.load(imgpath, io.IMAGE)
-        mask  = io.load(maskpath, io.MASK)
+        mask  =(io.load(maskpath, io.MASK) 
+                if Path(maskpath).exists()
+                else io.mask2segmap(self.gen_segmap()))
+
         rmtxt = core.inpainted(image, mask)
         import cv2
         cv2.imshow('i',image); 

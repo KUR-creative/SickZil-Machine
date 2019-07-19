@@ -87,7 +87,7 @@ class MainWindow(QObject):
 
     #---------------------------------------------------
     @pyqtSlot()
-    def gen_segmap(self): # gen_mask
+    def gen_mask(self): 
         imgpath = state.now_image()
         if imgpath is None: return None
 
@@ -112,7 +112,7 @@ class MainWindow(QObject):
         image = io.load(imgpath, io.IMAGE)
         mask  =(io.load(maskpath, io.MASK) 
                 if Path(maskpath).exists()
-                else io.mask2segmap(self.gen_segmap()))
+                else io.mask2segmap(self.gen_mask()))
 
         rmtxt = core.inpainted(image, mask)
         import cv2

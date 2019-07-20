@@ -84,4 +84,9 @@ def test_gen_segmap_empty_state_then_no_action(clear_state):
     assert main_window.gen_segmap() is None
     # expected no error.
 
+# TODO: Add test
+# rm_txt with existing mask: then use mask.
+# rm_txt without mask: make segmap and then use it.
+# edit mask => gen segmap => add generated segmap to old mask
+# edit mask(no mask) => rm_txt => ...
 app.quit()

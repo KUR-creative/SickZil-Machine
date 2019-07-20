@@ -21,6 +21,7 @@ class MainWindow(QObject):
     imageUpdate = pyqtSignal(str, arguments=['path']) 
     warning = pyqtSignal(str, arguments=['msg'])
     maskProvide = pyqtSignal(str, arguments=['path']) 
+    rmtxtPreview = pyqtSignal()
 
     def __init__(self,engine):
         QObject.__init__(self)
@@ -116,3 +117,4 @@ class MainWindow(QObject):
 
         io.save(state.now_image(), inpainted)
         self.update_gui()
+        self.rmtxtPreview.emit()

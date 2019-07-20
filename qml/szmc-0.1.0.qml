@@ -38,6 +38,10 @@ ApplicationWindow {
             canvas.imgpath = url // TODO: how to unable cacheing?
             canvas.loadImage(url) // load image *
         }
+        onRmtxtPreview: {
+            canvas.visible = false
+            canvas.state = canvas.rmtxt_preview
+        }
     }
 
     //=============================================================
@@ -148,10 +152,14 @@ ApplicationWindow {
              if(event.key == Qt.Key_Up)   { main.display_prev(); }
         else if(event.key == Qt.Key_Down) { main.display_next(); }
         else if(event.key == Qt.Key_Space){ 
-                canvas.visible = !(canvas.visible)
+                if (canvas.state == canvas.rmtxt_preview){
+                    canvas.state = canvas.edit
+                }
+                canvas.visible = !(canvas.visible);
                 // TODO: inform canvas visibility to user.
             }
         }
+
 
         ScrollView {
             objectName: "view"
@@ -163,27 +171,35 @@ ApplicationWindow {
                 objectName: "image"
                 source: "../resource/startup.png"
 
+                MouseArea {
+                    id: area
+                    anchors.fill: parent
+                    onPressed: {
+                        canvas.lastX = mouseX
+                        canvas.lastY = mouseY
+                        if (canvas.state == canvas.rmtxt_preview){
+                            canvas.state = canvas.edit
+                            canvas.visible = true;
+                        }
+                    }
+
+                    onPositionChanged: {
+                        canvas.requestPaint();
+                    }
+
+                }
+
                 Canvas {
                     id: canvas
                     anchors.fill: parent
 
+                    readonly property string edit: "edit"
+                    readonly property string rmtxt_preview: "rmtxt_preview"
+                    property string state: edit
                     property int lastX: 0
                     property int lastY: 0
                     property string imgpath: ""
 
-                    MouseArea {
-                        id: area
-                        anchors.fill: parent
-                        onPressed: {
-                            canvas.lastX = mouseX
-                            canvas.lastY = mouseY
-                        }
-
-                        onPositionChanged: {
-                            canvas.requestPaint();
-                        }
-
-                    }
                     onImageLoaded: {
                         // it didn't called. why? cached?
                         var ctx = getContext("2d");
@@ -193,7 +209,7 @@ ApplicationWindow {
                         requestPaint();
                     }
                     onPaint: {
-                        console.log('painted?')
+                        //console.log('painted?')
                         var ctx = getContext("2d");
                         ctx.lineCap = 'round'
                         ctx.strokeStyle = "#FF0000"
@@ -206,7 +222,6 @@ ApplicationWindow {
                         lastY = area.mouseY;
                         ctx.lineTo(lastX,lastY);
                         ctx.stroke();
-
                     }
                 } 
             }

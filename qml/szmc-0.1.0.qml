@@ -21,7 +21,7 @@ ApplicationWindow {
     Connections {
         target: main
         onImageUpdate: {
-            console.log('received signal', path)
+            im.source = "" // unload
             im.source = "image://imageUpdater/" + path
         }
         onWarning: {

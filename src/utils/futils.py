@@ -41,6 +41,18 @@ def replace1(old, new, path):
     idx = parts.index(old)
     return str(Path(*F.set_in(parts, [idx], new)))
 
+def delete(path, except_on_fail=False):
+    # TODO: add directory deletion
+    # NOTE: use try, because file can be DELETED 
+    # while checking existance 
+    try: 
+        Path(path).unlink()
+        return True
+    except FileNotFoundError as error:
+        if except_on_fail:
+            raise error
+        else:
+            return False
 
 if __name__ == '__main__':
     for x in Path('.').iterdir():

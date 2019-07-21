@@ -89,4 +89,10 @@ def test_gen_mask_empty_state_then_no_action(clear_state):
 # rm_txt without mask: make segmap and then use it.
 # edit mask => gen segmap => add generated segmap to old mask
 # edit mask(no mask) => rm_txt => ...
+def test_if_display_other_image_then_save_mask(clear_state):
+    #Path('~/ppap').unlink()
+    main_window.open_project(QUrl(
+        'file://' + os.path.abspath('./fixture/real_proj/')
+    ))
+
 app.quit()

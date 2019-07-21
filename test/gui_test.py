@@ -10,6 +10,7 @@ import numpy as np
 import cv2
 
 import utils.fp as fp
+import utils.futils as fu
 import gui
 import state
 import config
@@ -83,16 +84,28 @@ def test_gen_mask():
 def test_gen_mask_empty_state_then_no_action(clear_state):
     assert main_window.gen_mask() is None
     # expected no error.
-
 # TODO: Add test
 # rm_txt with existing mask: then use mask.
 # rm_txt without mask: make segmap and then use it.
 # edit mask => gen segmap => add generated segmap to old mask
 # edit mask(no mask) => rm_txt => ...
+
+#NOTE: It's not testable(cuz no gui)! Find other way to test!
+'''
 def test_if_display_other_image_then_save_mask(clear_state):
-    #Path('~/ppap').unlink()
     main_window.open_project(QUrl(
         'file://' + os.path.abspath('./fixture/real_proj/')
     ))
+    mpath0 = state.now_mask()
+    fu.delete(mpath0)
+    assert not Path(mpath0).exists()
+
+    # next
+    main_window.display_next()
+    print(mpath0)
+    assert Path(mpath0).exists()
+    # prev
+    # goto some index
+'''
 
 app.quit()

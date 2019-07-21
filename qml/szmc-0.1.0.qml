@@ -18,6 +18,7 @@ ApplicationWindow {
         id: msgDialog
     }
     //-------------------------------------------------------------
+
     Connections {
         target: main
         onImageUpdate: {
@@ -37,6 +38,49 @@ ApplicationWindow {
             canvas.unloadImage(old_url) // unload prev image
             canvas.imgpath = url // TODO: how to unable cacheing?
             canvas.loadImage(url) // load image *
+        }
+        onSaveMask: {
+            canvas.save(path)
+            // TODO: try to use createImageData ...
+            // https://ebeenarticle.tistory.com/entry/QML-Canvas-Element
+            // https://doc.qt.io/qt-5/qml-qtquick-context2d.html#createImageData-method
+
+            /*
+            const w = canvas.width
+            const h = canvas.height
+            var ctx = canvas.getContext("2d");
+            var ar = ctx.getImageData(0,0,w,h);
+            //https://stackoverflow.com/questions/51407887/how-can-i-get-pixel-array-from-qml-canvas
+            //https://stackoverflow.com/questions/37333314/creating-arrays-in-qml-not-objects
+            //https://stackoverflow.com/questions/36299045/how-to-convert-qjsvalue-to-python-list-in-python-and-qml
+            main.get_canvas(ar.data);
+            console.log(ar.data)
+            console.log(ar.data.length)
+            console.log(ar.width)
+            console.log(ar.height)
+            for( var x=0; x < ar.data.length; x=x+4 )
+            {
+                // To read RGBA values
+                var red   =  ar.data[x];
+                var green =  ar.data[x + 1];
+                var blue  =  ar.data[x + 2];
+                var alpha =  ar.data[x + 3];
+                if(red != 0){
+                    console.log(red + ", " + green + ", " + blue + ", " + alpha );
+                }
+            }
+
+            canvas.grabToImage( function(img) {
+                // https://doc-snapshots.qt.io/qt5-5.9/qml-qtquick-item.html#grabToImage-method
+                // ... grab happens *asynchronously*
+                console.log(path)
+                main.get_canvas(img)
+                img.saveToFile(path)
+            })
+            timer.setTimeout(
+                function () {console.log('!!');}, 2000)
+            */
+
         }
         onRmtxtPreview: {
             canvas.visible = false
@@ -97,14 +141,6 @@ ApplicationWindow {
                 Layout.preferredWidth:  h_icon
                 onClicked: { 
                     main.gen_mask()
-                    /*
-                    canvas.grabToImage( #TODO: get smap from mask after edit..
-                        function(img) {
-                            img.saveToFile("test_imgs/test.png")
-                            main.get_canvas(img)
-                        }
-                    )
-                    */
                 }
             }
             ToolButton {
@@ -143,20 +179,51 @@ ApplicationWindow {
     }
 
     //-------------------------------------------------------------
+
     RowLayout {
         anchors.fill: parent
         spacing: 6
 
         focus: true
+        property bool up_pressed: false
+        property bool down_pressed: false
         Keys.onPressed: {
-             if(event.key == Qt.Key_Up)   { main.display_prev(); }
-        else if(event.key == Qt.Key_Down) { main.display_next(); }
-        else if(event.key == Qt.Key_Space){ 
+            // TODO: if up/down key pressed in startup page, 
+            // IT DELETES THIS QML FILE!!!! WTF????
+            if(event.key == Qt.Key_Up)   { 
+                if(up_pressed == false){ 
+                    console.log('up pressed', up_pressed)
+                    main.display_prev(); 
+                }
+                up_pressed = true
+            }
+            else if(event.key == Qt.Key_Down) { 
+                if(! down_pressed){ 
+                    console.log('down pressed', down_pressed)
+                    main.display_next(); 
+                }
+                down_pressed = true
+            }
+            else if(event.key == Qt.Key_Space){ 
                 if (canvas.state == canvas.rmtxt_preview){
                     canvas.state = canvas.edit
                 }
                 canvas.visible = !(canvas.visible);
                 // TODO: inform canvas visibility to user.
+            }
+        }
+        Keys.onReleased: {
+            if(event.key == Qt.Key_Up)   { 
+                console.log('up released', up_pressed)
+                if (!event.isAutoRepeat) {
+                    up_pressed = false
+                }
+            }
+            else if(event.key == Qt.Key_Down) { 
+                console.log('down released', down_pressed)
+                if (!event.isAutoRepeat) {
+                    down_pressed = false
+                }
             }
         }
 

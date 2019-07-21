@@ -64,7 +64,7 @@ def test_open_project_is_flat_imgdir_then_no_state_change(clear_state):
     assert state.project() == ((),())
     assert dir_type == config.FLAT_IMGDIR
 
-def test_gen_segmap():
+def test_gen_mask():
     main_window.open_project(QUrl(
         'file://' + os.path.abspath('./fixture/real_proj/')
     ))
@@ -73,15 +73,15 @@ def test_gen_segmap():
         './fixture/real_proj/images/bgr1.png',
         cv2.imread, core.segmap, io.segmap2mask
     )
-    main_window.gen_segmap()
+    main_window.gen_mask()
     actual = cv2.imread(
         './fixture/real_proj/masks/bgr1.png',
         cv2.IMREAD_UNCHANGED) #NOTE: rgba -> 4channel, wb -> 1ch..
 
     assert np.array_equal(actual, expected)
 
-def test_gen_segmap_empty_state_then_no_action(clear_state):
-    assert main_window.gen_segmap() is None
+def test_gen_mask_empty_state_then_no_action(clear_state):
+    assert main_window.gen_mask() is None
     # expected no error.
 
 # TODO: Add test

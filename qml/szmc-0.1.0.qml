@@ -1,4 +1,6 @@
 // TODO: decompose it. especially, remove magic string & numbers!
+// TODO: https://stackoverflow.com/questions/47891156/understanding-markdirty-in-qml
+//       for performance optimization
 
 import QtQuick 2.5
 import QtQuick.Layouts 1.3
@@ -35,9 +37,9 @@ ApplicationWindow {
             console.log('load', path)
             var old_url = canvas.imgpath
             var url = "image://maskProvider/" + path
-            canvas.unloadImage(old_url) // unload prev image
-            canvas.imgpath = url // TODO: how to unable cacheing?
-            canvas.loadImage(url) // load image *
+            canvas.unloadImage(old_url)
+            canvas.imgpath = url 
+            canvas.loadImage(url) 
         }
         onSaveMask: {
             canvas.save(path)
@@ -90,7 +92,7 @@ ApplicationWindow {
     toolBar: ToolBar {
         RowLayout {
             // TODO: Refactor: Add SzmcToolBtn type
-            // TODO: add unavailable icon.
+            // TODO: add disabled icon representation.
             ToolButton {
                 Image {
                     source: "../resource/mask_btn.png"
@@ -211,7 +213,8 @@ ApplicationWindow {
                     }
 
                     onPositionChanged: {
-                        canvas.requestPaint();
+                        canvas.requestPaint(); // TODO: use markdirty for performance
+                        //console.log('is dirty!')
                     }
 
                 }
@@ -228,15 +231,12 @@ ApplicationWindow {
                     property string imgpath: ""
 
                     onImageLoaded: {
-                        // it didn't called. why? cached?
                         var ctx = getContext("2d");
-                        //ctx.closePath();
                         ctx.clearRect(0,0, width,height)
                         ctx.drawImage(imgpath, 0, 0);
                         requestPaint();
                     }
                     onPaint: {
-                        //console.log('painted?')
                         var ctx = getContext("2d");
                         ctx.lineCap = 'round'
                         ctx.strokeStyle = "#FF0000"

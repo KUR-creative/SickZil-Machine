@@ -78,7 +78,6 @@ class MainWindow(QObject):
         import time 
         self.saveMask.emit(state.now_mask())
         state.next()
-        #time.sleep(0.2)
         self.update_gui()
 
     @pyqtSlot()
@@ -86,7 +85,6 @@ class MainWindow(QObject):
         import time 
         self.saveMask.emit(state.now_mask())
         state.prev()
-        #time.sleep(0.25)
         self.update_gui()
 
     @pyqtSlot(int)
@@ -101,7 +99,7 @@ class MainWindow(QObject):
         import utils.imutils as iu
         import cv2
         nparr = iu.qimg2nparr(img.image())
-        cv2.imshow('im',nparr); #cv2.waitKey(0)
+        cv2.imshow('im',nparr); 
     #---------------------------------------------------
     @pyqtSlot()
     def gen_mask(self): 

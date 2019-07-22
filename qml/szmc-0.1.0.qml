@@ -31,7 +31,7 @@ ApplicationWindow {
             msgDialog.text = msg;
             msgDialog.visible = true;
         }
-        onMaskProvide: {
+        onProvideMask: {
             console.log('load', path)
             var old_url = canvas.imgpath
             var url = "image://maskProvider/" + path

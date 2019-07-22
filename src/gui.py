@@ -21,8 +21,7 @@ class ImageProvider(QQuickImageProvider):
 class MainWindow(QObject):
     imageUpdate = pyqtSignal(str, arguments=['path']) 
     warning = pyqtSignal(str, arguments=['msg'])
-    maskProvide = pyqtSignal(str, arguments=['path']) 
-    # TODO: Rename provideMask
+    provideMask = pyqtSignal(str, arguments=['path']) 
     saveMask = pyqtSignal(str, arguments=['path'])
     rmtxtPreview = pyqtSignal()
 
@@ -46,7 +45,7 @@ class MainWindow(QObject):
         now_imgpath = state.now_image()
         if now_imgpath:
             self.imageUpdate.emit(now_imgpath)
-            self.maskProvide.emit(state.now_mask())
+            self.provideMask.emit(state.now_mask())
             self.im_model.update()
 
     #---------------------------------------------------

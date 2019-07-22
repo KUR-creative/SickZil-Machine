@@ -33,19 +33,16 @@ ApplicationWindow {
             im.source = "image://imageUpdater/" + path
         }
         onWarning: {
-            console.log('received warning:', msg)
             msgDialog.title = "project format error"
             msgDialog.text = msg;
             msgDialog.visible = true;
         }
         onProvideMask: {
-            //console.log('load', path)
             var old_url = canvas.imgpath
             var url = "image://maskProvider/" + path
             canvas.unloadImage(old_url)
             canvas.imgpath = url 
             canvas.loadImage(url) 
-            console.log(path)
         }
         onSaveMask: {
             if(canvas.is_edited){
@@ -165,14 +162,12 @@ ApplicationWindow {
             // IT DELETES THIS QML FILE!!!! WTF????
             if(event.key == Qt.Key_Up)   { 
                 if(up_pressed == false){ 
-                    console.log('up pressed', up_pressed)
                     main.display_prev(); 
                 }
                 up_pressed = true
             }
             else if(event.key == Qt.Key_Down) { 
                 if(! down_pressed){ 
-                    console.log('down pressed', down_pressed)
                     main.display_next(); 
                 }
                 down_pressed = true
@@ -187,13 +182,11 @@ ApplicationWindow {
         }
         Keys.onReleased: {
             if(event.key == Qt.Key_Up)   { 
-                console.log('up released', up_pressed)
                 if (!event.isAutoRepeat) {
                     up_pressed = false
                 }
             }
             else if(event.key == Qt.Key_Down) { 
-                console.log('down released', down_pressed)
                 if (!event.isAutoRepeat) {
                     down_pressed = false
                 }

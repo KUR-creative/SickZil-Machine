@@ -93,6 +93,7 @@ class MainWindow(QObject):
         state.cursor(index)
         self.update_gui()
 
+    '''
     # NOTE: for DEBUG
     @pyqtSlot(QQuickItemGrabResult)
     def get_canvas(self, img):
@@ -100,6 +101,7 @@ class MainWindow(QObject):
         import cv2
         nparr = iu.qimg2nparr(img.image())
         cv2.imshow('im',nparr); 
+    '''
     #---------------------------------------------------
     @pyqtSlot()
     def gen_mask(self): 

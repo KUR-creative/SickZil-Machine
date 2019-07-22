@@ -46,7 +46,7 @@ ApplicationWindow {
         }
         onRmtxtPreview: {
             canvas.visible = false
-            canvas.state = canvas.rmtxt_preview
+            canvas.mode = canvas.rmtxt_preview
         }
     }
 
@@ -167,8 +167,8 @@ ApplicationWindow {
                 down_pressed = true
             }
             else if(event.key == Qt.Key_Space){ 
-                if (canvas.state == canvas.rmtxt_preview){
-                    canvas.state = canvas.edit
+                if (canvas.mode == canvas.rmtxt_preview){
+                    canvas.mode = canvas.edit
                 }
                 canvas.visible = !(canvas.visible);
                 // TODO: inform canvas visibility to user.
@@ -206,15 +206,15 @@ ApplicationWindow {
                     onPressed: {
                         canvas.lastX = mouseX
                         canvas.lastY = mouseY
-                        if (canvas.state == canvas.rmtxt_preview){
-                            canvas.state = canvas.edit
+                        if (canvas.mode == canvas.rmtxt_preview){
+                            canvas.mode = canvas.edit
                             canvas.visible = true;
                         }
                     }
 
                     onPositionChanged: {
                         canvas.requestPaint(); // TODO: use markdirty for performance
-                        //console.log('is dirty!')
+                        console.log('is dirty!')
                     }
 
                 }
@@ -225,7 +225,7 @@ ApplicationWindow {
 
                     readonly property string edit: "edit"
                     readonly property string rmtxt_preview: "rmtxt_preview"
-                    property string state: edit
+                    property string mode: edit
                     property int lastX: 0
                     property int lastY: 0
                     property string imgpath: ""

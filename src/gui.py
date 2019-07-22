@@ -97,39 +97,12 @@ class MainWindow(QObject):
         self.update_gui()
 
     # NOTE: for DEBUG
-    #@pyqtSlot(QObject)
-    #@pyqtSlot(QMatrix)
-    #@pyqtSlot(QVariantList)
-    #@pyqtSlot(QVariant)
-    #def get_canvas(self, data):
     @pyqtSlot(QQuickItemGrabResult)
     def get_canvas(self, img):
         import utils.imutils as iu
         import cv2
         nparr = iu.qimg2nparr(img.image())
         cv2.imshow('im',nparr); #cv2.waitKey(0)
-        '''
-        print(data)
-        print(type(data))
-        print(dir(data))
-        print(data.isArray())
-        print('->',data.toQObject())
-        print('---')
-        print(data.isArray(), 
-            data.isBool(), 
-            data.isCallable(), 
-            data.isDate(), 
-            data.isError(), 
-            data.isNull(), 
-            data.isNumber(), 
-            data.isObject(), # <- True
-            '|', data.isQObject(), data.isRegExp(), data.isString(), data.isUndefined(), data.isVariant())
-        from pprint import pprint
-        def dump(obj):
-            for attr in dir(obj):
-                print("obj.%s = %r" % (attr, getattr(obj, attr)))
-        dump(data)
-        '''
     #---------------------------------------------------
     @pyqtSlot()
     def gen_mask(self): 

@@ -41,46 +41,6 @@ ApplicationWindow {
         }
         onSaveMask: {
             canvas.save(path)
-            // TODO: try to use createImageData ...
-            // https://ebeenarticle.tistory.com/entry/QML-Canvas-Element
-            // https://doc.qt.io/qt-5/qml-qtquick-context2d.html#createImageData-method
-
-            /*
-            const w = canvas.width
-            const h = canvas.height
-            var ctx = canvas.getContext("2d");
-            var ar = ctx.getImageData(0,0,w,h);
-            //https://stackoverflow.com/questions/51407887/how-can-i-get-pixel-array-from-qml-canvas
-            //https://stackoverflow.com/questions/37333314/creating-arrays-in-qml-not-objects
-            //https://stackoverflow.com/questions/36299045/how-to-convert-qjsvalue-to-python-list-in-python-and-qml
-            main.get_canvas(ar.data);
-            console.log(ar.data)
-            console.log(ar.data.length)
-            console.log(ar.width)
-            console.log(ar.height)
-            for( var x=0; x < ar.data.length; x=x+4 )
-            {
-                // To read RGBA values
-                var red   =  ar.data[x];
-                var green =  ar.data[x + 1];
-                var blue  =  ar.data[x + 2];
-                var alpha =  ar.data[x + 3];
-                if(red != 0){
-                    console.log(red + ", " + green + ", " + blue + ", " + alpha );
-                }
-            }
-
-            canvas.grabToImage( function(img) {
-                // https://doc-snapshots.qt.io/qt5-5.9/qml-qtquick-item.html#grabToImage-method
-                // ... grab happens *asynchronously*
-                console.log(path)
-                main.get_canvas(img)
-                img.saveToFile(path)
-            })
-            timer.setTimeout(
-                function () {console.log('!!');}, 2000)
-            */
-
         }
         onRmtxtPreview: {
             canvas.visible = false

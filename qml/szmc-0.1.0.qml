@@ -3,7 +3,7 @@
 //       for performance optimization
 /*
  [ALL STATES]
-canvas.mode
+NOT USED           canvas.mode 
 canvas.is_edited
 */
 
@@ -55,7 +55,7 @@ ApplicationWindow {
         onRmtxtPreview: {
             canvas.visible = false
             setMaskVisible(canvas.visible)
-            canvas.mode = canvas.rmtxt_preview
+            //canvas.mode = canvas.rmtxt_preview
         }
     }
 
@@ -203,9 +203,7 @@ ApplicationWindow {
                 down_pressed = true
             }
             else if(event.key == Qt.Key_Space){ 
-                if (canvas.mode == canvas.rmtxt_preview){
-                    canvas.mode = canvas.edit
-                }
+                //if (canvas.mode == canvas.rmtxt_preview){ canvas.mode = canvas.edit }
                 canvas.visible = !(canvas.visible);
                 setMaskVisible(canvas.visible)
                 // TODO: inform canvas visibility to user.
@@ -241,11 +239,13 @@ ApplicationWindow {
                     onPressed: {
                         canvas.lastX = mouseX
                         canvas.lastY = mouseY
+                        /*
                         if (canvas.mode == canvas.rmtxt_preview){
                             canvas.mode = canvas.edit
                             canvas.visible = true;
                             setMaskVisible(canvas.visible)
                         }
+                        */
                     }
 
                     onPositionChanged: {
@@ -259,10 +259,10 @@ ApplicationWindow {
                     id: canvas
                     anchors.fill: parent
 
-                    readonly property string edit: "edit"
-                    readonly property string rmtxt_preview: "rmtxt_preview"
+                    //readonly property string edit: "edit"
+                    //readonly property string rmtxt_preview: "rmtxt_preview"
 
-                    property string mode: edit
+                    //property string mode: edit
                     property int lastX: 0
                     property int lastY: 0
 

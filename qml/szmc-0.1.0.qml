@@ -1,6 +1,11 @@
 // TODO: decompose it. especially, remove magic string & numbers!
 // TODO: https://stackoverflow.com/questions/47891156/understanding-markdirty-in-qml
 //       for performance optimization
+/*
+ [ALL STATES]
+canvas.mode
+canvas.is_edited
+*/
 
 import QtQuick 2.5
 import QtQuick.Layouts 1.3
@@ -34,15 +39,19 @@ ApplicationWindow {
             msgDialog.visible = true;
         }
         onProvideMask: {
-            console.log('load', path)
+            //console.log('load', path)
             var old_url = canvas.imgpath
             var url = "image://maskProvider/" + path
             canvas.unloadImage(old_url)
             canvas.imgpath = url 
             canvas.loadImage(url) 
+            console.log(path)
         }
         onSaveMask: {
-            canvas.save(path)
+            if(canvas.is_edited){
+                canvas.save(path)
+                canvas.is_edited = false
+            }
         }
         onRmtxtPreview: {
             canvas.visible = false
@@ -102,6 +111,7 @@ ApplicationWindow {
                 Layout.preferredHeight: w_icon
                 Layout.preferredWidth:  h_icon
                 onClicked: { 
+                    canvas.is_edited = true
                     main.gen_mask()
                 }
             }
@@ -114,6 +124,7 @@ ApplicationWindow {
                 Layout.preferredHeight: w_icon
                 Layout.preferredWidth:  h_icon
                 onClicked: {
+                    canvas.is_edited = true
                     main.rm_txt()
                 }
             }
@@ -213,8 +224,8 @@ ApplicationWindow {
                     }
 
                     onPositionChanged: {
+                        canvas.is_edited = true
                         canvas.requestPaint(); // TODO: use markdirty for performance
-                        console.log('is dirty!')
                     }
 
                 }
@@ -225,10 +236,13 @@ ApplicationWindow {
 
                     readonly property string edit: "edit"
                     readonly property string rmtxt_preview: "rmtxt_preview"
+
                     property string mode: edit
                     property int lastX: 0
                     property int lastY: 0
+
                     property string imgpath: ""
+                    property bool is_edited: false
 
                     onImageLoaded: {
                         var ctx = getContext("2d");

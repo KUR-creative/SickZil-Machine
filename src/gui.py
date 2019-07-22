@@ -19,11 +19,11 @@ class ImageProvider(QQuickImageProvider):
         return img, img.size()
 
 class MainWindow(QObject):
+    warning     = pyqtSignal(str, arguments=['msg'])
+    rmtxtPreview= pyqtSignal()
     updateImage = pyqtSignal(str, arguments=['path']) 
-    warning = pyqtSignal(str, arguments=['msg'])
     provideMask = pyqtSignal(str, arguments=['path']) 
-    saveMask = pyqtSignal(str, arguments=['path'])
-    rmtxtPreview = pyqtSignal()
+    saveMask    = pyqtSignal(str, arguments=['path'])
 
     def __init__(self,engine):
         QObject.__init__(self)

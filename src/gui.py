@@ -125,6 +125,7 @@ class MainWindow(QObject):
         maskpath = state.now_mask()
         if imgpath is None: return None
 
+        self.saveMask.emit(state.now_mask())
         image = io.load(imgpath, io.IMAGE)
         mask  =(io.load(maskpath, io.MASK) 
                 if Path(maskpath).exists()

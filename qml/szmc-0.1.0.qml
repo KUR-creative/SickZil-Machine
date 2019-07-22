@@ -26,6 +26,8 @@ ApplicationWindow {
     }
     //-------------------------------------------------------------
 
+    signal setMaskVisible(bool is_on);
+
     Connections {
         target: main
         onUpdateImage: {
@@ -52,6 +54,7 @@ ApplicationWindow {
         }
         onRmtxtPreview: {
             canvas.visible = false
+            setMaskVisible(canvas.visible)
             canvas.mode = canvas.rmtxt_preview
         }
     }
@@ -145,6 +148,33 @@ ApplicationWindow {
                 Layout.preferredWidth:  h_icon
                 onClicked: { }
             }
+            // toggle buttons
+            ToolButton {
+                Image {
+                    id: mask_toggle_btn
+                    property bool mask_on: true
+                    readonly property string on_img:  "../resource/mask_on.png"
+                    readonly property string off_img: "../resource/mask_off.png"
+                    source: mask_toggle_btn.on_img
+                    x:     x_all; y:      y_all
+                    width: w_all; height: h_all
+                }
+                Layout.preferredHeight: w_icon
+                Layout.preferredWidth:  h_icon
+                onClicked: { 
+                    canvas.visible = !(canvas.visible);
+                    setMaskVisible(canvas.visible)
+                }
+                Connections {
+                    target: window
+                    onSetMaskVisible: {
+                        mask_toggle_btn.source = 
+                            canvas.visible ? mask_toggle_btn.on_img 
+                                           : mask_toggle_btn.off_img
+                        mask_toggle_btn.mask_on = !(mask_toggle_btn.mask_on);
+                    } 
+                }
+            }
         }
     }
 
@@ -177,6 +207,7 @@ ApplicationWindow {
                     canvas.mode = canvas.edit
                 }
                 canvas.visible = !(canvas.visible);
+                setMaskVisible(canvas.visible)
                 // TODO: inform canvas visibility to user.
             }
         }
@@ -213,6 +244,7 @@ ApplicationWindow {
                         if (canvas.mode == canvas.rmtxt_preview){
                             canvas.mode = canvas.edit
                             canvas.visible = true;
+                            setMaskVisible(canvas.visible)
                         }
                     }
 

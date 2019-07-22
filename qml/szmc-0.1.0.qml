@@ -28,7 +28,7 @@ ApplicationWindow {
 
     Connections {
         target: main
-        onImageUpdate: {
+        onUpdateImage: {
             im.source = "" // unload
             im.source = "image://imageUpdater/" + path
         }

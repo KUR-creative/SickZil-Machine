@@ -3,6 +3,8 @@
 //       for performance optimization
 /*
  [ALL STATES]
+window.state
+window.edit_tool
 canvas.is_dirty
 canvas.visible
 */
@@ -20,6 +22,24 @@ ApplicationWindow {
     visible: true
     width: 850; height: 750
     //visibility: Window.Maximized
+
+    // STATES
+    readonly property string start_up: "start_up"
+    readonly property string load_img: "load_img"
+    readonly property string edit_mask:"edit_mask"
+    property string state: start_up
+
+    readonly property string pen: "../resource/pen.png"
+    readonly property string eraser: "../resource/eraser.png"
+    property string edit_tool: pen
+
+    /*
+    //for DEBUG
+    Timer {
+        interval: 500; running: true; repeat: true
+        onTriggered: console.log("canvas.visible:", canvas.visible)
+    }
+    */
 
     MessageDialog {
         id: msgDialog

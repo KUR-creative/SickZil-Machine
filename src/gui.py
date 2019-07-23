@@ -120,6 +120,22 @@ class MainWindow(QObject):
         return mask
 
     @pyqtSlot()
+    def gen_mask_all(self): 
+        imgpath = state.now_image()
+        if imgpath is None: return None
+
+        mask = fp.go(
+            imgpath,
+            lambda path: io.load(path, io.NDARR),
+            core.segmap,
+            io.segmap2mask
+        )
+        io.save(state.now_mask(), mask)
+        self.update_gui()
+
+        return mask
+
+    @pyqtSlot()
     def rm_txt(self):
         imgpath  = state.now_image()
         maskpath = state.now_mask()

@@ -26,7 +26,8 @@ ApplicationWindow {
     }
     //-------------------------------------------------------------
 
-    signal setMaskVisible(bool is_on);
+    signal setMaskVisible(bool is_on); // TODO: ~Visibility
+    signal setBrushMode(bool is_pen);
 
     Connections {
         target: main
@@ -171,6 +172,32 @@ ApplicationWindow {
                             canvas.visible ? mask_toggle_btn.on_img 
                                            : mask_toggle_btn.off_img
                         mask_toggle_btn.mask_on = !(mask_toggle_btn.mask_on);
+                    } 
+                }
+            }
+            ToolButton {
+                Image {
+                    id: pen_toggle_btn
+                    property bool is_pen: true
+                    readonly property string pen: "../resource/pen.png"
+                    readonly property string eraser: "../resource/eraser.png"
+                    source: pen
+                    x:     x_all; y:      y_all
+                    width: w_all; height: h_all
+                }
+                Layout.preferredHeight: w_icon
+                Layout.preferredWidth:  h_icon
+                onClicked: { 
+                    pen_toggle_btn.is_pen = !(pen_toggle_btn.is_pen);
+                    setBrushMode(pen_toggle_btn.is_pen)
+                }
+                Connections {
+                    target: window
+                    onSetBrushMode: {
+                        console.log(is_pen)
+                        pen_toggle_btn.source =
+                            is_pen ? pen_toggle_btn.pen 
+                                   : pen_toggle_btn.eraser
                     } 
                 }
             }

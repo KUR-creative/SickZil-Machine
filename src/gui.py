@@ -141,13 +141,13 @@ class MainWindow(QObject):
         maskpath = state.now_mask()
         if imgpath is None: return None
 
-        self.saveMask.emit(state.now_mask())
+        self.saveMask.emit(state.now_mask()) # save edited mask
         image = io.load(imgpath, io.IMAGE)
         mask  =(io.load(maskpath, io.MASK) 
                 if Path(maskpath).exists()
                 else io.mask2segmap(self.gen_mask()))
         inpainted = core.inpainted(image, mask)
 
-        io.save(state.now_image(), inpainted)
+        io.save(state.now_image(), inpainted) 
         self.update_gui()
         self.rmtxtPreview.emit()

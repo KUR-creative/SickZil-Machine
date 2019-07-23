@@ -25,7 +25,7 @@ ApplicationWindow {
 
     // STATES
     readonly property string start_up: "start_up"
-    readonly property string load_img: "load_img"
+    readonly property string load_mask: "load_mask"
     readonly property string edit_mask:"edit_mask"
     property string state: start_up
 
@@ -61,11 +61,13 @@ ApplicationWindow {
             msgDialog.visible = true;
         }
         onProvideMask: {
+            window.state = window.load_mask
+
             var old_url = canvas.imgpath
             var url = "image://maskProvider/" + path
             canvas.unloadImage(old_url)
             canvas.imgpath = url 
-            canvas.loadImage(url) 
+            canvas.loadImage(url);
         }
         onSaveMask: {
             if(canvas.is_dirty){
@@ -185,15 +187,6 @@ ApplicationWindow {
                     canvas.visible = !(canvas.visible);
                     setMaskVisible(canvas.visible)
                 }
-                Connections {
-                    target: window
-                    onSetMaskVisible: {
-                        mask_toggle_btn.source = 
-                            canvas.visible ? mask_toggle_btn.on_img 
-                                           : mask_toggle_btn.off_img
-                        mask_toggle_btn.mask_on = !(mask_toggle_btn.mask_on);
-                    } 
-                }
             }
             ToolButton {
                 Image {
@@ -210,20 +203,29 @@ ApplicationWindow {
                 onClicked: { 
                     pen_toggle_btn.is_pen = !(pen_toggle_btn.is_pen);
                     setBrushMode(pen_toggle_btn.is_pen)
+                    var ctx = canvas.getContext("2d");
+                    ctx.globalCompositeOperation = 
+                        pen_toggle_btn.is_pen ? "source-over"
+                                              : "destination-out";
                 }
-                Connections {
-                    target: window
-                    onSetBrushMode: {
-                        //console.log(is_pen)
-                        pen_toggle_btn.source =
-                            is_pen ? pen_toggle_btn.pen 
-                                   : pen_toggle_btn.eraser
-                    } 
-                }
+            }
+
+            Connections {
+                target: window
+                onSetMaskVisible: {
+                    mask_toggle_btn.source = 
+                        canvas.visible ? mask_toggle_btn.on_img 
+                                       : mask_toggle_btn.off_img
+                    mask_toggle_btn.mask_on = !(mask_toggle_btn.mask_on);
+                } 
+                onSetBrushMode: {
+                    pen_toggle_btn.source =
+                        is_pen ? pen_toggle_btn.pen 
+                               : pen_toggle_btn.eraser
+                } 
             }
         }
     }
-
     //-------------------------------------------------------------
 
     RowLayout {
@@ -282,6 +284,7 @@ ApplicationWindow {
                     id: area
                     anchors.fill: parent
                     onPressed: {
+                        window.state = window.edit_mask;
                         canvas.lastX = mouseX
                         canvas.lastY = mouseY
                     }
@@ -312,11 +315,12 @@ ApplicationWindow {
                     onPaint: {
                         var ctx = getContext("2d");
                         ctx.globalCompositeOperation = 
+                            window.state == window.load_mask ? "source-over":
                             pen_toggle_btn.is_pen ? "source-over"
                                                   : "destination-out";
                         ctx.lineCap = 'round'
                         ctx.strokeStyle = "#FF0000"
-                        ctx.lineWidth = 10;
+                        ctx.lineWidth = 40;
                         ctx.beginPath();
 
                         ctx.moveTo(lastX, lastY);

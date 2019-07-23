@@ -253,9 +253,9 @@ ApplicationWindow {
                 }
                 down_pressed = true
             }
-            else if(event.key == Qt.Key_Space){ 
-                toggle_visibility(canvas)
-            }
+            // toggle keys
+            else if(event.key == Qt.Key_Space) { toggle_visibility(canvas) }
+            else if(event.key == Qt.Key_T)     { toggle_paint_mode(window) }
         }
         Keys.onReleased: {
             if (event.key == Qt.Key_Up && (! event.isAutoRepeat)) 

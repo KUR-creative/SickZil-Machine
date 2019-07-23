@@ -284,6 +284,7 @@ ApplicationWindow {
                     id: area
                     anchors.fill: parent
                     onPressed: {
+                        set_visibility(canvas, true)
                         window.state = window.edit_mask;
                         canvas.lastX = mouseX
                         canvas.lastY = mouseY

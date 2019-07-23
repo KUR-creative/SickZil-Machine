@@ -242,29 +242,21 @@ ApplicationWindow {
             // TODO: if up/down key pressed in startup page, 
             // IT DELETES THIS QML FILE!!!! WTF????
             if(event.key == Qt.Key_Up)   { 
-                if(up_pressed == false){ 
-                    main.display_prev(); 
-                }
-                up_pressed = true
+                if (! up_pressed)   { main.display_prev(); }
+                up_pressed = true;
             }
             else if(event.key == Qt.Key_Down) { 
-                if(! down_pressed){ 
-                    main.display_next(); 
-                }
-                down_pressed = true
+                if (! down_pressed) { main.display_next(); }
+                down_pressed = true;
             }
             // toggle keys
             else if(event.key == Qt.Key_Space) { toggle_visibility(canvas) }
             else if(event.key == Qt.Key_T)     { toggle_paint_mode(window) }
         }
         Keys.onReleased: {
-            if (event.key == Qt.Key_Up && (! event.isAutoRepeat)) 
-            {
-                up_pressed = false
-            }
-            else if (event.key == Qt.Key_Down && (! event.isAutoRepeat))
-            {
-                down_pressed = false
+            if(! event.isAutoRepeat){
+                     if (event.key == Qt.Key_Up)   { up_pressed = false }
+                else if (event.key == Qt.Key_Down) { down_pressed = false }
             }
         }
         //-------------------------------------------------------------

@@ -43,6 +43,14 @@ ApplicationWindow {
     signal changeMaskVisibility(bool is_on); // TODO: ~Visibility
     signal changeBrushMode(bool painting);
 
+    function set_visibility(canvas, is_visible) {
+        canvas.visible = is_visible;
+        changeMaskVisibility(is_visible);
+    }
+    function toggle_visibility(canvas) {
+        set_visibility(canvas, !(canvas.visible));
+    }
+
     Connections {
         target: main
         onUpdateImage: {
@@ -70,8 +78,7 @@ ApplicationWindow {
             }
         }
         onRmtxtPreview: {
-            canvas.visible = false
-            changeMaskVisibility(canvas.visible)
+            set_visibility(canvas,false)
         }
     }
 
@@ -182,8 +189,7 @@ ApplicationWindow {
                 Layout.preferredHeight: w_icon
                 Layout.preferredWidth:  h_icon
                 onClicked: { 
-                    canvas.visible = !(canvas.visible);
-                    changeMaskVisibility(canvas.visible)
+                    toggle_visibility(canvas)
                 }
             }
             ToolButton {
@@ -249,8 +255,7 @@ ApplicationWindow {
                 down_pressed = true
             }
             else if(event.key == Qt.Key_Space){ 
-                canvas.visible = !(canvas.visible);
-                changeMaskVisibility(canvas.visible)
+                toggle_visibility(canvas)
             }
         }
         Keys.onReleased: {

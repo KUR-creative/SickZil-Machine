@@ -40,8 +40,8 @@ ApplicationWindow {
     */
     //-------------------------------------------------------------
 
-    signal setMaskVisible(bool is_on); // TODO: ~Visibility
-    signal setBrushMode(bool painting);
+    signal changeMaskVisibility(bool is_on); // TODO: ~Visibility
+    signal changeBrushMode(bool painting);
 
     Connections {
         target: main
@@ -71,7 +71,7 @@ ApplicationWindow {
         }
         onRmtxtPreview: {
             canvas.visible = false
-            setMaskVisible(canvas.visible)
+            changeMaskVisibility(canvas.visible)
         }
     }
 
@@ -183,7 +183,7 @@ ApplicationWindow {
                 Layout.preferredWidth:  h_icon
                 onClicked: { 
                     canvas.visible = !(canvas.visible);
-                    setMaskVisible(canvas.visible)
+                    changeMaskVisibility(canvas.visible)
                 }
             }
             ToolButton {
@@ -199,7 +199,7 @@ ApplicationWindow {
                 Layout.preferredWidth:  h_icon
                 onClicked: { 
                     window.painting = !(window.painting);
-                    setBrushMode(window.painting)
+                    changeBrushMode(window.painting)
                     var ctx = canvas.getContext("2d");
                     ctx.globalCompositeOperation = 
                         window.painting ? "source-over"
@@ -209,13 +209,13 @@ ApplicationWindow {
 
             Connections {
                 target: window
-                onSetMaskVisible: {
+                onChangeMaskVisibility: {
                     mask_toggle_btn.source = 
                         canvas.visible ? mask_toggle_btn.on_img 
                                        : mask_toggle_btn.off_img
                     mask_toggle_btn.mask_on = !(mask_toggle_btn.mask_on);
                 } 
-                onSetBrushMode: {
+                onChangeBrushMode: {
                     pen_toggle_btn.source =
                         painting ? pen_toggle_btn.pen 
                                  : pen_toggle_btn.eraser
@@ -250,7 +250,7 @@ ApplicationWindow {
             }
             else if(event.key == Qt.Key_Space){ 
                 canvas.visible = !(canvas.visible);
-                setMaskVisible(canvas.visible)
+                changeMaskVisibility(canvas.visible)
             }
         }
         Keys.onReleased: {

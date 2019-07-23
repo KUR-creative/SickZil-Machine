@@ -31,8 +31,6 @@ ApplicationWindow {
 
     property bool painting: true //: pen, false: eraser
 
-    //-------------------------------------------------------------
-
     signal changeMaskVisibility(bool is_on); // TODO: ~Visibility
     signal changeBrushMode(bool painting);
 
@@ -44,6 +42,15 @@ ApplicationWindow {
         set_visibility(canvas, !(canvas.visible));
     }
 
+    function set_paint_mode(window, is_painting) {
+        window.painting = is_painting;
+        changeBrushMode(is_painting);
+    }
+    function toggle_paint_mode(window) {
+        set_paint_mode(window, !(window.painting));
+    }
+
+    //-------------------------------------------------------------
     Connections {
         target: main
         onUpdateImage: {
@@ -197,8 +204,7 @@ ApplicationWindow {
                 Layout.preferredHeight: w_icon
                 Layout.preferredWidth:  h_icon
                 onClicked: { 
-                    window.painting = !(window.painting);
-                    changeBrushMode(window.painting)
+                    toggle_paint_mode(window)
                     var ctx = canvas.getContext("2d");
                     ctx.globalCompositeOperation = 
                         window.painting ? "source-over"

@@ -4,7 +4,7 @@
 /*
  [ALL STATES]
 window.state
-window.edit_tool
+window.edit_tool #TODO change
 canvas.is_dirty
 canvas.visible
 */
@@ -53,6 +53,12 @@ ApplicationWindow {
     //-------------------------------------------------------------
     Connections {
         target: main
+        onInitialize: {
+            // window.state is set 'load' when loading image
+            canvas.is_dirty = false;
+            set_visibility(canvas, true);
+            set_paint_mode(window, true);
+        }
         onUpdateImage: {
             im.source = "" // unload
             im.source = "image://imageUpdater/" + path

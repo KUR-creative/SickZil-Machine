@@ -20,6 +20,7 @@ class ImageProvider(QQuickImageProvider):
 
 class MainWindow(QObject):
     warning     = pyqtSignal(str, arguments=['msg'])
+    initialize  = pyqtSignal()
     rmtxtPreview= pyqtSignal()
     updateImage = pyqtSignal(str, arguments=['path']) 
     provideMask = pyqtSignal(str, arguments=['path']) 
@@ -68,6 +69,7 @@ class MainWindow(QObject):
                 config.WARN_MSGS[config.FLAT_IMGDIR]
             )
         else:
+            self.initialize.emit()
             state.set_project(dirpath)
             self.update_gui()
 

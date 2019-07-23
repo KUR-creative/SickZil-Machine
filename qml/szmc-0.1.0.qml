@@ -31,7 +31,7 @@ ApplicationWindow {
 
     property bool painting: true //: pen, false: eraser
 
-    signal changeMaskVisibility(bool is_on); // TODO: ~Visibility
+    signal changeMaskVisibility(bool is_on); 
     signal changeBrushMode(bool painting);
 
     function set_visibility(canvas, is_visible) {

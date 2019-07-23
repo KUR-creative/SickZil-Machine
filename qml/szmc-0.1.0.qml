@@ -194,7 +194,7 @@ ApplicationWindow {
                 Connections {
                     target: window
                     onSetBrushMode: {
-                        console.log(is_pen)
+                        //console.log(is_pen)
                         pen_toggle_btn.source =
                             is_pen ? pen_toggle_btn.pen 
                                    : pen_toggle_btn.eraser
@@ -291,6 +291,9 @@ ApplicationWindow {
                     }
                     onPaint: {
                         var ctx = getContext("2d");
+                        ctx.globalCompositeOperation = 
+                            pen_toggle_btn.is_pen ? "source-over"
+                                                  : "destination-out";
                         ctx.lineCap = 'round'
                         ctx.strokeStyle = "#FF0000"
                         ctx.lineWidth = 10;

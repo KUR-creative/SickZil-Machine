@@ -24,9 +24,9 @@ ApplicationWindow {
     //visibility: Window.Maximized
 
     // STATES
-    readonly property string start_up: "start_up"
+    readonly property string start_up:  "start_up"
     readonly property string load_mask: "load_mask"
-    readonly property string edit_mask:"edit_mask"
+    readonly property string edit_mask: "edit_mask"
     property string state: start_up
 
     readonly property string pen: "../resource/pen.png"
@@ -40,10 +40,6 @@ ApplicationWindow {
         onTriggered: console.log("canvas.visible:", canvas.visible)
     }
     */
-
-    MessageDialog {
-        id: msgDialog
-    }
     //-------------------------------------------------------------
 
     signal setMaskVisible(bool is_on); // TODO: ~Visibility
@@ -82,6 +78,10 @@ ApplicationWindow {
     }
 
     //=============================================================
+    MessageDialog {
+        id: msgDialog
+    }
+
     FileDialog {
         id: projectOpenDialog
         selectFolder: true
@@ -232,6 +232,7 @@ ApplicationWindow {
         anchors.fill: parent
         spacing: 6
 
+        //-------------------------------------------------------------
         focus: true
         property bool up_pressed: false
         property bool down_pressed: false
@@ -253,22 +254,19 @@ ApplicationWindow {
             else if(event.key == Qt.Key_Space){ 
                 canvas.visible = !(canvas.visible);
                 setMaskVisible(canvas.visible)
-                // TODO: inform canvas visibility to user.
             }
         }
         Keys.onReleased: {
-            if(event.key == Qt.Key_Up)   { 
-                if (!event.isAutoRepeat) {
-                    up_pressed = false
-                }
+            if (event.key == Qt.Key_Up && (! event.isAutoRepeat)) 
+            {
+                up_pressed = false
             }
-            else if(event.key == Qt.Key_Down) { 
-                if (!event.isAutoRepeat) {
-                    down_pressed = false
-                }
+            else if (event.key == Qt.Key_Down && (! event.isAutoRepeat))
+            {
+                down_pressed = false
             }
         }
-
+        //-------------------------------------------------------------
 
         ScrollView {
             objectName: "view"

@@ -29,9 +29,7 @@ ApplicationWindow {
     readonly property string edit_mask: "edit_mask"
     property string state: start_up
 
-    readonly property string pen: "../resource/pen.png"
-    readonly property string eraser: "../resource/eraser.png"
-    property string edit_tool: pen
+    property bool painting: true //: pen, false: eraser
 
     /*
     //for DEBUG
@@ -43,7 +41,7 @@ ApplicationWindow {
     //-------------------------------------------------------------
 
     signal setMaskVisible(bool is_on); // TODO: ~Visibility
-    signal setBrushMode(bool is_pen);
+    signal setBrushMode(bool painting);
 
     Connections {
         target: main
@@ -191,7 +189,6 @@ ApplicationWindow {
             ToolButton {
                 Image {
                     id: pen_toggle_btn
-                    property bool is_pen: true
                     readonly property string pen: "../resource/pen.png"
                     readonly property string eraser: "../resource/eraser.png"
                     source: pen
@@ -201,12 +198,12 @@ ApplicationWindow {
                 Layout.preferredHeight: w_icon
                 Layout.preferredWidth:  h_icon
                 onClicked: { 
-                    pen_toggle_btn.is_pen = !(pen_toggle_btn.is_pen);
-                    setBrushMode(pen_toggle_btn.is_pen)
+                    window.painting = !(window.painting);
+                    setBrushMode(window.painting)
                     var ctx = canvas.getContext("2d");
                     ctx.globalCompositeOperation = 
-                        pen_toggle_btn.is_pen ? "source-over"
-                                              : "destination-out";
+                        window.painting ? "source-over"
+                                        : "destination-out";
                 }
             }
 
@@ -220,8 +217,8 @@ ApplicationWindow {
                 } 
                 onSetBrushMode: {
                     pen_toggle_btn.source =
-                        is_pen ? pen_toggle_btn.pen 
-                               : pen_toggle_btn.eraser
+                        painting ? pen_toggle_btn.pen 
+                                 : pen_toggle_btn.eraser
                 } 
             }
         }
@@ -314,8 +311,8 @@ ApplicationWindow {
                         var ctx = getContext("2d");
                         ctx.globalCompositeOperation = 
                             window.state == window.load_mask ? "source-over":
-                            pen_toggle_btn.is_pen ? "source-over"
-                                                  : "destination-out";
+                            window.painting ? "source-over"
+                                            : "destination-out";
                         ctx.lineCap = 'round'
                         ctx.strokeStyle = "#FF0000"
                         ctx.lineWidth = 40;

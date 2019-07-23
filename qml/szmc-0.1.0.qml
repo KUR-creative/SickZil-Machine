@@ -3,7 +3,7 @@
 //       for performance optimization
 /*
  [ALL STATES]
-canvas.is_edited
+canvas.is_dirty
 canvas.visible
 */
 
@@ -48,9 +48,9 @@ ApplicationWindow {
             canvas.loadImage(url) 
         }
         onSaveMask: {
-            if(canvas.is_edited){
+            if(canvas.is_dirty){
                 canvas.save(path)
-                canvas.is_edited = false
+                canvas.is_dirty = false
             }
         }
         onRmtxtPreview: {
@@ -111,7 +111,7 @@ ApplicationWindow {
                 Layout.preferredHeight: w_icon
                 Layout.preferredWidth:  h_icon
                 onClicked: { 
-                    canvas.is_edited = true
+                    canvas.is_dirty = true
                     main.gen_mask()
                 }
             }
@@ -124,7 +124,7 @@ ApplicationWindow {
                 Layout.preferredHeight: w_icon
                 Layout.preferredWidth:  h_icon
                 onClicked: {
-                    canvas.is_edited = true
+                    canvas.is_dirty = true
                     main.rm_txt()
                 }
             }
@@ -267,7 +267,7 @@ ApplicationWindow {
                     }
 
                     onPositionChanged: {
-                        canvas.is_edited = true
+                        canvas.is_dirty = true
                         canvas.requestPaint(); // TODO: use markdirty for performance
                     }
 
@@ -281,7 +281,7 @@ ApplicationWindow {
                     property int lastY: 0
 
                     property string imgpath: ""
-                    property bool is_edited: false
+                    property bool is_dirty: false
 
                     onImageLoaded: {
                         var ctx = getContext("2d");

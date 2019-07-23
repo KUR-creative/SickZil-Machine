@@ -74,7 +74,6 @@ ApplicationWindow {
         onSaveMask: {
             if(canvas.is_dirty){
                 canvas.save(path)
-                canvas.is_dirty = false
             }
         }
         onRmtxtPreview: {
@@ -138,8 +137,8 @@ ApplicationWindow {
                 Layout.preferredHeight: w_icon
                 Layout.preferredWidth:  h_icon
                 onClicked: { 
-                    canvas.is_dirty = true
                     main.gen_mask()
+                    canvas.is_dirty = true
                 }
             }
             ToolButton {
@@ -151,8 +150,8 @@ ApplicationWindow {
                 Layout.preferredHeight: w_icon
                 Layout.preferredWidth:  h_icon
                 onClicked: {
-                    canvas.is_dirty = true
                     main.rm_txt()
+                    canvas.is_dirty = true
                 }
             }
             ToolButton {
@@ -361,11 +360,9 @@ ApplicationWindow {
     }
 
     //=============================================================
-    /*
     //for DEBUG
     Timer {
-        interval: 500; running: true; repeat: true
-        onTriggered: console.log("canvas.visible:", canvas.visible)
+        interval: 250; running: true; repeat: true
+        onTriggered: console.log("canvas.is_dirty:", canvas.is_dirty)
     }
-    */
 }

@@ -31,13 +31,6 @@ ApplicationWindow {
 
     property bool painting: true //: pen, false: eraser
 
-    /*
-    //for DEBUG
-    Timer {
-        interval: 500; running: true; repeat: true
-        onTriggered: console.log("canvas.visible:", canvas.visible)
-    }
-    */
     //-------------------------------------------------------------
 
     signal changeMaskVisibility(bool is_on); // TODO: ~Visibility
@@ -370,4 +363,11 @@ ApplicationWindow {
     }
 
     //=============================================================
+    /*
+    //for DEBUG
+    Timer {
+        interval: 500; running: true; repeat: true
+        onTriggered: console.log("canvas.visible:", canvas.visible)
+    }
+    */
 }

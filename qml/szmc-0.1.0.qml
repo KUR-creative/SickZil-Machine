@@ -74,6 +74,7 @@ ApplicationWindow {
         onSaveMask: {
             if(canvas.is_dirty){
                 canvas.save(path)
+                canvas.is_dirty = false;
             }
         }
         onRmtxtPreview: {

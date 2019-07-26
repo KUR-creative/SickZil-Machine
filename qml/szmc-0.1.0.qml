@@ -285,19 +285,26 @@ ApplicationWindow {
                         window.state = window.edit_mask;
                         mask.lastX = mouseX
                         mask.lastY = mouseY
+                        mask.drawing = true
+                    }
+                    onReleased: {
+                        mask.drawing = false
                     }
 
+                    hoverEnabled: true
                     onPositionChanged: {
-                        mask.is_dirty = true
-                        mask.requestPaint(); // TODO: use markdirty for performance
+                        if(mask.drawing){
+                            mask.is_dirty = true
+                            mask.requestPaint(); // TODO: use markdirty for performance
+                        }
                     }
-
                 }
 
                 Canvas {
                     id: mask
                     anchors.fill: parent
 
+                    property bool drawing: false
                     property int lastX: 0
                     property int lastY: 0
 

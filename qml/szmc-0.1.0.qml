@@ -368,8 +368,10 @@ ApplicationWindow {
 
     //=============================================================
     //for DEBUG
+    /*
     Timer {
         interval: 250; running: true; repeat: true
-        onTriggered: console.log("mask.is_dirty:", mask.is_dirty)
+        onTriggered: console.log("canvas.is_dirty:", canvas.is_dirty)
     }
+    */
 }

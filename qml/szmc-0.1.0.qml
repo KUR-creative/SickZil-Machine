@@ -278,7 +278,8 @@ ApplicationWindow {
 
             property int brush_radius: 10
             function inc_radius(){ brush_radius += 1; }
-            function dec_radius(){ brush_radius -= (brush_radius > 0 ? 1 : 0); }
+            function dec_radius(){ brush_radius -= (brush_radius > 1 ? 1 : 0); }
+
 
             /*
             logical structure

@@ -276,10 +276,15 @@ ApplicationWindow {
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            property int brush_radius: 10
-            function inc_radius(){ brush_radius += 1; }
-            function dec_radius(){ brush_radius -= (brush_radius > 1 ? 1 : 0); }
-
+            property int brush_radius: 20
+            function inc_radius(){
+                brush_radius += 1;
+                overlay.requestPaint();
+            }
+            function dec_radius(){
+                brush_radius -= (brush_radius > 1 ? 1 : 0);
+                overlay.requestPaint();
+            }
 
             /*
             logical structure
@@ -308,10 +313,15 @@ ApplicationWindow {
 
                     hoverEnabled: true
                     onPositionChanged: {
+                        // mask
                         if(mask.drawing){
                             mask.is_dirty = true
                             mask.requestPaint(); // TODO: use markdirty for performance
                         }
+                        // overlay
+                        overlay.lastX = mouseX
+                        overlay.lastY = mouseY
+                        overlay.requestPaint();
                     }
                 }
 
@@ -328,11 +338,12 @@ ApplicationWindow {
 
                     onImageLoaded: {
                         var ctx = getContext("2d");
-                        ctx.clearRect(0,0, width,height)
+                        ctx.clearRect(0,0, width,height) // TODO: use reset?
                         ctx.drawImage(imgpath, 0, 0);
                         requestPaint();
                     }
                     onPaint: {
+                            console.log(':',drawboard.brush_radius);
                         var ctx = getContext("2d");
                         ctx.globalCompositeOperation = 
                             window.state == window.load_mask ? "source-over":
@@ -342,6 +353,7 @@ ApplicationWindow {
                         ctx.strokeStyle = "#FF0000"
                         ctx.lineWidth = drawboard.brush_radius;
                         ctx.beginPath();
+                            console.log('begin:',drawboard.brush_radius);
 
                         ctx.moveTo(lastX, lastY);
 
@@ -351,6 +363,32 @@ ApplicationWindow {
                         ctx.stroke();
                     }
                 } 
+
+                Canvas {
+                    id: overlay
+                    anchors.fill: parent
+
+                    property int lastX: 0
+                    property int lastY: 0
+
+                    onPaint: {
+                        var ctx = getContext("2d");
+                        ctx.reset();
+                        ctx.strokeStyle = "#008888";
+                        ctx.setLineDash([3, 1]);
+                        ctx.lineWidth = 1;
+
+                        ctx.beginPath();
+                        ctx.arc(
+                            lastX, lastY,
+                            drawboard.brush_radius * 0.5,
+                            0.0, Math.PI * 2,
+                            false
+                        );
+                        ctx.stroke();
+                        ctx.closePath();
+                    }
+                }
             }
         }
 

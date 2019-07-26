@@ -58,6 +58,8 @@ ApplicationWindow {
             mask.is_dirty = false;
             set_visibility(mask, true);
             set_paint_mode(window, true);
+            //mask.lastX = area.mouseX
+            //mask.lastY = area.mouseY
         }
         onUpdateImage: {
             image.source = "" // unload
@@ -314,10 +316,8 @@ ApplicationWindow {
                     hoverEnabled: true
                     onPositionChanged: {
                         // mask
-                        if(mask.drawing){
-                            mask.is_dirty = true
-                            mask.requestPaint(); // TODO: use markdirty for performance
-                        }
+                        mask.is_dirty = true
+                        mask.requestPaint(); // TODO: use markdirty for performance
                         // overlay
                         overlay.lastX = mouseX
                         overlay.lastY = mouseY
@@ -343,24 +343,24 @@ ApplicationWindow {
                         requestPaint();
                     }
                     onPaint: {
-                            console.log(':',drawboard.brush_radius);
-                        var ctx = getContext("2d");
-                        ctx.globalCompositeOperation = 
-                            window.state == window.load_mask ? "source-over":
-                            window.painting ? "source-over"
-                                            : "destination-out";
-                        ctx.lineCap = 'round'
-                        ctx.strokeStyle = "#FF0000"
-                        ctx.lineWidth = drawboard.brush_radius;
-                        ctx.beginPath();
-                            console.log('begin:',drawboard.brush_radius);
+                        if(mask.drawing){
+                            var ctx = getContext("2d");
+                            ctx.globalCompositeOperation = 
+                                window.state == window.load_mask ? "source-over":
+                                window.painting ? "source-over"
+                                                : "destination-out";
+                            ctx.lineCap = 'round'
+                            ctx.strokeStyle = "#FF0000"
+                            ctx.lineWidth = drawboard.brush_radius;
+                            ctx.beginPath();
 
-                        ctx.moveTo(lastX, lastY);
+                            ctx.moveTo(lastX, lastY);
 
-                        lastX = area.mouseX;
-                        lastY = area.mouseY;
-                        ctx.lineTo(lastX,lastY);
-                        ctx.stroke();
+                            lastX = area.mouseX;
+                            lastY = area.mouseY;
+                            ctx.lineTo(lastX,lastY);
+                            ctx.stroke();
+                        }
                     }
                 } 
 

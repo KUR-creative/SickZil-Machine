@@ -255,6 +255,9 @@ ApplicationWindow {
                 if (! down_pressed) { main.display_next(); }
                 down_pressed = true;
             }
+            // drawboard keys
+            else if(event.key == Qt.Key_Plus)  { drawboard.inc_radius() }
+            else if(event.key == Qt.Key_Minus) { drawboard.dec_radius() }
             // toggle keys
             else if(event.key == Qt.Key_Space) { toggle_visibility(mask) }
             else if(event.key == Qt.Key_T)     { toggle_paint_mode(window) }
@@ -268,9 +271,14 @@ ApplicationWindow {
         //-------------------------------------------------------------
 
         ScrollView {
+            id: drawboard
             objectName: "view"
             Layout.fillWidth: true
             Layout.fillHeight: true
+
+            property int brush_radius: 10
+            function inc_radius(){ brush_radius += 1; }
+            function dec_radius(){ brush_radius -= (brush_radius > 0 ? 1 : 0); }
 
             /*
             logical structure
@@ -331,7 +339,7 @@ ApplicationWindow {
                                             : "destination-out";
                         ctx.lineCap = 'round'
                         ctx.strokeStyle = "#FF0000"
-                        ctx.lineWidth = 40;
+                        ctx.lineWidth = drawboard.brush_radius;
                         ctx.beginPath();
 
                         ctx.moveTo(lastX, lastY);

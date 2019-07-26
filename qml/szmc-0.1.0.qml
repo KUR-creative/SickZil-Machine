@@ -5,8 +5,8 @@
  [ALL STATES]
 window.state
 window.edit_tool #TODO change
-canvas.is_dirty
-canvas.visible
+mask.is_dirty
+mask.visible
 */
 
 import QtQuick 2.5
@@ -34,12 +34,12 @@ ApplicationWindow {
     signal changeMaskVisibility(bool is_on); 
     signal changeBrushMode(bool painting);
 
-    function set_visibility(canvas, is_visible) {
-        canvas.visible = is_visible;
+    function set_visibility(mask, is_visible) {
+        mask.visible = is_visible;
         changeMaskVisibility(is_visible);
     }
-    function toggle_visibility(canvas) {
-        set_visibility(canvas, !(canvas.visible));
+    function toggle_visibility(mask) {
+        set_visibility(mask, !(mask.visible));
     }
 
     function set_paint_mode(window, is_painting) {
@@ -55,8 +55,8 @@ ApplicationWindow {
         target: main
         onInitialize: {
             // window.state is set 'load' when loading image
-            canvas.is_dirty = false;
-            set_visibility(canvas, true);
+            mask.is_dirty = false;
+            set_visibility(mask, true);
             set_paint_mode(window, true);
         }
         onUpdateImage: {
@@ -71,20 +71,20 @@ ApplicationWindow {
         onProvideMask: {
             window.state = window.load_mask
 
-            var old_url = canvas.imgpath
+            var old_url = mask.imgpath
             var url = "image://maskProvider/" + path
-            canvas.unloadImage(old_url)
-            canvas.imgpath = url 
-            canvas.loadImage(url);
+            mask.unloadImage(old_url)
+            mask.imgpath = url 
+            mask.loadImage(url);
         }
         onSaveMask: {
-            if(canvas.is_dirty){
-                canvas.save(path)
-                canvas.is_dirty = false;
+            if(mask.is_dirty){
+                mask.save(path)
+                mask.is_dirty = false;
             }
         }
         onRmtxtPreview: {
-            set_visibility(canvas,false)
+            set_visibility(mask,false)
         }
     }
 
@@ -145,7 +145,7 @@ ApplicationWindow {
                 Layout.preferredWidth:  h_icon
                 onClicked: { 
                     main.gen_mask()
-                    canvas.is_dirty = true
+                    mask.is_dirty = true
                 }
             }
             ToolButton {
@@ -158,7 +158,7 @@ ApplicationWindow {
                 Layout.preferredWidth:  h_icon
                 onClicked: {
                     main.rm_txt()
-                    canvas.is_dirty = true
+                    mask.is_dirty = true
                 }
             }
             ToolButton {
@@ -195,7 +195,7 @@ ApplicationWindow {
                 Layout.preferredHeight: w_icon
                 Layout.preferredWidth:  h_icon
                 onClicked: { 
-                    toggle_visibility(canvas)
+                    toggle_visibility(mask)
                 }
             }
             ToolButton {
@@ -211,7 +211,7 @@ ApplicationWindow {
                 Layout.preferredWidth:  h_icon
                 onClicked: { 
                     toggle_paint_mode(window)
-                    var ctx = canvas.getContext("2d");
+                    var ctx = mask.getContext("2d");
                     ctx.globalCompositeOperation = 
                         window.painting ? "source-over"
                                         : "destination-out";
@@ -222,7 +222,7 @@ ApplicationWindow {
                 target: window
                 onChangeMaskVisibility: {
                     mask_toggle_btn.source = 
-                        canvas.visible ? mask_toggle_btn.on_img 
+                        mask.visible ? mask_toggle_btn.on_img 
                                        : mask_toggle_btn.off_img
                     mask_toggle_btn.mask_on = !(mask_toggle_btn.mask_on);
                 } 
@@ -256,7 +256,7 @@ ApplicationWindow {
                 down_pressed = true;
             }
             // toggle keys
-            else if(event.key == Qt.Key_Space) { toggle_visibility(canvas) }
+            else if(event.key == Qt.Key_Space) { toggle_visibility(mask) }
             else if(event.key == Qt.Key_T)     { toggle_paint_mode(window) }
         }
         Keys.onReleased: {
@@ -281,21 +281,21 @@ ApplicationWindow {
                     id: area
                     anchors.fill: parent
                     onPressed: {
-                        set_visibility(canvas, true)
+                        set_visibility(mask, true)
                         window.state = window.edit_mask;
-                        canvas.lastX = mouseX
-                        canvas.lastY = mouseY
+                        mask.lastX = mouseX
+                        mask.lastY = mouseY
                     }
 
                     onPositionChanged: {
-                        canvas.is_dirty = true
-                        canvas.requestPaint(); // TODO: use markdirty for performance
+                        mask.is_dirty = true
+                        mask.requestPaint(); // TODO: use markdirty for performance
                     }
 
                 }
 
                 Canvas {
-                    id: canvas
+                    id: mask
                     anchors.fill: parent
 
                     property int lastX: 0
@@ -370,6 +370,6 @@ ApplicationWindow {
     //for DEBUG
     Timer {
         interval: 250; running: true; repeat: true
-        onTriggered: console.log("canvas.is_dirty:", canvas.is_dirty)
+        onTriggered: console.log("mask.is_dirty:", mask.is_dirty)
     }
 }

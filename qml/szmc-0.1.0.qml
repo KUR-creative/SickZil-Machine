@@ -60,8 +60,8 @@ ApplicationWindow {
             set_paint_mode(window, true);
         }
         onUpdateImage: {
-            im.source = "" // unload
-            im.source = "image://imageUpdater/" + path
+            image.source = "" // unload
+            image.source = "image://imageUpdater/" + path
         }
         onWarning: {
             msgDialog.title = "project format error"
@@ -272,8 +272,14 @@ ApplicationWindow {
             Layout.fillWidth: true
             Layout.fillHeight: true
 
+            /*
+            logical structure
+            ------ overlay ----- cursor, drawing effect, etc..
+            ------- mask ------- (loaded) mask
+            ------- image ------ loaded manga image
+            */
             Image { 
-                id: "im"
+                id: image
                 objectName: "image"
                 source: "../resource/startup.png"
 

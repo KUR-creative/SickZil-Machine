@@ -278,7 +278,7 @@ ApplicationWindow {
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            property int brush_radius: 20
+            property int brush_radius: 10
             function inc_radius(){
                 brush_radius += 1;
                 overlay.requestPaint();
@@ -351,7 +351,7 @@ ApplicationWindow {
                                                 : "destination-out";
                             ctx.lineCap = 'round'
                             ctx.strokeStyle = "#FF0000"
-                            ctx.lineWidth = drawboard.brush_radius;
+                            ctx.lineWidth = drawboard.brush_radius * 2;
                             ctx.beginPath();
 
                             ctx.moveTo(mx, my);
@@ -381,7 +381,7 @@ ApplicationWindow {
                         ctx.beginPath();
                         ctx.arc(
                             mx, my,
-                            drawboard.brush_radius * 0.5,
+                            drawboard.brush_radius,
                             0.0, Math.PI * 2,
                             false
                         );

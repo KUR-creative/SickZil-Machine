@@ -357,8 +357,12 @@ ApplicationWindow {
                         // mask drawing for click
                         mask.mx = mouseX
                         mask.my = mouseY
-                        mask.drawing = true
-                        mask.request_paint(); 
+                        mask.pressed_x = mouseX
+                        mask.pressed_y = mouseY
+                        if(window.tool == window.pen) {
+                            mask.drawing = true
+                            mask.request_paint(); 
+                        }
                         // overlay
                         overlay.drawing = true
                         overlay.pressed_x = mouseX
@@ -366,6 +370,11 @@ ApplicationWindow {
                     }
                     onReleased: {
                         mask.drawing = false
+                        mask.released_x = mouseX
+                        mask.released_y = mouseY
+                        if(window.tool == window.rect){
+                            mask.request_paint(); 
+                        }
                         // overlay
                         overlay.drawing = false
                         overlay.pressed_x = mouseX
@@ -376,7 +385,9 @@ ApplicationWindow {
                     hoverEnabled: true
                     onPositionChanged: {
                         // mask drawing for drag
-                        mask.request_paint(); 
+                        if(window.tool == window.pen) {
+                            mask.request_paint(); 
+                        }
                         // move cursor
                         overlay.mx = mouseX
                         overlay.my = mouseY
@@ -392,6 +403,10 @@ ApplicationWindow {
                     property bool drawing: false
                     property int mx: 0
                     property int my: 0
+                    property int pressed_x: 0
+                    property int pressed_y: 0
+                    property int released_x: 0
+                    property int released_y: 0
 
                     property string imgpath: ""
                     property bool is_dirty: false
@@ -439,7 +454,19 @@ ApplicationWindow {
                                 ctx.closePath();
                                 //---------------------------------------------------
                             }
-                            else if(window.tool == window.rect){
+                        }else{
+                            if(window.state == window.edit_mask &&
+                               window.tool == window.rect) 
+                            {
+                                ctx.lineCap = 'butt'
+                                ctx.fillStyle = "#FF0000"
+                                ctx.beginPath(); 
+                                ctx.rect(
+                                    pressed_x, pressed_y,
+                                    released_x - pressed_x, released_y - pressed_y
+                                );
+                                ctx.fill();
+                                ctx.closePath();
                             }
                         }
                     }
@@ -476,7 +503,7 @@ ApplicationWindow {
                             ctx.closePath();
                         } else if(window.tool == window.rect) {
                             if(drawing){
-                                ctx.strokeStyle = "#FF0000";
+                                ctx.strokeStyle = "#00FF00";
                                 ctx.lineWidth = 1.5;
 
                                 ctx.beginPath();

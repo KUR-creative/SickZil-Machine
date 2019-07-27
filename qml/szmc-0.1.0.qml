@@ -361,9 +361,18 @@ ApplicationWindow {
                         mask.my = mouseY
                         mask.drawing = true
                         mask.request_paint(); 
+                        // overlay
+                        overlay.drawing = true
+                        overlay.pressed_x = mouseX
+                        overlay.pressed_y = mouseY
                     }
                     onReleased: {
                         mask.drawing = false
+                        // overlay
+                        overlay.drawing = false
+                        overlay.pressed_x = mouseX
+                        overlay.pressed_y = mouseY
+                        overlay.requestPaint();
                     }
 
                     hoverEnabled: true
@@ -374,6 +383,7 @@ ApplicationWindow {
                         overlay.mx = mouseX
                         overlay.my = mouseY
                         overlay.requestPaint();
+                        //if(window.tool == window.rect) {
                     }
                 }
 
@@ -432,7 +442,6 @@ ApplicationWindow {
                             //---------------------------------------------------
                         }
                         else if(window.tool == window.rect){
-                            console.log('rect mode on')
                         }
                     }}
                 } 
@@ -441,25 +450,45 @@ ApplicationWindow {
                     id: overlay
                     anchors.fill: parent
 
+                    property bool drawing: false
                     property int mx: 0
                     property int my: 0
+                    property int pressed_x: 0
+                    property int pressed_y: 0
+                    property int released_x: 0
+                    property int released_y: 0
 
                     onPaint: {
                         var ctx = getContext("2d");
                         ctx.reset();
-                        ctx.strokeStyle = "#008888";
-                        ctx.setLineDash([3, 1]);
-                        ctx.lineWidth = 1.5;
+                        if(window.tool == window.pen) {
+                            ctx.strokeStyle = "#008888";
+                            ctx.setLineDash([3, 1]);
+                            ctx.lineWidth = 1.5;
 
-                        ctx.beginPath();
-                        ctx.arc(
-                            mx, my,
-                            drawboard.brush_radius,
-                            0.0, Math.PI * 2,
-                            false
-                        );
-                        ctx.stroke();
-                        ctx.closePath();
+                            ctx.beginPath();
+                            ctx.arc(
+                                mx, my,
+                                drawboard.brush_radius,
+                                0.0, Math.PI * 2,
+                                false
+                            );
+                            ctx.stroke();
+                            ctx.closePath();
+                        } else if(window.tool == window.rect) {
+                            if(drawing){
+                                ctx.strokeStyle = "#FF0000";
+                                ctx.lineWidth = 1.5;
+
+                                ctx.beginPath();
+                                ctx.rect(
+                                    pressed_x, pressed_y,
+                                    mx - pressed_x, my - pressed_y,
+                                );
+                                ctx.stroke();
+                                ctx.closePath();
+                            }
+                        }
                     }
                 }
             }

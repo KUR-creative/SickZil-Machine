@@ -4,7 +4,7 @@
 /*
  [ALL STATES]
 window.state
-window.edit_tool #TODO change
+window.tool
 mask.is_dirty
 mask.visible
 */
@@ -29,10 +29,15 @@ ApplicationWindow {
     readonly property string edit_mask: "edit_mask"
     property string state: start_up
 
+    readonly property string pen: "pen"
+    readonly property string rect: "rect"
+    property string tool: pen
+
     property bool painting: true //: pen, false: eraser
 
     signal changeMaskVisibility(bool is_on); 
     signal changeBrushMode(bool painting);
+    signal changeTool(string new_tool);
 
     function set_visibility(mask, is_visible) {
         mask.visible = is_visible;
@@ -50,6 +55,10 @@ ApplicationWindow {
         set_paint_mode(window, !(window.painting));
     }
 
+    function set_tool(new_tool) {
+        window.tool = new_tool
+        changeTool(new_tool)
+    }
     //-------------------------------------------------------------
     Connections {
         target: main
@@ -228,11 +237,13 @@ ApplicationWindow {
                     source: pen_on 
                     x:     x_all; y:      y_all
                     width: w_all; height: h_all
+                    function on()  { source = pen_on; }
+                    function off() { source = pen_off; }
                 }
                 Layout.preferredHeight: w_icon
                 Layout.preferredWidth:  h_icon
                 onClicked: { 
-                    pen_tool.source = pen_tool.pen_off;
+                    window.set_tool(window.pen)
                 }
             }
             ToolButton {
@@ -243,11 +254,13 @@ ApplicationWindow {
                     source: rect_off
                     x:     x_all; y:      y_all
                     width: w_all; height: h_all
+                    function on()  { source = rect_on; }
+                    function off() { source = rect_off; }
                 }
                 Layout.preferredHeight: w_icon
                 Layout.preferredWidth:  h_icon
                 onClicked: { 
-                    rect_tool.source = rect_tool.rect_on;
+                    window.set_tool(window.rect)
                 }
             }
 
@@ -264,6 +277,13 @@ ApplicationWindow {
                         painting ? pen_toggle_btn.pen 
                                  : pen_toggle_btn.eraser
                 } 
+                onChangeTool: {
+                    if(new_tool == window.pen){
+                        pen_tool.on(); rect_tool.off(); 
+                    }else if(new_tool == window.rect){
+                        pen_tool.off(); rect_tool.on();
+                    }
+                }
             }
         }
     }
@@ -379,16 +399,16 @@ ApplicationWindow {
                         requestPaint();
                     }
                     onPaint: {
-                        if(mask.drawing){
-                            var ctx = getContext("2d");
-                            ctx.globalCompositeOperation = 
-                                window.state == window.load_mask ? "source-over":
-                                window.painting ? "source-over"
-                                                : "destination-out";
-                            ctx.lineCap = 'round'
-                            ctx.strokeStyle = "#FF0000"
-                            ctx.fillStyle = "#FF0000"
-
+                    if(mask.drawing) {
+                        var ctx = getContext("2d");
+                        ctx.globalCompositeOperation = 
+                            window.state == window.load_mask ? "source-over":
+                            window.painting ? "source-over"
+                                            : "destination-out";
+                        ctx.lineCap = 'round'
+                        ctx.strokeStyle = "#FF0000"
+                        ctx.fillStyle = "#FF0000"
+                        if(window.tool == window.pen) {
                             //-------------------- for click --------------------
                             ctx.beginPath(); 
                             ctx.arc(
@@ -411,7 +431,10 @@ ApplicationWindow {
                             ctx.closePath();
                             //---------------------------------------------------
                         }
-                    }
+                        else if(window.tool == window.rect){
+                            console.log('rect mode on')
+                        }
+                    }}
                 } 
 
                 Canvas {

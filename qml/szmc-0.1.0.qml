@@ -376,7 +376,7 @@ ApplicationWindow {
                         ctx.reset();
                         ctx.strokeStyle = "#008888";
                         ctx.setLineDash([3, 1]);
-                        ctx.lineWidth = 1;
+                        ctx.lineWidth = 1.5;
 
                         ctx.beginPath();
                         ctx.arc(

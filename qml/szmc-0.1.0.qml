@@ -305,9 +305,11 @@ ApplicationWindow {
                     onPressed: {
                         set_visibility(mask, true)
                         window.state = window.edit_mask;
+                        // mask drawing for click
                         mask.mx = mouseX
                         mask.my = mouseY
                         mask.drawing = true
+                        mask.request_paint(); 
                     }
                     onReleased: {
                         mask.drawing = false
@@ -315,10 +317,9 @@ ApplicationWindow {
 
                     hoverEnabled: true
                     onPositionChanged: {
-                        // mask
-                        mask.is_dirty = true
-                        mask.requestPaint(); // TODO: use markdirty for performance
-                        // overlay
+                        // mask drawing for drag
+                        mask.request_paint(); 
+                        // move cursor
                         overlay.mx = mouseX
                         overlay.my = mouseY
                         overlay.requestPaint();
@@ -335,6 +336,10 @@ ApplicationWindow {
 
                     property string imgpath: ""
                     property bool is_dirty: false
+                    function request_paint(){
+                        mask.is_dirty = true
+                        mask.requestPaint(); // TODO: use markdirty for performance
+                    }
 
                     onImageLoaded: {
                         var ctx = getContext("2d");
@@ -351,15 +356,29 @@ ApplicationWindow {
                                                 : "destination-out";
                             ctx.lineCap = 'round'
                             ctx.strokeStyle = "#FF0000"
+                            ctx.fillStyle = "#FF0000"
+
+                            //-------------------- for click --------------------
+                            ctx.beginPath(); 
+                            ctx.arc(
+                                mx, my,
+                                drawboard.brush_radius,
+                                0.0, Math.PI * 2,
+                                false
+                            );
+                            ctx.fill();
+                            ctx.closePath();
+                            //---------------------------------------------------
+
+                            //-------------------- for drag ---------------------
+                            ctx.beginPath(); 
                             ctx.lineWidth = drawboard.brush_radius * 2;
-                            ctx.beginPath();
-
                             ctx.moveTo(mx, my);
-
-                            mx = area.mouseX;
-                            my = area.mouseY;
+                            mx = area.mouseX; my = area.mouseY;
                             ctx.lineTo(mx,my);
                             ctx.stroke();
+                            ctx.closePath();
+                            //---------------------------------------------------
                         }
                     }
                 } 

@@ -219,6 +219,37 @@ ApplicationWindow {
                                         : "destination-out";
                 }
             }
+            // tools
+            ToolButton {
+                Image {
+                    id: pen_tool
+                    readonly property string pen_on:  "../resource/tools/pen_tool_on.png"
+                    readonly property string pen_off: "../resource/tools/pen_tool_off.png"
+                    source: pen_on 
+                    x:     x_all; y:      y_all
+                    width: w_all; height: h_all
+                }
+                Layout.preferredHeight: w_icon
+                Layout.preferredWidth:  h_icon
+                onClicked: { 
+                    pen_tool.source = pen_tool.pen_off;
+                }
+            }
+            ToolButton {
+                Image {
+                    id: rect_tool
+                    readonly property string rect_on:  "../resource/tools/rect_tool_on.png"
+                    readonly property string rect_off: "../resource/tools/rect_tool_off.png"
+                    source: rect_off
+                    x:     x_all; y:      y_all
+                    width: w_all; height: h_all
+                }
+                Layout.preferredHeight: w_icon
+                Layout.preferredWidth:  h_icon
+                onClicked: { 
+                    rect_tool.source = rect_tool.rect_on;
+                }
+            }
 
             Connections {
                 target: window

@@ -67,8 +67,6 @@ ApplicationWindow {
             mask.is_dirty = false;
             set_visibility(mask, true);
             set_paint_mode(window, true);
-            //mask.mx = area.mouseX
-            //mask.my = area.mouseY
         }
         onUpdateImage: {
             image.source = "" // unload
@@ -351,7 +349,7 @@ ApplicationWindow {
                 source: "../resource/startup.png"
 
                 MouseArea {
-                    id: area
+                    id: mouse_area
                     anchors.fill: parent
                     onPressed: {
                         set_visibility(mask, true)
@@ -409,41 +407,42 @@ ApplicationWindow {
                         requestPaint();
                     }
                     onPaint: {
-                    if(mask.drawing) {
                         var ctx = getContext("2d");
                         ctx.globalCompositeOperation = 
                             window.state == window.load_mask ? "source-over":
                             window.painting ? "source-over"
                                             : "destination-out";
-                        ctx.lineCap = 'round'
-                        ctx.strokeStyle = "#FF0000"
-                        ctx.fillStyle = "#FF0000"
-                        if(window.tool == window.pen) {
-                            //-------------------- for click --------------------
-                            ctx.beginPath(); 
-                            ctx.arc(
-                                mx, my,
-                                drawboard.brush_radius,
-                                0.0, Math.PI * 2,
-                                false
-                            );
-                            ctx.fill();
-                            ctx.closePath();
-                            //---------------------------------------------------
+                        if(mask.drawing) {
+                            ctx.lineCap = 'round'
+                            ctx.strokeStyle = "#FF0000"
+                            ctx.fillStyle = "#FF0000"
+                            if(window.tool == window.pen) {
+                                //-------------------- for click --------------------
+                                ctx.beginPath(); 
+                                ctx.arc(
+                                    mx, my,
+                                    drawboard.brush_radius,
+                                    0.0, Math.PI * 2,
+                                    false
+                                );
+                                ctx.fill();
+                                ctx.closePath();
+                                //---------------------------------------------------
 
-                            //-------------------- for drag ---------------------
-                            ctx.beginPath(); 
-                            ctx.lineWidth = drawboard.brush_radius * 2;
-                            ctx.moveTo(mx, my);
-                            mx = area.mouseX; my = area.mouseY;
-                            ctx.lineTo(mx,my);
-                            ctx.stroke();
-                            ctx.closePath();
-                            //---------------------------------------------------
+                                //-------------------- for drag ---------------------
+                                ctx.beginPath(); 
+                                ctx.lineWidth = drawboard.brush_radius * 2;
+                                ctx.moveTo(mx, my);
+                                mx = mouse_area.mouseX; my = mouse_area.mouseY;
+                                ctx.lineTo(mx,my);
+                                ctx.stroke();
+                                ctx.closePath();
+                                //---------------------------------------------------
+                            }
+                            else if(window.tool == window.rect){
+                            }
                         }
-                        else if(window.tool == window.rect){
-                        }
-                    }}
+                    }
                 } 
 
                 Canvas {

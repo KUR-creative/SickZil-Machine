@@ -58,8 +58,8 @@ ApplicationWindow {
             mask.is_dirty = false;
             set_visibility(mask, true);
             set_paint_mode(window, true);
-            //mask.lastX = area.mouseX
-            //mask.lastY = area.mouseY
+            //mask.mx = area.mouseX
+            //mask.my = area.mouseY
         }
         onUpdateImage: {
             image.source = "" // unload
@@ -305,8 +305,8 @@ ApplicationWindow {
                     onPressed: {
                         set_visibility(mask, true)
                         window.state = window.edit_mask;
-                        mask.lastX = mouseX
-                        mask.lastY = mouseY
+                        mask.mx = mouseX
+                        mask.my = mouseY
                         mask.drawing = true
                     }
                     onReleased: {
@@ -319,8 +319,8 @@ ApplicationWindow {
                         mask.is_dirty = true
                         mask.requestPaint(); // TODO: use markdirty for performance
                         // overlay
-                        overlay.lastX = mouseX
-                        overlay.lastY = mouseY
+                        overlay.mx = mouseX
+                        overlay.my = mouseY
                         overlay.requestPaint();
                     }
                 }
@@ -330,8 +330,8 @@ ApplicationWindow {
                     anchors.fill: parent
 
                     property bool drawing: false
-                    property int lastX: 0
-                    property int lastY: 0
+                    property int mx: 0
+                    property int my: 0
 
                     property string imgpath: ""
                     property bool is_dirty: false
@@ -354,11 +354,11 @@ ApplicationWindow {
                             ctx.lineWidth = drawboard.brush_radius;
                             ctx.beginPath();
 
-                            ctx.moveTo(lastX, lastY);
+                            ctx.moveTo(mx, my);
 
-                            lastX = area.mouseX;
-                            lastY = area.mouseY;
-                            ctx.lineTo(lastX,lastY);
+                            mx = area.mouseX;
+                            my = area.mouseY;
+                            ctx.lineTo(mx,my);
                             ctx.stroke();
                         }
                     }
@@ -368,8 +368,8 @@ ApplicationWindow {
                     id: overlay
                     anchors.fill: parent
 
-                    property int lastX: 0
-                    property int lastY: 0
+                    property int mx: 0
+                    property int my: 0
 
                     onPaint: {
                         var ctx = getContext("2d");
@@ -380,7 +380,7 @@ ApplicationWindow {
 
                         ctx.beginPath();
                         ctx.arc(
-                            lastX, lastY,
+                            mx, my,
                             drawboard.brush_radius * 0.5,
                             0.0, Math.PI * 2,
                             false

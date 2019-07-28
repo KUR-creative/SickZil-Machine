@@ -309,7 +309,8 @@ ApplicationWindow {
                 down_pressed = true;
             }
             // drawboard keys
-            else if(event.key == Qt.Key_Plus)  { drawboard.inc_radius() }
+            else if(event.key == Qt.Key_Plus || // Equal for convinience
+                    event.key == Qt.Key_Equal) { drawboard.inc_radius() }
             else if(event.key == Qt.Key_Minus) { drawboard.dec_radius() }
             // toggle keys
             else if(event.key == Qt.Key_Space) { toggle_visibility(mask) }

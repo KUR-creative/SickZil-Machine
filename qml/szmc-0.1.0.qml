@@ -411,7 +411,8 @@ ApplicationWindow {
                     hoverEnabled: true
                     onPositionChanged: {
                         // mask drawing for drag
-                        if(window.tool == window.pen) {
+                        if(window.tool == window.pen &&
+                           mask.drawing == true) {
                             mask.request_paint(); 
                         }
                         // move cursor
@@ -586,8 +587,8 @@ ApplicationWindow {
     //for DEBUG
     /*
     Timer {
-        interval: 250; running: true; repeat: true
-        onTriggered: console.log("canvas.is_dirty:", canvas.is_dirty)
+        interval: 150; running: true; repeat: true
+        onTriggered: console.log("mask.is_dirty:", mask.is_dirty)
     }
     */
 }

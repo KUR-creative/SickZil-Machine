@@ -77,6 +77,11 @@ ApplicationWindow {
         onUpdateImage: {
             image.source = "" // unload image
             image.source = "image://imageUpdater/" + path
+            // revert dragged position
+            image.x = 0; image.y = 0
+            //if(image.x + image.width < 100 ||
+               //image.y + image.height < 100){
+            //}
         }
         onWarning: {
             msgDialog.title = "project format error"

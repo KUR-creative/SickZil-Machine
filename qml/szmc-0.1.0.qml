@@ -272,6 +272,23 @@ ApplicationWindow {
                     window.set_tool(window.rect)
                 }
             }
+            ToolButton {
+                Image {
+                    id: panning_tool
+                    readonly property string panning_on:  "../resource/tools/panning_on.png"
+                    readonly property string panning_off: "../resource/tools/panning_off.png"
+                    source: panning_off
+                    x:     x_all; y:      y_all
+                    width: w_all; height: h_all
+                    function on()  { source = panning_on; }
+                    function off() { source = panning_off; }
+                }
+                Layout.preferredHeight: w_icon
+                Layout.preferredWidth:  h_icon
+                onClicked: { 
+                    //window.set_tool(window.panning)
+                }
+            }
 
             //-------------------------------------------------------------
             Connections {
@@ -289,9 +306,11 @@ ApplicationWindow {
                 } 
                 onChangeTool: {
                     if(new_tool == window.pen){
-                        pen_tool.on(); rect_tool.off(); 
+                        pen_tool.on(); rect_tool.off(); panning_tool.off()
                     }else if(new_tool == window.rect){
-                        pen_tool.off(); rect_tool.on();
+                        pen_tool.off(); rect_tool.on(); panning_tool.off()
+                    }else if(new_tool == window.panning){
+                        pen_tool.off(); rect_tool.off();panning_tool.on()
                     }
                 }
             }
@@ -385,11 +404,12 @@ ApplicationWindow {
                         mask.pressed_x = mouseX
                         mask.pressed_y = mouseY
                         if(mouse.button == Qt.LeftButton &&
-                           window.tool == window.pen){
+                           window.tool != window.panning){
                             drag.target = invisible_target
                             mask.drawing = true
                             mask.request_paint(); 
                         }else if(mouse.button == Qt.MiddleButton){
+                            window.set_tool(window.panning)
                             drag.target = image
                         }else if(mouse.button == Qt.RightButton){
                             drag.target = invisible_target
@@ -403,7 +423,9 @@ ApplicationWindow {
                         mask.drawing = false
                         mask.released_x = mouseX
                         mask.released_y = mouseY
-                        if(window.tool == window.rect){
+                        if(window.tool == window.panning){
+                            window.set_tool(window.prev_tool)
+                        }else if(window.tool == window.rect){
                             mask.request_paint(); 
                         }
                         // overlay
@@ -593,7 +615,7 @@ ApplicationWindow {
     /*
     Timer {
         interval: 150; running: true; repeat: true
-        onTriggered: console.log("mask.is_dirty:", mask.is_dirty)
+        onTriggered: console.log("mask.is_dirty:", mask.is_dirty, "window.tool", window.tool)
     }
     */
 }

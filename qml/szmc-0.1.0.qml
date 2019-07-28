@@ -314,6 +314,9 @@ ApplicationWindow {
             // toggle keys
             else if(event.key == Qt.Key_Space) { toggle_visibility(mask) }
             else if(event.key == Qt.Key_T)     { toggle_paint_mode(window) }
+            // tools keys
+            else if(event.key == Qt.Key_N) { set_tool(window.pen) }  // peN
+            else if(event.key == Qt.Key_R) { set_tool(window.rect) } // Rect
         }
         Keys.onReleased: {
             // to prevent image loading error

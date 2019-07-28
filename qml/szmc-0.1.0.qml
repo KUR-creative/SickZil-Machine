@@ -59,6 +59,7 @@ ApplicationWindow {
         window.tool = new_tool
         changeTool(new_tool)
     }
+
     //-------------------------------------------------------------
     Connections {
         target: main
@@ -69,7 +70,7 @@ ApplicationWindow {
             set_paint_mode(window, true);
         }
         onUpdateImage: {
-            image.source = "" // unload
+            image.source = "" // unload image
             image.source = "image://imageUpdater/" + path
         }
         onWarning: {
@@ -262,6 +263,7 @@ ApplicationWindow {
                 }
             }
 
+            //-------------------------------------------------------------
             Connections {
                 target: window
                 onChangeMaskVisibility: {
@@ -285,8 +287,8 @@ ApplicationWindow {
             }
         }
     }
-    //-------------------------------------------------------------
 
+    //-------------------------------------------------------------
     RowLayout {
         anchors.fill: parent
         spacing: 6
@@ -314,13 +316,15 @@ ApplicationWindow {
             else if(event.key == Qt.Key_T)     { toggle_paint_mode(window) }
         }
         Keys.onReleased: {
+            // to prevent image loading error
+            // (caused by continuous up/down key input)
             if(! event.isAutoRepeat){
                      if (event.key == Qt.Key_Up)   { up_pressed = false }
                 else if (event.key == Qt.Key_Down) { down_pressed = false }
             }
         }
-        //-------------------------------------------------------------
 
+        //-------------------------------------------------------------
         ScrollView {
             id: drawboard
             objectName: "view"
@@ -392,7 +396,6 @@ ApplicationWindow {
                         overlay.mx = mouseX
                         overlay.my = mouseY
                         overlay.requestPaint();
-                        //if(window.tool == window.rect) {
                     }
                 }
 
@@ -520,6 +523,7 @@ ApplicationWindow {
             }
         }
 
+        //-------------------------------------------------------------
         ScrollView {
             Layout.fillHeight: true
             Layout.preferredWidth: 400
@@ -547,6 +551,7 @@ ApplicationWindow {
         }
     }
     
+    //=============================================================
     statusBar: StatusBar {
         RowLayout {
             anchors.fill: parent
@@ -554,7 +559,6 @@ ApplicationWindow {
         }
     }
 
-    //=============================================================
     //for DEBUG
     /*
     Timer {

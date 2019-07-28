@@ -359,6 +359,8 @@ ApplicationWindow {
                 MouseArea {
                     id: mouse_area
                     anchors.fill: parent
+                    acceptedButtons: Qt.LeftButton | Qt.MiddleButton | Qt.RightButton
+                    //-------------------------------------------------------------
                     onPressed: {
                         set_visibility(mask, true)
                         window.state = window.edit_mask;
@@ -367,7 +369,8 @@ ApplicationWindow {
                         mask.my = mouseY
                         mask.pressed_x = mouseX
                         mask.pressed_y = mouseY
-                        if(window.tool == window.pen) {
+                        if(mouse.button == Qt.LeftButton &&
+                           window.tool == window.pen){
                             mask.drawing = true
                             mask.request_paint(); 
                         }
@@ -375,6 +378,7 @@ ApplicationWindow {
                         overlay.drawing = true
                         overlay.pressed_x = mouseX
                         overlay.pressed_y = mouseY
+                        console.log(mouse.button)
                     }
                     onReleased: {
                         mask.drawing = false

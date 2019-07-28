@@ -24,6 +24,7 @@ ApplicationWindow {
     //visibility: Window.Maximized
 
     // STATES
+    // NOTE: USE SETTERS! do not directly set state vars! 
     readonly property string start_up:  "start_up"
     readonly property string load_mask: "load_mask"
     readonly property string edit_mask: "edit_mask"
@@ -31,6 +32,8 @@ ApplicationWindow {
 
     readonly property string pen: "pen"
     readonly property string rect: "rect"
+    readonly property string panning: "panning" 
+    property string prev_tool: pen
     property string tool: pen
 
     property bool painting: true //: pen, false: eraser
@@ -39,6 +42,7 @@ ApplicationWindow {
     signal changeBrushMode(bool painting);
     signal changeTool(string new_tool);
 
+    // setters for state vars
     function set_visibility(mask, is_visible) {
         mask.visible = is_visible;
         changeMaskVisibility(is_visible);
@@ -56,6 +60,7 @@ ApplicationWindow {
     }
 
     function set_tool(new_tool) {
+        window.prev_tool = window.tool
         window.tool = new_tool
         changeTool(new_tool)
     }
@@ -356,10 +361,15 @@ ApplicationWindow {
                 objectName: "image"
                 source: "../resource/startup.png"
 
+                Rectangle { // for drag.target hack
+                    id: invisible_target
+                    width: 0; height: 0; visible: false;
+                }
                 MouseArea {
                     id: mouse_area
                     anchors.fill: parent
                     acceptedButtons: Qt.LeftButton | Qt.MiddleButton | Qt.RightButton
+                    drag.target: image
                     //-------------------------------------------------------------
                     onPressed: {
                         set_visibility(mask, true)
@@ -371,14 +381,18 @@ ApplicationWindow {
                         mask.pressed_y = mouseY
                         if(mouse.button == Qt.LeftButton &&
                            window.tool == window.pen){
+                            drag.target = invisible_target
                             mask.drawing = true
                             mask.request_paint(); 
+                        }else if(mouse.button == Qt.MiddleButton){
+                            drag.target = image
+                        }else if(mouse.button == Qt.RightButton){
+                            drag.target = invisible_target
                         }
                         // overlay
                         overlay.drawing = true
                         overlay.pressed_x = mouseX
                         overlay.pressed_y = mouseY
-                        console.log(mouse.button)
                     }
                     onReleased: {
                         mask.drawing = false
@@ -404,6 +418,8 @@ ApplicationWindow {
                         overlay.mx = mouseX
                         overlay.my = mouseY
                         overlay.requestPaint();
+
+                        //console.log(mouse.button, window.prev_tool, window.tool)
                     }
                 }
 

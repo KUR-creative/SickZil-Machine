@@ -21,7 +21,6 @@ class ImageProvider(QQuickImageProvider):
 class MainWindow(QObject):
     warning     = pyqtSignal(str, arguments=['msg'])
     initialize  = pyqtSignal()
-    rmtxtPreview= pyqtSignal()
     updateImage = pyqtSignal(str, arguments=['path']) 
     provideMask = pyqtSignal(str, arguments=['path']) 
     saveMask    = pyqtSignal(str, arguments=['path'])
@@ -152,4 +151,3 @@ class MainWindow(QObject):
 
         io.save(state.now_image(), inpainted) 
         self.update_gui()
-        self.rmtxtPreview.emit()

@@ -33,7 +33,7 @@ ApplicationWindow {
     readonly property string pen: "pen"
     readonly property string rect: "rect"
     readonly property string panning: "panning" 
-    property string prev_tool: pen
+    property string prev_tool: pen // for temporary tool changing(ex: panning)
     property string tool: pen
 
     property bool painting: true //: pen, false: eraser
@@ -169,6 +169,7 @@ ApplicationWindow {
                 onClicked: { 
                     main.gen_mask()
                     mask.is_dirty = true
+                    set_visibility(mask, true)
                 }
             }
             ToolButton {
@@ -182,6 +183,7 @@ ApplicationWindow {
                 onClicked: {
                     main.rm_txt()
                     mask.is_dirty = true
+                    set_visibility(mask, false)
                 }
             }
             ToolButton {

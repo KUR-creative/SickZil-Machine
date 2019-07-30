@@ -91,6 +91,9 @@ ApplicationWindow {
             msgDialog.text = msg;
             msgDialog.visible = true;
         }
+
+        onImgsToProjWarning: { imgsToProjWarnDialog.open() }
+
         onProvideMask: {
             window.state = window.load_mask
 
@@ -106,9 +109,6 @@ ApplicationWindow {
                 mask.is_dirty = false;
             }
         }
-        onRmtxtPreview: {
-            set_visibility(mask,false)
-        }
     }
 
     //=============================================================
@@ -119,8 +119,23 @@ ApplicationWindow {
     FileDialog {
         id: projectOpenDialog
         selectFolder: true
+        title: "Select Manga Project Folder"
         onAccepted: {
             main.open_project(projectOpenDialog.fileUrl)
+        }
+    }
+
+    MessageDialog {
+        id: imgsToProjWarnDialog
+        title: "Flat Image folder -> Manga Project folder"
+        text: "You have chosen a folder that contains some images.\n"
+            + 'Would you like to create a "Manga project folder" with these images?'
+        standardButtons: StandardButton.Yes | StandardButton.No 
+        onYes: {
+            main.new_project(projectOpenDialog.fileUrl)
+        }
+        onNo: {
+            console.log("Nope")
         }
     }
 

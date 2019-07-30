@@ -1,6 +1,7 @@
 from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot, QUrl
 from PyQt5.QtQuick import QQuickImageProvider, QQuickItemGrabResult
 from PyQt5.QtCore import QVariant
+from PyQt5.QtWidgets import QFileDialog
 
 import utils.fp as fp
 from ImListModel import ImListModel
@@ -20,6 +21,7 @@ class ImageProvider(QQuickImageProvider):
 
 class MainWindow(QObject):
     warning     = pyqtSignal(str, arguments=['msg'])
+    imgsToProjWarning = pyqtSignal()
     initialize  = pyqtSignal()
     updateImage = pyqtSignal(str, arguments=['path']) 
     provideMask = pyqtSignal(str, arguments=['path']) 
@@ -60,19 +62,41 @@ class MainWindow(QObject):
             )
             return dir_type # for test
         if dir_type == config.FLAT_IMGDIR:
+            # User: choose flat image directory in projectOpenDialog
+            # -> py: imgsToProjWarning.emit()
+            # -> qml: onImgsToProjWarning
+            # -> qml: imgsToProjWarning
+            # -> User: click ok
+            # -> qml: imgsToProjDialog
+            # -> User: choose(or new directory for saving
+            # -> qml: convert_imgs2proj(imgdir, projdir)
+
             #TODO: create project directory structure
             #      and then copy images into 'images'
             #      and then reset dirpath
             #      and then below: use project directory
-            self.warning.emit(
-                config.WARN_MSGS[config.FLAT_IMGDIR]
-            )
+            self.imgsToProjWarning.emit()
         else:
             self.initialize.emit()
             state.set_project(dirpath)
             self.update_gui()
 
         return dir_type
+
+    @pyqtSlot(QUrl)
+    def new_project(self, src_imgdir):
+        '''
+        create new project directory from src image directory to dst
+        '''
+        imgdir = src_imgdir.toLocalFile()
+
+        p = Path(imgdir)
+        projdir,_ = QFileDialog.getSaveFileName(
+            caption="Create New Manga Project Folder", 
+            directory=str( p.with_name(str(p.name) + "_mproj") )
+        )
+        print(imgdir, '->', projdir)
+
 
     @pyqtSlot()
     def display_next(self):

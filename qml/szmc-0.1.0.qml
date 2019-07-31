@@ -19,6 +19,7 @@ import QtQuick.Window 2.2
 
 ApplicationWindow {
     id: window
+    title: "SickZil-Machine 0.1.0"
     visible: true
     width: 850; height: 750
     //visibility: Window.Maximized

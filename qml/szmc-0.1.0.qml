@@ -174,6 +174,30 @@ ApplicationWindow {
         RowLayout {
             // TODO: Refactor: Add SzmcToolBtn type
             // TODO: add disabled icon representation.
+            //---------------------------------------------
+            // 'ALL' tools
+            ToolButton {
+                Image {
+                    source: "../resource/mask_all_btn.png"
+                    x:     x_all; y:      y_all
+                    width: w_all; height: h_all
+                }
+                Layout.preferredHeight: w_icon
+                Layout.preferredWidth:  h_icon
+                onClicked: { }
+            }
+            ToolButton {
+                id: rmtxt_all_btn
+                Image {
+                    source: "../resource/rmtxt_all_btn.png"
+                    x:     x_all; y:      y_all
+                    width: w_all; height: h_all
+                }
+                Layout.preferredHeight: w_icon
+                Layout.preferredWidth:  h_icon
+                onClicked: { }
+            }
+            // 'single image' tools
             ToolButton {
                 Image {
                     source: "../resource/mask_btn.png"
@@ -201,26 +225,6 @@ ApplicationWindow {
                     mask.is_dirty = true
                     set_visibility(mask, false)
                 }
-            }
-            ToolButton {
-                Image {
-                    source: "../resource/mask_all_btn.png"
-                    x:     x_all; y:      y_all
-                    width: w_all; height: h_all
-                }
-                Layout.preferredHeight: w_icon
-                Layout.preferredWidth:  h_icon
-                onClicked: { }
-            }
-            ToolButton {
-                Image {
-                    source: "../resource/rmtxt_all_btn.png"
-                    x:     x_all; y:      y_all
-                    width: w_all; height: h_all
-                }
-                Layout.preferredHeight: w_icon
-                Layout.preferredWidth:  h_icon
-                onClicked: { }
             }
             // toggle buttons
             ToolButton {

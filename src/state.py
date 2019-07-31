@@ -3,6 +3,7 @@
 #      (After conversion, all jpgs are deleted)
 from pathlib import Path
 from collections import namedtuple
+import shutil
 import funcy as F
 
 import config
@@ -35,6 +36,20 @@ def project():
     )
 
 #-----------------------------------------------
+def new_project(imgdir, projdir):
+    # create folder structure
+    Path(projdir, config.IMGDIR).mkdir(parents=True, exist_ok=True)
+    Path(projdir, config.MASKDIR).mkdir(parents=True, exist_ok=True)
+    Path(projdir, config.ORIGIN_IMGDIR).mkdir(parents=True, exist_ok=True)
+    Path(projdir, config.ORIGIN_MASKDIR).mkdir(parents=True, exist_ok=True)
+    # copy imgs
+    imgs_dirpath = Path(projdir, config.IMGDIR)
+    imgpaths = filter(
+        iu.is_img_file, fu.children(imgdir))
+    for imgpath in imgpaths:
+        shutil.copy(str(imgpath), str(imgs_dirpath))
+    return projdir
+
 def set_project(prj_dirpath):
     assert Path(prj_dirpath,config.IMGDIR).exists()
     assert Path(prj_dirpath,config.MASKDIR).exists()

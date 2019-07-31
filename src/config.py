@@ -6,6 +6,8 @@ MAIN_QML = '../qml/szmc-0.1.0.qml'
 
 IMGDIR = 'images'
 MASKDIR = 'masks'
+ORIGIN_IMGDIR = 'origin_' + IMGDIR
+ORIGIN_MASKDIR = 'origin_' + MASKDIR
 
 # core config
 #TF_CPP_MIN_LOG_LEVEL = '1' #'3'
@@ -46,6 +48,8 @@ WARN_MSGS = {
     FLAT_IMGDIR: "it's img directory. not yet implemented!",
 }
 
+def default_proj_name(imgdir_name):
+    return imgdir_name + "_mproj"
 '''
 from collections import namedtuple
 

@@ -51,6 +51,11 @@ class MainWindow(QObject):
             self.im_model.update()
 
     #---------------------------------------------------
+    def set_project(self, dirpath):
+        self.initialize.emit()
+        state.set_project(dirpath)
+        self.update_gui()
+
     @pyqtSlot(QUrl)
     def open_project(self, dir_url):
         dirpath = dir_url.toLocalFile()
@@ -58,29 +63,11 @@ class MainWindow(QObject):
         dir_type = state.dir_type(dirpath)
         if dir_type == config.UNSUPPORT_DIR: 
             self.warning.emit(
-                config.WARN_MSGS[config.UNSUPPORT_DIR]
-            )
-            return dir_type # for test
+                config.WARN_MSGS[config.UNSUPPORT_DIR])
         if dir_type == config.FLAT_IMGDIR:
-            # User: choose flat image directory in projectOpenDialog
-            # -> py: imgsToProjWarning.emit()
-            # -> qml: onImgsToProjWarning
-            # -> qml: imgsToProjWarning
-            # -> User: click ok
-            # -> qml: imgsToProjDialog
-            # -> User: choose(or new directory for saving
-            # -> qml: convert_imgs2proj(imgdir, projdir)
-
-            #TODO: create project directory structure
-            #      and then copy images into 'images'
-            #      and then reset dirpath
-            #      and then below: use project directory
             self.imgsToProjWarning.emit()
         else:
-            self.initialize.emit()
-            state.set_project(dirpath)
-            self.update_gui()
-
+            self.set_project(dirpath)
         return dir_type
 
     @pyqtSlot(QUrl)
@@ -89,15 +76,20 @@ class MainWindow(QObject):
         create new project directory from src image directory to dst
         '''
         imgdir = src_imgdir.toLocalFile()
-
         p = Path(imgdir)
+        default_projdir = str(
+            p.with_name( config.default_proj_name(p.name) )
+        )
+
         projdir,_ = QFileDialog.getSaveFileName(
             caption="Create New Manga Project Folder", 
-            directory=str( p.with_name(str(p.name) + "_mproj") )
+            directory=default_projdir
         )
-        print(imgdir, '->', projdir)
 
+        new_projdir = state.new_project(imgdir, projdir)
+        self.set_project(new_projdir)
 
+    #---------------------------------------------------
     @pyqtSlot()
     def display_next(self):
         import time 

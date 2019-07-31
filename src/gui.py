@@ -61,10 +61,11 @@ class MainWindow(QObject):
         dirpath = dir_url.toLocalFile()
 
         dir_type = state.dir_type(dirpath)
+        print(dir_type)
         if dir_type == config.UNSUPPORT_DIR: 
             self.warning.emit(
                 config.WARN_MSGS[config.UNSUPPORT_DIR])
-        if dir_type == config.FLAT_IMGDIR:
+        elif dir_type == config.FLAT_IMGDIR:
             self.imgsToProjWarning.emit()
         else:
             self.set_project(dirpath)

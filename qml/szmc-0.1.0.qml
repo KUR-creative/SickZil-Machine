@@ -197,6 +197,10 @@ ApplicationWindow {
                 Layout.preferredWidth:  h_icon
                 onClicked: { }
             }
+            //---------------------------------------------
+            //Rectangle { x: 0; width: 0; height: h_all; color:"transparent"}
+            Rectangle { Layout.leftMargin: 3.5; width: 2; height: h_all+2; color:"gray"}
+            //---------------------------------------------
             // 'single image' tools
             ToolButton {
                 Image {

@@ -111,8 +111,8 @@ class MainWindow(QObject):
         state.cursor(index)
         self.update_gui()
 
-    '''
     # NOTE: for DEBUG
+    '''
     @pyqtSlot(QQuickItemGrabResult)
     def get_canvas(self, img):
         import utils.imutils as iu
@@ -121,17 +121,20 @@ class MainWindow(QObject):
         cv2.imshow('im',nparr); 
     '''
     #---------------------------------------------------
-    @pyqtSlot()
-    def gen_mask(self): 
-        imgpath = state.now_image()
-        if imgpath is None: return None
-
-        mask = fp.go(
+    def imgpath2mask(self, imgpath):
+        return fp.go(
             imgpath,
             lambda path: io.load(path, io.NDARR),
             core.segmap,
             io.segmap2mask
         )
+
+    @pyqtSlot()
+    def gen_mask(self): 
+        imgpath = state.now_image()
+        if imgpath is None: return None
+
+        mask = self.imgpath2mask(imgpath)
         io.save(state.now_mask(), mask)
         self.update_gui()
 
@@ -155,8 +158,18 @@ class MainWindow(QObject):
 
     @pyqtSlot()
     def gen_mask_all(self): 
+        if state.now_image() is None: return None
+
         self.warning.emit(
             config.WARN_MSGS[config.MASK_ALL])
+
+        masks = fp.lmap(self.imgpath2mask, state.img_paths)
+
+        for path,mask in zip(state.mask_paths,masks):
+            io.save(path, mask)
+        self.update_gui()
+
+        return masks
 
     @pyqtSlot()
     def rm_txt_all(self): 

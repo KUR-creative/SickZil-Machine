@@ -85,6 +85,9 @@ def test_gen_mask_empty_state_then_no_action(clear_state):
     assert main_window.gen_mask() is None
     # expected no error.
 # TODO: Add test
+# gen_mask_all: ?
+# rm_txt_all with existing mask: then use masks.
+# rm_txt_all without mask: make segmaps and then use it.
 # rm_txt with existing mask: then use mask.
 # rm_txt without mask: make segmap and then use it.
 # edit mask => gen segmap => add generated segmap to old mask

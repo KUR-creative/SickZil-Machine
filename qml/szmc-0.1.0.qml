@@ -184,7 +184,7 @@ ApplicationWindow {
                 }
                 Layout.preferredHeight: w_icon
                 Layout.preferredWidth:  h_icon
-                onClicked: { }
+                onClicked: main.gen_mask_all()
             }
             ToolButton {
                 id: rmtxt_all_btn
@@ -195,7 +195,7 @@ ApplicationWindow {
                 }
                 Layout.preferredHeight: w_icon
                 Layout.preferredWidth:  h_icon
-                onClicked: { }
+                onClicked: main.rm_txt_all()
             }
             //---------------------------------------------
             //Rectangle { x: 0; width: 0; height: h_all; color:"transparent"}

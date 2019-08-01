@@ -160,9 +160,6 @@ class MainWindow(QObject):
     def gen_mask_all(self): 
         if state.now_image() is None: return None
 
-        self.warning.emit(
-            config.WARN_MSGS[config.MASK_ALL])
-
         masks = fp.lmap(self.imgpath2mask, state.img_paths)
 
         for path,mask in zip(state.mask_paths,masks):

@@ -146,6 +146,20 @@ ApplicationWindow {
         onTriggered: projectOpenDialog.open()
     }
 
+    MessageDialog {
+        id: genMaskAllDialog
+        title: "Generate Mask All"
+        text: "It can take a long time. Would you still like "
+            + "to create a mask for all images?"
+        standardButtons: StandardButton.Yes | StandardButton.No 
+        onYes: {
+            main.gen_mask_all()
+        }
+        onNo: {
+            console.log("Nope")
+        }
+    }
+
     menuBar: MenuBar {
         Menu {
             title: "&Open"
@@ -184,7 +198,7 @@ ApplicationWindow {
                 }
                 Layout.preferredHeight: w_icon
                 Layout.preferredWidth:  h_icon
-                onClicked: main.gen_mask_all()
+                onClicked: genMaskAllDialog.open()
             }
             ToolButton {
                 id: rmtxt_all_btn

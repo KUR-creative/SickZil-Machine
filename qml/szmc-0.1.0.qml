@@ -152,12 +152,16 @@ ApplicationWindow {
         text: "It can take a long time. Would you still like "
             + "to create a mask for all images?"
         standardButtons: StandardButton.Yes | StandardButton.No 
-        onYes: {
-            main.gen_mask_all()
-        }
-        onNo: {
-            console.log("Nope")
-        }
+        onYes: main.gen_mask_all() 
+    }
+
+    MessageDialog {
+        id: rmTxtAllDialog
+        title: "Remove Text All"
+        text: "It can take a long time. Do you still want "
+            + "to remove the text of all images?"
+        standardButtons: StandardButton.Yes | StandardButton.No 
+        onYes: main.rm_txt_all() 
     }
 
     menuBar: MenuBar {
@@ -209,7 +213,7 @@ ApplicationWindow {
                 }
                 Layout.preferredHeight: w_icon
                 Layout.preferredWidth:  h_icon
-                onClicked: main.rm_txt_all()
+                onClicked: rmTxtAllDialog.open()
             }
             //---------------------------------------------
             //Rectangle { x: 0; width: 0; height: h_all; color:"transparent"}

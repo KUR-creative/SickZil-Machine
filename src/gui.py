@@ -170,5 +170,4 @@ class MainWindow(QObject):
 
     @pyqtSlot()
     def rm_txt_all(self): 
-        self.warning.emit(
-            config.WARN_MSGS[config.RMTXT_ALL])
+        pass

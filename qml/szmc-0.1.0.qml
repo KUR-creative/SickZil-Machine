@@ -175,9 +175,6 @@ ApplicationWindow {
         Menu {
             title: "&Open"
             MenuItem { action: openProject }
-            MenuItem { 
-                text: "Open &Mask" 
-            }
         }
     }
 

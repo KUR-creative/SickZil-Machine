@@ -147,6 +147,19 @@ ApplicationWindow {
     }
 
     MessageDialog {
+        id: genMaskDialog
+        title: "Remove Text All"
+        text: "WARNING: Edited mask will be overwritten!\n"
+            + "Do you want to generate mask anyway?"
+        standardButtons: StandardButton.Yes | StandardButton.No 
+        onYes: {
+            main.gen_mask()
+            mask.is_dirty = true
+            set_visibility(mask, true)
+        }
+    }
+
+    MessageDialog {
         id: genMaskAllDialog
         title: "Generate Mask All"
         text: "It can take a long time. Would you still like "
@@ -161,7 +174,7 @@ ApplicationWindow {
 
     MessageDialog {
         id: rmTxtAllDialog
-        title: "Remove Text All"
+        title: "Generate Mask"
         text: "It can take a long time. Do you still want "
             + "to remove the text of all images?"
         standardButtons: StandardButton.Yes | StandardButton.No 
@@ -233,9 +246,13 @@ ApplicationWindow {
                 Layout.preferredHeight: w_icon
                 Layout.preferredWidth:  h_icon
                 onClicked: { 
-                    main.gen_mask()
-                    mask.is_dirty = true
-                    set_visibility(mask, true)
+                    if(mask.is_dirty){
+                        genMaskDialog.open()
+                    }else{
+                        main.gen_mask()
+                        mask.is_dirty = true
+                        set_visibility(mask, true)
+                    }
                 }
             }
             ToolButton {

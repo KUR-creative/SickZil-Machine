@@ -1,11 +1,12 @@
 import os,sys
 sys.path.append( os.path.abspath('../src') )
 
+from pathlib import Path
+import shutil
 import pytest
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtQml import QQmlApplicationEngine
 from PyQt5.QtCore import QUrl
-from pathlib import Path
 import numpy as np
 import cv2
 
@@ -86,6 +87,39 @@ def test_gen_mask_empty_state_then_no_action(clear_state):
     # expected no error.
 # TODO: Add test
 # gen_mask_all: ?
+
+def test_no_img_then_nothing_happen_when_calling_rm_txt_all(clear_state):
+    assert fp.is_empty( main_window.rm_txt_all() )
+
+def test_all_imgs_have_mask_then_rm_txt_all_just_load_masks(clear_state):
+    dir_type = main_window.open_project(QUrl(
+        'file://' + os.path.abspath('./fixture/all_have_masks/')
+    ))
+    prev_masks = fp.lmap(cv2.imread, state.mask_paths)
+    main_window.rm_txt_all()
+
+    # Do not overwrite previously saved masks
+    now_masks = fp.lmap(cv2.imread, state.mask_paths)
+    for prev_mask,now_mask in zip(prev_masks,now_masks):
+        assert np.array_equal(prev_mask,now_mask)
+
+def test_if_some_imgs_hasnt_mask_then_generate_mask_for_them_in_rm_txt_all(clear_state):
+    dir_type = main_window.open_project(QUrl(
+        'file://' + os.path.abspath('./fixture/some_hasnt_mask/')
+    ))
+    saved_mpaths = fp.lfilter( 
+        lambda p: Path(p).exists(), state.mask_paths )
+    main_window.rm_txt_all()
+    mpaths = fp.lfilter( 
+        lambda p: Path(p).exists(), state.mask_paths )
+
+    assert len(saved_mpaths) < len(mpaths)
+
+    # NOTE: Below could be problematic testing code.. Use mock instead..
+    generated_mpaths = set(mpaths) - set(saved_mpaths)
+    for mask_path in generated_mpaths:
+        os.remove(mask_path)
+
 # rm_txt_all with existing mask: then use masks.
 # rm_txt_all without mask: make segmaps and then use it.
 # rm_txt with existing mask: then use mask.

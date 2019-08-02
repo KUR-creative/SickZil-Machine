@@ -174,4 +174,28 @@ class MainWindow(QObject):
 
     @pyqtSlot()
     def rm_txt_all(self): 
-        pass
+        ''' 
+        Remove text of all image.
+        NOTE: If image has previously saved masks, then use it.
+        '''
+        if state.now_image() is None: return None
+
+        no_mask_path_pairs = fp.lremove(
+            lambda pair: Path(pair.mask).exists(),
+            state.img_mask_pairs()
+        )
+        new_masks = fp.map(
+            lambda p: self.imgpath2mask(p.img),
+            no_mask_path_pairs
+        )
+        for mask,pair in zip(new_masks,no_mask_path_pairs):
+            io.save(pair.mask, mask)
+
+        img_paths,mask_paths = state.project()
+        images= fp.map(lambda p: io.load(p, io.IMAGE), img_paths)
+        masks = fp.map(lambda p: io.load(p, io.MASK), mask_paths)
+        inpainteds = fp.map(core.inpainted, images,masks)
+
+        for ipath,inpainted in zip(img_paths,inpainteds):
+            io.save(ipath, inpainted) 
+        self.update_gui()

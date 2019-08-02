@@ -28,7 +28,7 @@ def now_mask():
         return mask_paths[_cursor]
 
 def project():
-    global img_paths, mask_paths, _cursor
+    global img_paths, mask_paths
     return namedtuple(
         'Project', 
         'img_paths mask_paths')(

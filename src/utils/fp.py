@@ -26,6 +26,13 @@ def lfilter(f,*seq):
     return F.lfilter(f,*seq) if seq \
     else lambda *xs: F.lfilter(f,*xs)
 
+def remove(f,*seq):
+    return F.remove(f,*seq) if seq \
+    else lambda *xs: F.remove(f,*xs)
+def lremove(f,*seq):
+    return F.lremove(f,*seq) if seq \
+    else lambda *xs: F.lremove(f,*xs)
+
 def foreach(f,*seq):
     F.lmap(f,*seq)
     return None

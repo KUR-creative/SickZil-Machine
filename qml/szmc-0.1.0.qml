@@ -153,7 +153,10 @@ ApplicationWindow {
             + "to create a mask for all images?\n"
             + "NOTE: All previously saved masks will be OVERWRITTEN."
         standardButtons: StandardButton.Yes | StandardButton.No 
-        onYes: main.gen_mask_all() 
+        onYes: {
+            main.gen_mask_all() 
+            set_visibility(mask, true)
+        }
     }
 
     MessageDialog {
@@ -162,7 +165,10 @@ ApplicationWindow {
         text: "It can take a long time. Do you still want "
             + "to remove the text of all images?"
         standardButtons: StandardButton.Yes | StandardButton.No 
-        onYes: main.rm_txt_all() 
+        onYes: {
+            main.rm_txt_all() 
+            set_visibility(mask, false) // TODO: don't do it in startup page.
+        }
     }
 
     menuBar: MenuBar {

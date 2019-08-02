@@ -35,6 +35,13 @@ def project():
          img_paths,mask_paths
     )
 
+def img_mask_pairs():
+    global img_paths, mask_paths
+    return F.tap(tuple(fp.map(
+        namedtuple('PathPair', 'img mask'),
+        img_paths, mask_paths
+    )))
+
 #-----------------------------------------------
 def new_project(imgdir, projdir):
     # create folder structure

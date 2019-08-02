@@ -37,3 +37,20 @@ def test_dir_type():
     assert state.dir_type(unsupport_dir) == config.UNSUPPORT_DIR
     assert state.dir_type(flat_imgdir) == config.FLAT_IMGDIR
     assert state.dir_type(project_dir) == config.PRJDIR
+
+def test_img_mask_pairs():
+    state.set_project('fixture/prj_3file_I/')
+    def fpath(*ps): return str(Path(*ps))
+    img_masks = state.img_mask_pairs()
+    expected_pairs = [
+        (fpath('fixture/prj_3file_I',config.IMGDIR,'1'),
+         fpath('fixture/prj_3file_I',config.MASKDIR,'1.png')),
+        (fpath('fixture/prj_3file_I',config.IMGDIR,'2.png'),
+         fpath('fixture/prj_3file_I',config.MASKDIR,'2.png')),
+        (fpath('fixture/prj_3file_I',config.IMGDIR,'3.jpg'),
+         fpath('fixture/prj_3file_I',config.MASKDIR,'3.png')),
+    ]
+    for actual, (ipath,mpath) in zip(state.img_mask_pairs(),
+                                     expected_pairs):
+        assert actual.img  == ipath
+        assert actual.mask == mpath

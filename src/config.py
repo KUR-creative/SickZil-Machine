@@ -42,16 +42,14 @@ def cnet_out(version, sess):
 FLAT_IMGDIR = 'flat_imgdir'
 UNSUPPORT_DIR= 'unsupport_dir'
 PRJDIR = 'prjdir'
-MASK_ALL = 'mask_all'
-RMTXT_ALL = 'rmtxt_all'
+#MASK_ALL = 'mask_all'
+#RMTXT_ALL = 'rmtxt_all'
 
 WARN_MSGS = {
     UNSUPPORT_DIR:'This is neither project nor image folder.',
     FLAT_IMGDIR: "it's img directory. not yet implemented!",
-    MASK_ALL: "It can take a long time. Would you still like "
-        + "to create a mask for all images?",
-    RMTXT_ALL: "It can take a long time. Do you still want "
-        + "to clear the text of all images?"
+    #MASK_ALL: "It can take a long time. Would you still like " + "to create a mask for all images?",
+    #RMTXT_ALL: "It can take a long time. Do you still want " + "to clear the text of all images?"
 }
 
 def default_proj_name(imgdir_name):

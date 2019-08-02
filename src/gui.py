@@ -158,6 +158,10 @@ class MainWindow(QObject):
 
     @pyqtSlot()
     def gen_mask_all(self): 
+        ''' 
+        Generate NEW mask of all image.
+        NOTE: All previously saved masks will be overwritten.
+        '''
         if state.now_image() is None: return None
 
         masks = fp.lmap(self.imgpath2mask, state.img_paths)

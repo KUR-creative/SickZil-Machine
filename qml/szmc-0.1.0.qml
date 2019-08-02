@@ -150,7 +150,8 @@ ApplicationWindow {
         id: genMaskAllDialog
         title: "Generate Mask All"
         text: "It can take a long time. Would you still like "
-            + "to create a mask for all images?"
+            + "to create a mask for all images?\n"
+            + "NOTE: All previously saved masks will be OVERWRITTEN."
         standardButtons: StandardButton.Yes | StandardButton.No 
         onYes: main.gen_mask_all() 
     }

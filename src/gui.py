@@ -180,6 +180,7 @@ class MainWindow(QObject):
         '''
         if state.now_image() is None: return None
 
+        self.saveMask.emit(state.now_mask()) # save current edited mask
         no_mask_path_pairs = fp.lremove(
             lambda pair: Path(pair.mask).exists(),
             state.img_mask_pairs()

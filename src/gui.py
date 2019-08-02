@@ -11,6 +11,14 @@ import state
 import core
 from pathlib import Path
 
+def imgpath2mask(imgpath):
+    return fp.go(
+        imgpath,
+        lambda path: io.load(path, io.NDARR),
+        core.segmap,
+        io.segmap2mask
+    )
+
 class ImageProvider(QQuickImageProvider):
     def __init__(self):
         super(ImageProvider, self).__init__(
@@ -121,20 +129,12 @@ class MainWindow(QObject):
         cv2.imshow('im',nparr); 
     '''
     #---------------------------------------------------
-    def imgpath2mask(self, imgpath):
-        return fp.go(
-            imgpath,
-            lambda path: io.load(path, io.NDARR),
-            core.segmap,
-            io.segmap2mask
-        )
-
     @pyqtSlot()
     def gen_mask(self): 
         imgpath = state.now_image()
         if imgpath is None: return None
 
-        mask = self.imgpath2mask(imgpath)
+        mask = imgpath2mask(imgpath)
         io.save(state.now_mask(), mask)
         self.update_gui()
 
@@ -164,7 +164,7 @@ class MainWindow(QObject):
         '''
         if state.now_image() is None: return None
 
-        masks = fp.lmap(self.imgpath2mask, state.img_paths)
+        masks = fp.lmap(imgpath2mask, state.img_paths)
 
         for path,mask in zip(state.mask_paths,masks):
             io.save(path, mask)
@@ -185,7 +185,7 @@ class MainWindow(QObject):
             state.img_mask_pairs()
         )
         new_masks = fp.map(
-            lambda p: self.imgpath2mask(p.img),
+            lambda p: imgpath2mask(p.img),
             no_mask_path_pairs
         )
         for mask,pair in zip(new_masks,no_mask_path_pairs):

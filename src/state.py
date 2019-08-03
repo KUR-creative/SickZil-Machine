@@ -21,13 +21,17 @@ _cursor = 0 # NOTE: private! DO NOT ACCESS!!!!
 #-----------------------------------------------
 def now_image():
     global img_paths, _cursor
-    if img_paths:
-        return img_paths[_cursor]
-
+    if img_paths: return img_paths[_cursor]
 def now_mask():
     global mask_paths, _cursor
-    if mask_paths:
-        return mask_paths[_cursor]
+    if mask_paths: return mask_paths[_cursor]
+
+def prev_image():
+    global prev_img_paths, _cursor
+    if prev_img_paths: return prev_img_paths[_cursor]
+def prev_mask():
+    global prev_mask_paths, _cursor
+    if prev_mask_paths: return prev_mask_paths[_cursor]
 
 def project():
     global img_paths, mask_paths

@@ -19,10 +19,19 @@ import QtQuick.Window 2.2
 
 ApplicationWindow {
     id: window
-    title: main.config("program_name") + " " + main.config("version")
+    title: make_title("startup-page")
     visible: true
     width: 850; height: 750
     visibility: Window.Maximized
+
+    function make_title(projdir) {
+        return main.config("program_name") 
+             + " " + main.config("version") 
+             + " : " + projdir
+    }
+    function set_title_project(projdir) {
+        window.title = make_title(projdir)
+    }
 
     // STATES
     // NOTE: USE SETTERS! do not directly set state vars! 
@@ -78,9 +87,7 @@ ApplicationWindow {
         standardButtons: StandardButton.Yes | StandardButton.No 
         onYes: {
             const projdir = main.new_project(projectOpenDialog.fileUrl);
-            if(projdir){
-                console.log(projdir)
-            }
+            if(projdir) { set_title_project(projdir) }
         }
     }
     Connections {
@@ -138,9 +145,7 @@ ApplicationWindow {
         title: main.config(objectName)["title"]
         onAccepted: {
             const projdir = main.open_project(fileUrl)
-            if(projdir){
-                console.log(projdir)
-            }
+            if(projdir) { set_title_project(projdir) }
         }
     }
 

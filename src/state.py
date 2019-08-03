@@ -14,6 +14,8 @@ import utils.futils as fu
 # NOTE: DO NOT ASSIGN DIRECTLY!
 img_paths = () 
 mask_paths= ()
+prev_img_paths = () 
+prev_mask_paths= ()
 _cursor = 0 # NOTE: private! DO NOT ACCESS!!!!
 
 #-----------------------------------------------
@@ -57,10 +59,14 @@ def new_project(imgdir, projdir):
     return projdir
 
 def set_project(prj_dirpath):
-    assert Path(prj_dirpath,config.IMGDIR).exists()
-    assert Path(prj_dirpath,config.MASKDIR).exists()
+    assert Path(prj_dirpath, config.IMGDIR).exists()
+    assert Path(prj_dirpath, config.MASKDIR).exists()
+    assert Path(prj_dirpath, config.PREV_IMGDIR).exists()
+    assert Path(prj_dirpath, config.PREV_MASKDIR).exists()
 
-    global img_paths, mask_paths, _cursor
+    global img_paths, mask_paths,\
+           prev_img_paths, prev_mask_paths, _cursor
+
     img_paths = fp.go(
         Path(prj_dirpath) / config.IMGDIR,
         fu.children, 
@@ -75,6 +81,16 @@ def set_project(prj_dirpath):
         ),
         img_paths
     ))
+
+    prev_img_paths = tuple(fp.map(
+        fu.replace1(config.IMGDIR, config.PREV_IMGDIR),
+        img_paths
+    ))
+    prev_mask_paths = tuple(fp.map(
+        fu.replace1(config.MASKDIR, config.PREV_MASKDIR),
+        mask_paths
+    ))
+
     _cursor = 0
 
 def clear_all():

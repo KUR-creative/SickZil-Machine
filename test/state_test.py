@@ -21,18 +21,30 @@ def test_new_project(tmpdir):
         == set(os.listdir(tmpdir / 'prev_images')))
 
 def test_set_project():
-    state.set_project('fixture/prj_3file_I/')
+    prjdir = 'fixture/prj_3file_I/'
+    state.set_project(prjdir)
     def fpath(*ps): return str(Path(*ps))
     assert state.img_paths  == (
-        fpath('fixture/prj_3file_I',config.IMGDIR,'1'), 
-        fpath('fixture/prj_3file_I',config.IMGDIR,'2.png'), 
-        fpath('fixture/prj_3file_I',config.IMGDIR,'3.jpg')
+        fpath(prjdir, config.IMGDIR,'1'), 
+        fpath(prjdir, config.IMGDIR,'2.png'), 
+        fpath(prjdir, config.IMGDIR,'3.jpg')
     )
     assert state.mask_paths == (
-        fpath('fixture/prj_3file_I',config.MASKDIR,'1.png'), 
-        fpath('fixture/prj_3file_I',config.MASKDIR,'2.png'), 
-        fpath('fixture/prj_3file_I',config.MASKDIR,'3.png')
+        fpath(prjdir, config.MASKDIR,'1.png'), 
+        fpath(prjdir, config.MASKDIR,'2.png'), 
+        fpath(prjdir, config.MASKDIR,'3.png')
     )
+    assert state.prev_img_paths  == (
+        fpath(prjdir, config.PREV_IMGDIR,'1'), 
+        fpath(prjdir, config.PREV_IMGDIR,'2.png'), 
+        fpath(prjdir, config.PREV_IMGDIR,'3.jpg')
+    )
+    assert state.prev_mask_paths == (
+        fpath(prjdir, config.PREV_MASKDIR,'1.png'), 
+        fpath(prjdir, config.PREV_MASKDIR,'2.png'), 
+        fpath(prjdir, config.PREV_MASKDIR,'3.png')
+    )
+
 
 def test_clear_all():
     state.set_project('fixture/prj_3file_I/')

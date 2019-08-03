@@ -29,7 +29,7 @@ def clear_state():
 
 #@pytest.mark.skip(reason="no way of currently testing this")
 def test_open_project_with_prj3file_then_open_folder(clear_state):
-    dir_type = main_window.open_project(QUrl(
+    main_window.open_project(QUrl(
         'file://' + os.path.abspath('./fixture/prj_3file_I')
     ))
 
@@ -48,23 +48,20 @@ def test_open_project_with_prj3file_then_open_folder(clear_state):
     ))
 
     assert state.project() == (expected_imgs,expected_masks)
-    assert dir_type == consts.PRJDIR
 
 def test_open_project_not_prjdir_nor_imgdir_then_no_state_change(clear_state):
-    dir_type = main_window.open_project(QUrl(
+    main_window.open_project(QUrl(
         'file://' + os.path.abspath('./fixture')
     ))
     assert state.project() == ((),())
-    assert dir_type == consts.UNSUPPORT_DIR
 
 def test_open_project_is_flat_imgdir_then_no_state_change(clear_state):
     flat_imgdir = str(Path('fixture/prj_3file_I', consts.IMGDIR)) 
-    dir_type = main_window.open_project(QUrl(
+    main_window.open_project(QUrl(
         'file://' + os.path.abspath(flat_imgdir)
     ))
 
     assert state.project() == ((),())
-    assert dir_type == consts.FLAT_IMGDIR
 
 def test_gen_mask():
     main_window.open_project(QUrl(
@@ -92,7 +89,7 @@ def test_no_img_then_nothing_happen_when_calling_rm_txt_all(clear_state):
     assert fp.is_empty( main_window.rm_txt_all() )
 
 def test_all_imgs_have_mask_then_rm_txt_all_just_load_masks(clear_state):
-    dir_type = main_window.open_project(QUrl(
+    main_window.open_project(QUrl(
         'file://' + os.path.abspath('./fixture/all_have_masks/')
     ))
     prev_masks = fp.lmap(cv2.imread, state.mask_paths)
@@ -104,7 +101,7 @@ def test_all_imgs_have_mask_then_rm_txt_all_just_load_masks(clear_state):
         assert np.array_equal(prev_mask,now_mask)
 
 def test_if_some_imgs_hasnt_mask_then_generate_mask_for_them_in_rm_txt_all(clear_state):
-    dir_type = main_window.open_project(QUrl(
+    main_window.open_project(QUrl(
         'file://' + os.path.abspath('./fixture/some_hasnt_mask/')
     ))
     saved_mpaths = fp.lfilter( 

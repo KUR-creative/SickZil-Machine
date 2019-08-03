@@ -120,6 +120,25 @@ def test_if_some_imgs_hasnt_mask_then_generate_mask_for_them_in_rm_txt_all(clear
     for mask_path in generated_mpaths:
         os.remove(mask_path)
 
+def test_restore_prev_image_copy_img_from_prev_images_to_images(clear_state, tmpdir_factory):
+    # Create fixture
+    tmp_proj = tmpdir_factory.mktemp('tmp_proj')
+    shutil.rmtree(tmp_proj) # dst dir must not exist for copytree
+    shutil.copytree('./fixture/real_proj/', tmp_proj)
+
+    main_window.open_project(QUrl(
+        'file://' + os.path.abspath(tmp_proj)
+    ))
+
+    main_window.rm_txt_all()
+    prev_img  = io.load(state.prev_image(),io.IMAGE)
+    processed = io.load(state.now_image(), io.IMAGE)
+    assert np.any(np.not_equal( processed, prev_img ))
+
+    main_window.restore_prev_image()
+    restored = io.load(state.now_image(), io.IMAGE)
+    assert np.array_equal( restored, prev_img )
+
 # rm_txt_all with existing mask: then use masks.
 # rm_txt_all without mask: make segmaps and then use it.
 # rm_txt with existing mask: then use mask.

@@ -79,9 +79,6 @@ ApplicationWindow {
         onYes: {
             main.new_project(projectOpenDialog.fileUrl)
         }
-        onNo: {
-            console.log("Nope")
-        }
     }
     Connections {
         target: main
@@ -536,8 +533,6 @@ ApplicationWindow {
                         overlay.mx = mouseX
                         overlay.my = mouseY
                         overlay.requestPaint();
-
-                        //console.log(mouse.button, window.prev_tool, window.tool)
                     }
                 }
 

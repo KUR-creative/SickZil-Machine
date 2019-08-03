@@ -68,7 +68,7 @@ class MainWindow(QObject):
         state.set_project(dirpath)
         self.update_gui()
 
-    @pyqtSlot(QUrl)
+    @pyqtSlot(QUrl, result=str)
     def open_project(self, dir_url):
         dirpath = dir_url.toLocalFile()
 
@@ -80,9 +80,9 @@ class MainWindow(QObject):
             self.imgsToProjWarning.emit()
         else:
             self.set_project(dirpath)
-        return dir_type
+            return dirpath
 
-    @pyqtSlot(QUrl)
+    @pyqtSlot(QUrl, result=str)
     def new_project(self, src_imgdir):
         '''
         create new project directory from src image directory to dst
@@ -101,6 +101,8 @@ class MainWindow(QObject):
 
         new_projdir = state.new_project(imgdir, projdir)
         self.set_project(new_projdir)
+
+        return new_projdir
 
     #---------------------------------------------------
     @pyqtSlot()

@@ -77,7 +77,10 @@ ApplicationWindow {
         text: main.config(objectName)["text"]
         standardButtons: StandardButton.Yes | StandardButton.No 
         onYes: {
-            main.new_project(projectOpenDialog.fileUrl)
+            const projdir = main.new_project(projectOpenDialog.fileUrl);
+            if(projdir){
+                console.log(projdir)
+            }
         }
     }
     Connections {
@@ -134,7 +137,10 @@ ApplicationWindow {
         selectFolder: true
         title: main.config(objectName)["title"]
         onAccepted: {
-            main.open_project(projectOpenDialog.fileUrl)
+            const projdir = main.open_project(fileUrl)
+            if(projdir){
+                console.log(projdir)
+            }
         }
     }
 

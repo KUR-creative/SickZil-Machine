@@ -233,7 +233,6 @@ ApplicationWindow {
                 onClicked: rmTxtAllDialog.open()
             }
             //---------------------------------------------
-            //Rectangle { x: 0; width: 0; height: h_all; color:"transparent"}
             Rectangle { Layout.leftMargin: 3.5; width: 2; height: h_all+2; color:"gray"}
             //---------------------------------------------
             // 'single image' tools
@@ -357,6 +356,29 @@ ApplicationWindow {
                     //window.set_tool(window.panning)
                 }
             }
+
+            //---------------------------------------------
+            Rectangle { Layout.leftMargin: 3.5; width: 2; height: h_all+2; color:"gray"}
+            //---------------------------------------------
+            ToolButton {
+                Image {
+                    source: "../resource/restore_btn.png"
+                    x :     x_all; y:      y_all
+                    width: w_all; height: h_all
+                }
+                Layout.preferredHeight: w_icon
+                Layout.preferredWidth:  h_icon
+                onClicked: restorePrevImgDialog.open();
+                MessageDialog {
+                    id: restorePrevImgDialog
+                    title: "Restore Previously Saved Image"
+                    text: "WARNING: Current image will be overwritten!\n"
+                        + "Do you want to restore previous image anyway?"
+                    standardButtons: StandardButton.Yes | StandardButton.No 
+                    onYes: main.restore_prev_image();
+                }
+            }
+
 
             //-------------------------------------------------------------
             Connections {

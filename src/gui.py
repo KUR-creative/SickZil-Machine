@@ -28,6 +28,10 @@ class ImageProvider(QQuickImageProvider):
         return img, img.size()
 
 class MainWindow(QObject):
+    @pyqtSlot(str, result=QVariant)
+    def config(self, key):
+        return consts.config[key]
+
     warning     = pyqtSignal(str, arguments=['msg'])
     imgsToProjWarning = pyqtSignal()
     initialize  = pyqtSignal()

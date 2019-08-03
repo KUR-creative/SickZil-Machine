@@ -19,7 +19,7 @@ import QtQuick.Window 2.2
 
 ApplicationWindow {
     id: window
-    title: "SickZil-Machine 0.1.0"
+    title: main.config("program_name") + " " + main.config("version")
     visible: true
     width: 850; height: 750
     visibility: Window.Maximized
@@ -72,9 +72,9 @@ ApplicationWindow {
     }
     MessageDialog {
         id: imgsToProjWarnDialog
-        title: "Flat Image folder -> Manga Project folder"
-        text: "You have chosen a folder that contains some images.\n"
-            + 'Would you like to create a "Manga project folder" with these images?'
+        objectName: "imgsToProjWarnDialog"
+        title:main.config(objectName)["title"]
+        text: main.config(objectName)["text"]
         standardButtons: StandardButton.Yes | StandardButton.No 
         onYes: {
             main.new_project(projectOpenDialog.fileUrl)
@@ -96,12 +96,12 @@ ApplicationWindow {
                image.y < -image.height + 50 || // too small x,y
                image.x > image.width   - 50 ||
                image.y > image.height  - 50 ){ // too big x,y
-                // then revert dragged position
+                // then revert to dragged position
                 image.x = 0; image.y = 0
             }
         }
         onWarning: {
-            msgDialog.title = "project format error"
+            msgDialog.title = "project format error" // TODO: remove..
             msgDialog.text = msg;
             msgDialog.visible = true;
         }
@@ -130,23 +130,27 @@ ApplicationWindow {
     //=============================================================
     FileDialog {
         id: projectOpenDialog
+        objectName: "projectOpenDialog"
         selectFolder: true
-        title: "Select Manga Project Folder"
+        title: main.config(objectName)["title"]
         onAccepted: {
             main.open_project(projectOpenDialog.fileUrl)
         }
     }
 
     Action {
-        id: openProject
-        text: "Open Manga Project Folder" 
+        id: openProjectAction
+        objectName: "openProjectAction"
+        text: main.config(objectName)["text"]
         onTriggered: projectOpenDialog.open()
     }
 
     menuBar: MenuBar {
         Menu {
-            title: "&Open"
-            MenuItem { action: openProject }
+            id: openMenu
+            objectName: "openMenu"
+            title: main.config(objectName)["title"]
+            MenuItem { action: openProjectAction }
         }
     }
 
@@ -171,8 +175,13 @@ ApplicationWindow {
             //---------------------------------------------
             // 'ALL' tools
             ToolButton {
+                id: gen_mask_all
+                objectName: "gen_mask_all"
+                tooltip: "Generate Masks of all images" // TODO: remove
                 Image {
-                    source: "../resource/mask_all_btn.png"
+                    id: genMaskAllBtnImg
+                    objectName: "genMaskAllBtnImg"
+                    source: main.config(objectName)["source"]
                     x:     x_all; y:      y_all
                     width: w_all; height: h_all
                 }
@@ -181,10 +190,9 @@ ApplicationWindow {
                 onClicked: genMaskAllDialog.open()
                 MessageDialog {
                     id: genMaskAllDialog
-                    title: "Generate Mask All"
-                    text: "It can take a long time. Would you still like "
-                        + "to create a mask for all images?\n"
-                        + "NOTE: All previously saved masks will be OVERWRITTEN."
+                    objectName: "genMaskAllDialog"
+                    title:main.config(objectName)["title"]
+                    text: main.config(objectName)["text"]
                     standardButtons: StandardButton.Yes | StandardButton.No 
                     onYes: {
                         main.gen_mask_all() 
@@ -195,7 +203,9 @@ ApplicationWindow {
             ToolButton {
                 id: rmtxt_all_btn
                 Image {
-                    source: "../resource/rmtxt_all_btn.png"
+                    id: rmTxtAllBtnImg
+                    objectName: "rmTxtAllBtnImg"
+                    source: main.config(objectName)["source"]
                     x:     x_all; y:      y_all
                     width: w_all; height: h_all
                 }
@@ -204,9 +214,9 @@ ApplicationWindow {
                 onClicked: rmTxtAllDialog.open()
                 MessageDialog {
                     id: rmTxtAllDialog
-                    title: "Remove Text All"
-                    text: "It can take a long time. Do you still want "
-                        + "to remove the text of all images?"
+                    objectName: "rmTxtAllDialog"
+                    title:main.config(objectName)["title"]
+                    text: main.config(objectName)["text"]
                     standardButtons: StandardButton.Yes | StandardButton.No 
                     onYes: {
                         main.rm_txt_all() 
@@ -220,7 +230,9 @@ ApplicationWindow {
             // 'single image' tools
             ToolButton {
                 Image {
-                    source: "../resource/mask_btn.png"
+                    id: genMaskBtnImg
+                    objectName: "genMaskBtnImg"
+                    source: main.config(objectName)["source"]
                     x:     x_one; y:      y_one
                     width: w_one; height: h_one
                 }
@@ -237,9 +249,9 @@ ApplicationWindow {
                 }
                 MessageDialog {
                     id: genMaskDialog
-                    title: "Generate Mask"
-                    text: "WARNING: Edited mask will be overwritten!\n"
-                        + "Do you want to generate mask anyway?"
+                    objectName: "genMaskDialog"
+                    title: main.config(objectName)["title"]
+                    text: main.config(objectName)["text"]
                     standardButtons: StandardButton.Yes | StandardButton.No 
                     onYes: {
                         main.gen_mask()
@@ -251,7 +263,9 @@ ApplicationWindow {
             ToolButton {
                 id: rm_txt_btn
                 Image {
-                    source: "../resource/rmtxt_btn.png"
+                    id: rmTxtBtnImg
+                    objectName: "rmTxtBtnImg"
+                    source: main.config(objectName)["source"]
                     x:     x_one; y:      y_one
                     width: w_one; height: h_one
                 }
@@ -267,9 +281,10 @@ ApplicationWindow {
             ToolButton {
                 Image {
                     id: mask_toggle_btn
+                    objectName: "mask_toggle_btn"
                     property bool mask_on: true
-                    readonly property string on_img:  "../resource/mask_on.png"
-                    readonly property string off_img: "../resource/mask_off.png"
+                    readonly property string on_img:  main.config(objectName)["on_img"]
+                    readonly property string off_img: main.config(objectName)["off_img"]
                     source: mask_toggle_btn.on_img
                     x:     x_all; y:      y_all
                     width: w_all; height: h_all
@@ -283,8 +298,9 @@ ApplicationWindow {
             ToolButton {
                 Image {
                     id: pen_toggle_btn
-                    readonly property string pen: "../resource/pen.png"
-                    readonly property string eraser: "../resource/eraser.png"
+                    objectName: "pen_toggle_btn"
+                    readonly property string pen:    main.config(objectName)["pen"]
+                    readonly property string eraser: main.config(objectName)["eraser"]
                     source: pen
                     x:     x_all; y:      y_all
                     width: w_all; height: h_all
@@ -303,8 +319,9 @@ ApplicationWindow {
             ToolButton {
                 Image {
                     id: pen_tool
-                    readonly property string pen_on:  "../resource/tools/pen_tool_on.png"
-                    readonly property string pen_off: "../resource/tools/pen_tool_off.png"
+                    objectName: "pen_tool"
+                    readonly property string pen_on:  main.config(objectName)["pen_on"]
+                    readonly property string pen_off: main.config(objectName)["pen_off"]
                     source: pen_on 
                     x:     x_all; y:      y_all
                     width: w_all; height: h_all
@@ -320,8 +337,9 @@ ApplicationWindow {
             ToolButton {
                 Image {
                     id: rect_tool
-                    readonly property string rect_on:  "../resource/tools/rect_tool_on.png"
-                    readonly property string rect_off: "../resource/tools/rect_tool_off.png"
+                    objectName: "rect_tool"
+                    readonly property string rect_on:  main.config(objectName)["rect_on"]
+                    readonly property string rect_off: main.config(objectName)["rect_off"]
                     source: rect_off
                     x:     x_all; y:      y_all
                     width: w_all; height: h_all
@@ -337,8 +355,9 @@ ApplicationWindow {
             ToolButton {
                 Image {
                     id: panning_tool
-                    readonly property string panning_on:  "../resource/tools/panning_on.png"
-                    readonly property string panning_off: "../resource/tools/panning_off.png"
+                    objectName: "panning_tool"
+                    readonly property string panning_on:  main.config(objectName)["panning_on"]
+                    readonly property string panning_off: main.config(objectName)["panning_off"]
                     source: panning_off
                     x:     x_all; y:      y_all
                     width: w_all; height: h_all
@@ -357,7 +376,9 @@ ApplicationWindow {
             //---------------------------------------------
             ToolButton {
                 Image {
-                    source: "../resource/restore_btn.png"
+                    id: restoreBtnImg
+                    objectName: "restoreBtnImg"
+                    source: main.config(objectName)["source"]
                     x :     x_all; y:      y_all
                     width: w_all; height: h_all
                 }
@@ -366,9 +387,9 @@ ApplicationWindow {
                 onClicked: restorePrevImgDialog.open();
                 MessageDialog {
                     id: restorePrevImgDialog
-                    title: "Restore Previously Saved Image"
-                    text: "WARNING: Current image will be overwritten!\n"
-                        + "Do you want to restore previous image anyway?"
+                    objectName: "restorePrevImgDialog"
+                    title:main.config(objectName)["title"]
+                    text: main.config(objectName)["text"]
                     standardButtons: StandardButton.Yes | StandardButton.No 
                     onYes: main.restore_prev_image();
                 }
@@ -447,7 +468,7 @@ ApplicationWindow {
         //-------------------------------------------------------------
         ScrollView {
             id: drawboard
-            objectName: "view"
+            objectName: "drawboard"
             Layout.fillWidth: true
             Layout.fillHeight: true
 
@@ -470,7 +491,7 @@ ApplicationWindow {
             Image { 
                 id: image
                 objectName: "image"
-                source: "../resource/startup.png"
+                source: main.config(objectName)["source"]
 
                 Rectangle { // for drag.target hack
                     id: invisible_target

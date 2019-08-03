@@ -1,3 +1,68 @@
 {
-    "startup_image": "../resource/startup.png"
+    "program_name": "SickZil-Machine",
+    "version": "0.1.0", 
+    "language": "English",
+    "startup_image": "../resource/startup.png",
+
+    "imgsToProjWarnDialog": {
+        "title": "Flat Image folder -> Manga Project folder",
+        "text": "You have chosen a folder that contains some images.\nWould you like to create a \"Manga project folder\" with these images?" },
+
+    "projectOpenDialog": {
+        "title": "Select Manga Project Folder" },
+    "openProjectAction": {
+        "text": "Open Manga Project Folder" },
+    "openMenu": {
+        "title": "Open" },
+
+    "gen_mask_all": { },
+    "genMaskAllBtnImg": {
+        "source": "../resource/mask_all_btn.png" },
+    "genMaskAllDialog": {
+        "title": "Generate Mask All",
+        "text": "It can take a long time. Would you still like to create a mask for all images?\nNOTE: All previously saved masks will be OVERWRITTEN." },
+
+    "rmTxtAllBtnImg": {
+        "source": "../resource/rmtxt_all_btn.png" },
+    "rmTxtAllDialog": {
+        "title": "Remove Text All",
+        "text": "It can take a long time. Do you still want to remove the text of all images?" },
+
+    "genMaskBtnImg": {
+        "source": "../resource/mask_btn.png" },
+    "genMaskDialog": {
+        "title": "Generate Mask",
+        "text": "WARNING: Edited mask will be overwritten!\nDo you want to generate mask anyway?" },
+
+    "rmTxtBtnImg": {
+        "source": "../resource/rmtxt_btn.png" },
+    
+    "mask_toggle_btn": {
+        "on_img":  "../resource/mask_on.png",
+        "off_img": "../resource/mask_off.png" },
+
+    "pen_toggle_btn": {
+        "pen": "../resource/pen.png",
+        "eraser": "../resource/eraser.png" },
+
+    "pen_tool": {
+        "pen_on":  "../resource/tools/pen_tool_on.png",
+        "pen_off": "../resource/tools/pen_tool_off.png" },
+
+    "rect_tool": {
+        "rect_on":  "../resource/tools/rect_tool_on.png",
+        "rect_off": "../resource/tools/rect_tool_off.png" },
+
+    "panning_tool": {
+        "panning_on":  "../resource/tools/panning_on.png",
+        "panning_off": "../resource/tools/panning_off.png" },
+
+    "restoreBtnImg": {
+        "source": "../resource/restore_btn.png" },
+    "restorePrevImgDialog": {
+        "title": "Restore Previously Saved Image",
+        "text": "WARNING: Current image will be overwritten!\nDo you want to restore previous image anyway?" },
+
+    "image": {
+        "source": "../resource/startup.png" }
 }

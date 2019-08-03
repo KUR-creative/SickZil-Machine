@@ -148,7 +148,7 @@ ApplicationWindow {
 
     MessageDialog {
         id: genMaskDialog
-        title: "Remove Text All"
+        title: "Generate Mask"
         text: "WARNING: Edited mask will be overwritten!\n"
             + "Do you want to generate mask anyway?"
         standardButtons: StandardButton.Yes | StandardButton.No 
@@ -174,7 +174,7 @@ ApplicationWindow {
 
     MessageDialog {
         id: rmTxtAllDialog
-        title: "Generate Mask"
+        title: "Remove Text All"
         text: "It can take a long time. Do you still want "
             + "to remove the text of all images?"
         standardButtons: StandardButton.Yes | StandardButton.No 

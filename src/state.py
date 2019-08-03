@@ -98,11 +98,16 @@ def prev():
     cursor(_cursor - 1)
 
 #-----------------------------------------------
+# NOTE: if project structure changed in future,
+# maybe need some X_X_X version directory type
+# for backward compatibility.
 def dir_type(dirpath):
     parent = Path(dirpath)
 
     prjdir = ((parent / config.IMGDIR).exists()
-          and (parent / config.MASKDIR).exists())
+          and (parent / config.MASKDIR).exists()
+          and (parent / config.PREV_IMGDIR).exists()
+          and (parent / config.PREV_MASKDIR).exists())
     imgdir = any(fp.map(
         iu.is_img_file, fu.children(parent)
     ))

@@ -46,11 +46,14 @@ def test_dir_type():
     nowhere_dir = 'nowhere'
     flat_imgdir = str(Path('fixture/prj_3file_I', config.IMGDIR)) 
     project_dir = 'fixture/prj_3file_I/'
+    not_proj_no_prevs = 'fixture/not_proj_cuz_no_prevs/'
 
     assert state.dir_type(nowhere_dir) == config.UNSUPPORT_DIR
     assert state.dir_type(unsupport_dir) == config.UNSUPPORT_DIR
     assert state.dir_type(flat_imgdir) == config.FLAT_IMGDIR
     assert state.dir_type(project_dir) == config.PRJDIR
+    # NOTE: version 0.1.0
+    assert state.dir_type(not_proj_no_prevs) == config.UNSUPPORT_DIR
 
 def test_img_mask_pairs():
     state.set_project('fixture/prj_3file_I/')

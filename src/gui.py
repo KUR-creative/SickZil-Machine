@@ -204,6 +204,7 @@ class MainWindow(QObject):
     #---------------------------------------------------
     @pyqtSlot()
     def restore_prev_image(self):
+        if state.now_image() is None: return None
         # TODO: It's definitely not gui functionality. 
         #       but.. where to place this function? tool.py?
         import shutil

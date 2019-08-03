@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import QFileDialog
 import utils.fp as fp
 from ImListModel import ImListModel
 import imgio as io
-import config
+import consts
 import state
 import core
 from pathlib import Path
@@ -40,7 +40,7 @@ class MainWindow(QObject):
 
         self.im_model = ImListModel()
         engine.rootContext().setContextProperty(
-            config.MAIN_CONTEXT_NAME, self)
+            consts.MAIN_CONTEXT_NAME, self)
         engine.rootContext().setContextProperty(
             'ImModel', self.im_model)
         engine.addImageProvider(
@@ -48,7 +48,7 @@ class MainWindow(QObject):
         engine.addImageProvider(
             'maskProvider', ImageProvider())
 
-        engine.load(config.MAIN_QML)
+        engine.load(consts.MAIN_QML)
         self.window = engine.rootObjects()[0]
 
     def update_gui(self):
@@ -69,10 +69,10 @@ class MainWindow(QObject):
         dirpath = dir_url.toLocalFile()
 
         dir_type = state.dir_type(dirpath)
-        if dir_type == config.UNSUPPORT_DIR: 
+        if dir_type == consts.UNSUPPORT_DIR: 
             self.warning.emit(
-                config.WARN_MSGS[config.UNSUPPORT_DIR])
-        elif dir_type == config.FLAT_IMGDIR:
+                consts.WARN_MSGS[consts.UNSUPPORT_DIR])
+        elif dir_type == consts.FLAT_IMGDIR:
             self.imgsToProjWarning.emit()
         else:
             self.set_project(dirpath)
@@ -86,7 +86,7 @@ class MainWindow(QObject):
         imgdir = src_imgdir.toLocalFile()
         p = Path(imgdir)
         default_projdir = str(
-            p.with_name( config.default_proj_name(p.name) )
+            p.with_name( consts.default_proj_name(p.name) )
         )
 
         projdir,_ = QFileDialog.getSaveFileName(

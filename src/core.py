@@ -1,6 +1,6 @@
 import os
-import config
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = config.TF_CPP_MIN_LOG_LEVEL
+import consts
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = consts.TF_CPP_MIN_LOG_LEVEL
 # NOTE: above only work before tf was imported.
 import tensorflow as tf
 import numpy as np
@@ -15,10 +15,10 @@ def load_model(mpath, version):
         graph_def.ParseFromString(f.read())
         tf.import_graph_def(
             graph_def, 
-            name = config.model_name(mpath, version)
+            name = consts.model_name(mpath, version)
         )
-load_model(config.SNETPATH, '0.1.0')
-load_model(config.CNETPATH, '0.1.0')
+load_model(consts.SNETPATH, '0.1.0')
+load_model(consts.CNETPATH, '0.1.0')
 
 #----------------------------------------------------------------
 def segment_or_oom(segnet, inp, modulo=16):
@@ -85,8 +85,8 @@ def segmap(image):
         return iu.decategorize(mask, iu.rgb2wk_map)
 
     with tf.Session() as sess:
-        snet_in  = config.snet_in('0.1.0', sess)
-        snet_out = config.snet_out('0.1.0', sess)
+        snet_in  = consts.snet_in('0.1.0', sess)
+        snet_out = consts.snet_out('0.1.0', sess)
         def snet(img): 
             return sess.run(snet_out, feed_dict={snet_in:img})
 
@@ -165,8 +165,8 @@ def inpainted(image, segmap):
     assert (255 >= image).all(), image.max()
     assert   (image >= 0).all(), image.min()
     with tf.Session() as sess:
-        cnet_in  = config.cnet_in('0.1.0',sess)
-        cnet_out = config.cnet_out('0.1.0',sess)
+        cnet_in  = consts.cnet_in('0.1.0',sess)
+        cnet_out = consts.cnet_out('0.1.0',sess)
         return inpaint(
             lambda img:sess.run(
                 cnet_out, feed_dict={cnet_in:img}

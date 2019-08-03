@@ -14,7 +14,7 @@ import utils.fp as fp
 import utils.futils as fu
 import gui
 import state
-import config
+import consts
 import core
 import imgio as io
 
@@ -36,35 +36,35 @@ def test_open_project_with_prj3file_then_open_folder(clear_state):
     def fpath(*ps): return str(Path(*ps))
     expected_imgs = tuple(fp.map(
         os.path.abspath,
-        (fpath('fixture/prj_3file_I',config.IMGDIR,'1'), 
-         fpath('fixture/prj_3file_I',config.IMGDIR,'2.png'), 
-         fpath('fixture/prj_3file_I',config.IMGDIR,'3.jpg'))
+        (fpath('fixture/prj_3file_I',consts.IMGDIR,'1'), 
+         fpath('fixture/prj_3file_I',consts.IMGDIR,'2.png'), 
+         fpath('fixture/prj_3file_I',consts.IMGDIR,'3.jpg'))
     ))
     expected_masks = tuple(fp.map(
         os.path.abspath,
-        (fpath('fixture/prj_3file_I',config.MASKDIR,'1.png'), 
-         fpath('fixture/prj_3file_I',config.MASKDIR,'2.png'), 
-         fpath('fixture/prj_3file_I',config.MASKDIR,'3.png'))
+        (fpath('fixture/prj_3file_I',consts.MASKDIR,'1.png'), 
+         fpath('fixture/prj_3file_I',consts.MASKDIR,'2.png'), 
+         fpath('fixture/prj_3file_I',consts.MASKDIR,'3.png'))
     ))
 
     assert state.project() == (expected_imgs,expected_masks)
-    assert dir_type == config.PRJDIR
+    assert dir_type == consts.PRJDIR
 
 def test_open_project_not_prjdir_nor_imgdir_then_no_state_change(clear_state):
     dir_type = main_window.open_project(QUrl(
         'file://' + os.path.abspath('./fixture')
     ))
     assert state.project() == ((),())
-    assert dir_type == config.UNSUPPORT_DIR
+    assert dir_type == consts.UNSUPPORT_DIR
 
 def test_open_project_is_flat_imgdir_then_no_state_change(clear_state):
-    flat_imgdir = str(Path('fixture/prj_3file_I', config.IMGDIR)) 
+    flat_imgdir = str(Path('fixture/prj_3file_I', consts.IMGDIR)) 
     dir_type = main_window.open_project(QUrl(
         'file://' + os.path.abspath(flat_imgdir)
     ))
 
     assert state.project() == ((),())
-    assert dir_type == config.FLAT_IMGDIR
+    assert dir_type == consts.FLAT_IMGDIR
 
 def test_gen_mask():
     main_window.open_project(QUrl(

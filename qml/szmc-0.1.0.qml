@@ -67,6 +67,22 @@ ApplicationWindow {
     }
 
     //-------------------------------------------------------------
+    MessageDialog {
+        id: msgDialog
+    }
+    MessageDialog {
+        id: imgsToProjWarnDialog
+        title: "Flat Image folder -> Manga Project folder"
+        text: "You have chosen a folder that contains some images.\n"
+            + 'Would you like to create a "Manga project folder" with these images?'
+        standardButtons: StandardButton.Yes | StandardButton.No 
+        onYes: {
+            main.new_project(projectOpenDialog.fileUrl)
+        }
+        onNo: {
+            console.log("Nope")
+        }
+    }
     Connections {
         target: main
         onInitialize: {
@@ -93,7 +109,9 @@ ApplicationWindow {
             msgDialog.visible = true;
         }
 
-        onImgsToProjWarning: { imgsToProjWarnDialog.open() }
+        onImgsToProjWarning: { 
+            imgsToProjWarnDialog.open()
+        }
 
         onProvideMask: {
             window.state = window.load_mask
@@ -113,10 +131,6 @@ ApplicationWindow {
     }
 
     //=============================================================
-    MessageDialog {
-        id: msgDialog
-    }
-
     FileDialog {
         id: projectOpenDialog
         selectFolder: true
@@ -126,62 +140,10 @@ ApplicationWindow {
         }
     }
 
-    MessageDialog {
-        id: imgsToProjWarnDialog
-        title: "Flat Image folder -> Manga Project folder"
-        text: "You have chosen a folder that contains some images.\n"
-            + 'Would you like to create a "Manga project folder" with these images?'
-        standardButtons: StandardButton.Yes | StandardButton.No 
-        onYes: {
-            main.new_project(projectOpenDialog.fileUrl)
-        }
-        onNo: {
-            console.log("Nope")
-        }
-    }
-
     Action {
         id: openProject
         text: "Open Manga Project Folder" 
         onTriggered: projectOpenDialog.open()
-    }
-
-    MessageDialog {
-        id: genMaskDialog
-        title: "Generate Mask"
-        text: "WARNING: Edited mask will be overwritten!\n"
-            + "Do you want to generate mask anyway?"
-        standardButtons: StandardButton.Yes | StandardButton.No 
-        onYes: {
-            main.gen_mask()
-            mask.is_dirty = true
-            set_visibility(mask, true)
-        }
-    }
-
-    MessageDialog {
-        id: genMaskAllDialog
-        title: "Generate Mask All"
-        text: "It can take a long time. Would you still like "
-            + "to create a mask for all images?\n"
-            + "NOTE: All previously saved masks will be OVERWRITTEN."
-        standardButtons: StandardButton.Yes | StandardButton.No 
-        onYes: {
-            main.gen_mask_all() 
-            set_visibility(mask, true)
-        }
-    }
-
-    MessageDialog {
-        id: rmTxtAllDialog
-        title: "Remove Text All"
-        text: "It can take a long time. Do you still want "
-            + "to remove the text of all images?"
-        standardButtons: StandardButton.Yes | StandardButton.No 
-        onYes: {
-            main.rm_txt_all() 
-            set_visibility(mask, false) // TODO: don't do it in startup page.
-        }
     }
 
     menuBar: MenuBar {
@@ -220,6 +182,18 @@ ApplicationWindow {
                 Layout.preferredHeight: w_icon
                 Layout.preferredWidth:  h_icon
                 onClicked: genMaskAllDialog.open()
+                MessageDialog {
+                    id: genMaskAllDialog
+                    title: "Generate Mask All"
+                    text: "It can take a long time. Would you still like "
+                        + "to create a mask for all images?\n"
+                        + "NOTE: All previously saved masks will be OVERWRITTEN."
+                    standardButtons: StandardButton.Yes | StandardButton.No 
+                    onYes: {
+                        main.gen_mask_all() 
+                        set_visibility(mask, true)
+                    }
+                }
             }
             ToolButton {
                 id: rmtxt_all_btn
@@ -231,6 +205,17 @@ ApplicationWindow {
                 Layout.preferredHeight: w_icon
                 Layout.preferredWidth:  h_icon
                 onClicked: rmTxtAllDialog.open()
+                MessageDialog {
+                    id: rmTxtAllDialog
+                    title: "Remove Text All"
+                    text: "It can take a long time. Do you still want "
+                        + "to remove the text of all images?"
+                    standardButtons: StandardButton.Yes | StandardButton.No 
+                    onYes: {
+                        main.rm_txt_all() 
+                        set_visibility(mask, false) // TODO: don't do it in startup page.
+                    }
+                }
             }
             //---------------------------------------------
             Rectangle { Layout.leftMargin: 3.5; width: 2; height: h_all+2; color:"gray"}
@@ -248,6 +233,18 @@ ApplicationWindow {
                     if(mask.is_dirty){
                         genMaskDialog.open()
                     }else{
+                        main.gen_mask()
+                        mask.is_dirty = true
+                        set_visibility(mask, true)
+                    }
+                }
+                MessageDialog {
+                    id: genMaskDialog
+                    title: "Generate Mask"
+                    text: "WARNING: Edited mask will be overwritten!\n"
+                        + "Do you want to generate mask anyway?"
+                    standardButtons: StandardButton.Yes | StandardButton.No 
+                    onYes: {
                         main.gen_mask()
                         mask.is_dirty = true
                         set_visibility(mask, true)

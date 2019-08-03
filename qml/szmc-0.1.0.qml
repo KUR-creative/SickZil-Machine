@@ -252,6 +252,7 @@ ApplicationWindow {
                 }
             }
             ToolButton {
+                id: rm_txt_btn
                 Image {
                     source: "../resource/rmtxt_btn.png"
                     x:     x_one; y:      y_one
@@ -424,6 +425,8 @@ ApplicationWindow {
                 if (! down_pressed) { main.display_next(); }
                 down_pressed = true;
             }
+            // gen_mask / rm_txt shortcuts
+            else if(event.key == Qt.Key_Return) { rm_txt_btn.clicked() }
             // drawboard keys
             else if(event.key == Qt.Key_Plus || // Equal for convinience
                     event.key == Qt.Key_Equal) { drawboard.inc_radius() }

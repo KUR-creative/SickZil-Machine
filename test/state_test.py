@@ -17,6 +17,9 @@ def test_new_project(tmpdir):
         .issuperset(set(os.listdir(tmpdir / 'images')))
     )
 
+    assert(set(os.listdir(tmpdir / 'images'))
+        == set(os.listdir(tmpdir / 'prev_images')))
+
 def test_set_project():
     state.set_project('fixture/prj_3file_I/')
     def fpath(*ps): return str(Path(*ps))

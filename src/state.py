@@ -50,11 +50,10 @@ def new_project(imgdir, projdir):
     Path(projdir, config.PREV_IMGDIR).mkdir(parents=True, exist_ok=True)
     Path(projdir, config.PREV_MASKDIR).mkdir(parents=True, exist_ok=True)
     # copy imgs
-    imgs_dirpath = Path(projdir, config.IMGDIR)
-    imgpaths = filter(
-        iu.is_img_file, fu.children(imgdir))
+    imgpaths = filter(iu.is_img_file, fu.children(imgdir))
     for imgpath in imgpaths:
-        shutil.copy(str(imgpath), str(imgs_dirpath))
+        shutil.copy( str(imgpath), Path(projdir, config.IMGDIR))
+        shutil.copy( str(imgpath), Path(projdir, config.PREV_IMGDIR))
     return projdir
 
 def set_project(prj_dirpath):

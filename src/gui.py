@@ -69,7 +69,6 @@ class MainWindow(QObject):
         dirpath = dir_url.toLocalFile()
 
         dir_type = state.dir_type(dirpath)
-        print(dir_type)
         if dir_type == config.UNSUPPORT_DIR: 
             self.warning.emit(
                 config.WARN_MSGS[config.UNSUPPORT_DIR])
@@ -200,4 +199,15 @@ class MainWindow(QObject):
 
         for ipath,inpainted in zip(img_paths,inpainteds):
             io.save(ipath, inpainted) 
+        self.update_gui()
+
+    #---------------------------------------------------
+    @pyqtSlot()
+    def restore_prev_image(self):
+        # TODO: It's definitely not gui functionality. 
+        #       but.. where to place this function? tool.py?
+        import shutil
+        shutil.copy(
+            state.prev_image(), state.now_image()
+        )
         self.update_gui()

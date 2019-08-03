@@ -7,11 +7,15 @@ import utils.fp as fp
 import config
 
 def test_new_project(tmpdir):
-    state.new_project(
-        'fixture/prj_3file_I/images', tmpdir)
+    imgdir = 'fixture/prj_3file_I/images'
+    state.new_project(imgdir, tmpdir)
+
     assert(set(os.listdir(tmpdir))
-        == set(['images','masks',
-                'prev_images','prev_masks']))
+        == set(['images','masks', 'prev_images','prev_masks']))
+    assert (
+        set(os.listdir(imgdir))
+        .issuperset(set(os.listdir(tmpdir / 'images')))
+    )
 
 def test_set_project():
     state.set_project('fixture/prj_3file_I/')

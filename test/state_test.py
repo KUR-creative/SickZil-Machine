@@ -6,6 +6,13 @@ import state
 import utils.fp as fp
 import config
 
+def test_new_project(tmpdir):
+    state.new_project(
+        'fixture/prj_3file_I/images', tmpdir)
+    assert(set(os.listdir(tmpdir))
+        == set(['images','masks',
+                'prev_images','prev_masks']))
+
 def test_set_project():
     state.set_project('fixture/prj_3file_I/')
     def fpath(*ps): return str(Path(*ps))

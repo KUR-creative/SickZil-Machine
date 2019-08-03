@@ -6,8 +6,8 @@ MAIN_QML = '../qml/szmc-0.1.0.qml'
 
 IMGDIR = 'images'
 MASKDIR = 'masks'
-ORIGIN_IMGDIR = 'origin_' + IMGDIR
-ORIGIN_MASKDIR = 'origin_' + MASKDIR
+PREV_IMGDIR = 'prev_' + IMGDIR
+PREV_MASKDIR = 'prev_' + MASKDIR
 
 # core config
 #TF_CPP_MIN_LOG_LEVEL = '1' #'3'

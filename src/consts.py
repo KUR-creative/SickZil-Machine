@@ -1,4 +1,10 @@
-STARTUP_IMAGE = '../resource/startup.png'
+# gui configs
+import json
+import utils.futils as fu
+
+config_fpath = '../resource/config.json'
+with open(config_fpath) as f:
+    config = json.load(f)
 
 ###### DO NOT CHANGE BELOW! ######
 MAIN_CONTEXT_NAME = 'main'

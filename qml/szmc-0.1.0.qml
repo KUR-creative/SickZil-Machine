@@ -22,7 +22,7 @@ ApplicationWindow {
     title: "SickZil-Machine 0.1.0"
     visible: true
     width: 850; height: 750
-    //visibility: Window.Maximized
+    visibility: Window.Maximized
 
     // STATES
     // NOTE: USE SETTERS! do not directly set state vars! 

@@ -100,9 +100,9 @@ class MainWindow(QObject):
         )
 
         new_projdir = state.new_project(imgdir, projdir)
-        self.set_project(new_projdir)
-
-        return new_projdir
+        if new_projdir:
+            self.set_project(new_projdir)
+            return new_projdir
 
     #---------------------------------------------------
     @pyqtSlot()

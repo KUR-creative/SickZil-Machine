@@ -1,7 +1,7 @@
 import os,sys
 sys.path.append( os.path.abspath('../src') )
 
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 import state
 import utils.fp as fp
 import consts
@@ -20,10 +20,11 @@ def test_new_project(tmpdir):
     assert(set(os.listdir(tmpdir / 'images'))
         == set(os.listdir(tmpdir / 'prev_images')))
 
+def fpath(*ps): return str(PurePosixPath(*ps))
+def fpath_real(*ps): return str(Path(*ps))
 def test_set_project():
     prjdir = 'fixture/prj_3file_I/'
     state.set_project(prjdir)
-    def fpath(*ps): return str(Path(*ps))
     assert state.img_paths  == (
         fpath(prjdir, consts.IMGDIR,'1'), 
         fpath(prjdir, consts.IMGDIR,'2.png'), 
@@ -35,14 +36,14 @@ def test_set_project():
         fpath(prjdir, consts.MASKDIR,'3.png')
     )
     assert state.prev_img_paths  == (
-        fpath(prjdir, consts.PREV_IMGDIR,'1'), 
-        fpath(prjdir, consts.PREV_IMGDIR,'2.png'), 
-        fpath(prjdir, consts.PREV_IMGDIR,'3.jpg')
+        fpath_real(prjdir, consts.PREV_IMGDIR,'1'), 
+        fpath_real(prjdir, consts.PREV_IMGDIR,'2.png'), 
+        fpath_real(prjdir, consts.PREV_IMGDIR,'3.jpg')
     )
     assert state.prev_mask_paths == (
-        fpath(prjdir, consts.PREV_MASKDIR,'1.png'), 
-        fpath(prjdir, consts.PREV_MASKDIR,'2.png'), 
-        fpath(prjdir, consts.PREV_MASKDIR,'3.png')
+        fpath_real(prjdir, consts.PREV_MASKDIR,'1.png'), 
+        fpath_real(prjdir, consts.PREV_MASKDIR,'2.png'), 
+        fpath_real(prjdir, consts.PREV_MASKDIR,'3.png')
     )
 
 
@@ -53,7 +54,6 @@ def test_clear_all():
     assert state.cursor() == 0
 
 def test_dir_type():
-    def fpath(*ps): return str(Path(*ps))
     unsupport_dir = 'fixture'
     nowhere_dir = 'nowhere'
     flat_imgdir = str(Path('fixture/prj_3file_I', consts.IMGDIR)) 
@@ -69,7 +69,6 @@ def test_dir_type():
 
 def test_img_mask_pairs():
     state.set_project('fixture/prj_3file_I/')
-    def fpath(*ps): return str(Path(*ps))
     img_masks = state.img_mask_pairs()
     expected_pairs = [
         (fpath('fixture/prj_3file_I',consts.IMGDIR,'1'),

@@ -2,6 +2,8 @@ SickZil-Machine
 ===============
 <sup>English | [한국어](#식질머신)</sup>
 
+![szmc-0.1.0](doc/szmc-0.1.0.gif)
+
 SickZil-Machine **automates texts removal** during manga/comics translation(Scanlation) process.
 
 ![SeisinkiVulnus_028](doc/1.jpg)
@@ -39,7 +41,8 @@ future works
 ========
 <sup>[English](#SickZil-Machine) | 한국어</sup>
 
-움짤 1 
+![szmc-0.1.0](doc/szmc-0.1.0.gif)
+
 
 식질머신은 식자 작업에서 **글자 제거 작업**을 **자동화**합니다.
 

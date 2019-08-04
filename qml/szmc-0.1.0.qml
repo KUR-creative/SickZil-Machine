@@ -34,6 +34,14 @@ ApplicationWindow {
         window.title = make_title(projdir)
     }
 
+    function note_for_users(projdir) {
+        msgDialog.title = "Note"
+        msgDialog.text = "Edited images are saved in ["+projdir+"/images]\n" 
+          + "You can edit masks in ["+projdir+"/masks] \nusing external tools.\n"
+          + "\n" + "Happy SickZil!"
+        msgDialog.visible = true;
+    }
+
     // STATES
     // NOTE: USE SETTERS! do not directly set state vars! 
     readonly property string start_up:  "start_up"
@@ -88,7 +96,10 @@ ApplicationWindow {
         standardButtons: StandardButton.Yes | StandardButton.No 
         onYes: {
             const projdir = main.new_project(projectOpenDialog.fileUrl);
-            if(projdir) { set_title_project(projdir) }
+            if(projdir) { 
+                set_title_project(projdir) 
+                note_for_users(projdir)
+            }
         }
     }
     Connections {
@@ -146,7 +157,10 @@ ApplicationWindow {
         title: main.config(objectName)["title"]
         onAccepted: {
             const projdir = main.open_project(fileUrl)
-            if(projdir) { set_title_project(projdir) }
+            if(projdir) { 
+                set_title_project(projdir) 
+                note_for_users(projdir)
+            }
         }
     }
 

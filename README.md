@@ -29,8 +29,8 @@ Of course, if you want, you can also specify text area you want to erase.
 
 Release
 -----
-Now I'm working on GUI.
-Version 0.1.0 coming soon! 
+**We released 0.1.0 pre-release version!** \
+You can download it [here](https://github.com/KUR-creative/SickZil-Machine/releases).
 
 future works
 -----
@@ -72,8 +72,8 @@ future works
 
 Release
 -----
-현재 GUI 작업을 진행 중입니다.
-0.1.0 버전이 곧 배포됩니다!
+**현재 0.1.0 pre-release 버전을 배포하고 있습니다!** \
+[여기](https://github.com/KUR-creative/SickZil-Machine/releases)서 다운로드할 수 있습니다.
 
 
 future works

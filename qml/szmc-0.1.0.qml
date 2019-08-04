@@ -36,8 +36,8 @@ ApplicationWindow {
 
     function note_for_users(projdir) {
         msgDialog.title = "Note"
-        msgDialog.text = "Edited images are saved in ["+projdir+"/images]\n" 
-          + "You can edit masks in ["+projdir+"/masks] \nusing external tools.\n"
+        msgDialog.text = "Edited images are saved \n in ["+projdir+"/images]\n\n" 
+          + "You can edit masks \n in ["+projdir+"/masks] \nusing external tools.\n"
           + "\n" + "Happy SickZil!"
         msgDialog.visible = true;
     }

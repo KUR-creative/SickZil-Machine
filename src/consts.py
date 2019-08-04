@@ -2,9 +2,11 @@
 import json
 import utils.futils as fu
 
-config_fpath = '../resource/config.json'
-with open(config_fpath) as f:
-    config = json.load(f)
+config = {}
+def load_config(config_fpath = '../resource/config.json'):
+    global config
+    with open(config_fpath) as f:
+        config = json.load(f)
 
 ###### DO NOT CHANGE BELOW! ######
 MAIN_CONTEXT_NAME = 'main'

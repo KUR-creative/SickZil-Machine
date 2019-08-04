@@ -9,8 +9,10 @@ import sys
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtQml import QQmlApplicationEngine
 import gui
+import consts
 
 if __name__ == '__main__':
+    consts.load_config('../resource/config.json')
     app = QApplication(sys.argv)
 
     engine = QQmlApplicationEngine()

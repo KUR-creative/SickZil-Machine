@@ -53,10 +53,10 @@ def segment(segnet, inp, modulo=16):
         result = segment_or_oom(segnet, inp, modulo)
         if result is None: # seg_limit: Ok but OOM occur!
             seg_limit = h*w
-            print('segmentation seg_limit =', seg_limit, 'updated!')
-    else:
-        print('segmentation seg_limit exceed! img_size =', 
-              h*w, '>', seg_limit, '= seg_limit')
+            #print('segmentation seg_limit =', seg_limit, 'updated!')
+    #else:
+        #print('segmentation seg_limit exceed! img_size =', 
+              #h*w, '>', seg_limit, '= seg_limit')
 
     if result is None: # exceed seg_limit or OOM
         if h > w:
@@ -67,7 +67,7 @@ def segment(segnet, inp, modulo=16):
             left  = segment(segnet, inp[:,:w//2], modulo)
             right = segment(segnet, inp[:,w//2:], modulo)
             return np.concatenate((left,right), axis=1)
-    print('segmented', result.shape)
+    #print('segmented', result.shape)
     return result # image segmented successfully!
 
 def segmap(image):
@@ -139,9 +139,9 @@ def inpaint(complnet, img, mask):
         result = inpaint_or_oom(complnet, img, mask)
         if result is None: # compl_limit: Ok but OOM occur!
             compl_limit = h*w
-    else:
-        print('compl_limit exceed! img_size =', 
-              h*w, '>', compl_limit, '= compl_limit')
+    #else:
+        #print('compl_limit exceed! img_size =', 
+              #h*w, '>', compl_limit, '= compl_limit')
 
     if result is None: # exceed compl_limit or OOM
         if h > w:
@@ -152,7 +152,7 @@ def inpaint(complnet, img, mask):
             left  = inpaint(complnet, img[:,:w//2], mask[:,:w//2])
             right = inpaint(complnet, img[:,w//2:], mask[:,w//2:])
             return np.concatenate((left,right), axis=1)
-    print('inpainted', result.shape)
+    #print('inpainted', result.shape)
     return result # image inpainted successfully!
 
 def inpainted(image, segmap):

@@ -1,3 +1,4 @@
+import imageio
 import utils.imutils as iu #TODO: make imutils minimal.
 import utils.fp as fp
 import numpy as np
@@ -44,4 +45,13 @@ def mask2segmap(mask):
     )
 
 def save(path, img): #TODO: multimethod..?
-    cv2.imwrite(path, img)
+    if len(img.shape) == 3:
+        n_channels = img.shape[-1]
+        if n_channels == 4:   # bgra -> rgba
+            rgb_img = cv2.cvtColor(img, cv2.COLOR_BGRA2RGBA)
+        elif n_channels == 3: # bgr -> rgb
+            rgb_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    elif len(img.shape) == 2: # bw = bw
+        rgb_img = img
+
+    imageio.imwrite(path, rgb_img)

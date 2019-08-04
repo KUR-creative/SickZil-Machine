@@ -58,7 +58,7 @@
         "off_img": "../resource/mask_off.png" },
 
     "toggleDrawEraseBtn": {
-        "tooltip": "[T]oggleDrawErase: click to switch draw/erase mask tools"},
+        "tooltip": "[T]oggleDrawErase: click to toggle draw/erase mask tools"},
     "pen_toggle_btn": {
         "pen": "../resource/pen.png",
         "eraser": "../resource/eraser.png" },

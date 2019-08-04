@@ -1,7 +1,7 @@
 import os,sys
 sys.path.append( os.path.abspath('../src') )
 
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 import shutil
 import pytest
 from PyQt5.QtWidgets import QApplication
@@ -15,6 +15,7 @@ import utils.futils as fu
 import gui
 import state
 import consts
+consts.load_config()
 import core
 import imgio as io
 
@@ -27,13 +28,24 @@ main_window = gui.MainWindow(
 def clear_state():
     state.clear_all()
 
+def fpath(*ps): 
+    return str(PurePosixPath(*ps))
+def open_project(prjdir):
+    abspath = os.path.abspath(prjdir)
+    main_window.open_project(QUrl(
+        'file://' + '/' + abspath.replace('\\','/') if '\\' in abspath
+        else 'file://' + abspath
+    ))
+
 #@pytest.mark.skip(reason="no way of currently testing this")
 def test_open_project_with_prj3file_then_open_folder(clear_state):
+    open_project('./fixture/prj_3file_I')
+    '''
     main_window.open_project(QUrl(
         'file://' + os.path.abspath('./fixture/prj_3file_I')
     ))
+    '''
 
-    def fpath(*ps): return str(Path(*ps))
     expected_imgs = tuple(fp.map(
         os.path.abspath,
         (fpath('fixture/prj_3file_I',consts.IMGDIR,'1'), 
@@ -50,24 +62,26 @@ def test_open_project_with_prj3file_then_open_folder(clear_state):
     assert state.project() == (expected_imgs,expected_masks)
 
 def test_open_project_not_prjdir_nor_imgdir_then_no_state_change(clear_state):
-    main_window.open_project(QUrl(
-        'file://' + os.path.abspath('./fixture')
-    ))
+    open_project('./fixture')
     assert state.project() == ((),())
 
 def test_open_project_is_flat_imgdir_then_no_state_change(clear_state):
-    flat_imgdir = str(Path('fixture/prj_3file_I', consts.IMGDIR)) 
+    '''
+    flat_imgdir = str(Path(, consts.IMGDIR)) 
     main_window.open_project(QUrl(
         'file://' + os.path.abspath(flat_imgdir)
     ))
-
+    '''
+    open_project('fixture/prj_3file_I/' + consts.IMGDIR)
     assert state.project() == ((),())
 
 def test_gen_mask():
+    '''
     main_window.open_project(QUrl(
         'file://' + os.path.abspath('./fixture/real_proj/')
     ))
-
+    '''
+    open_project('./fixture/real_proj/')
     expected = fp.go(
         './fixture/real_proj/images/bgr1.png',
         cv2.imread, core.segmap, io.segmap2mask
@@ -89,9 +103,12 @@ def test_no_img_then_nothing_happen_when_calling_rm_txt_all(clear_state):
     assert fp.is_empty( main_window.rm_txt_all() )
 
 def test_all_imgs_have_mask_then_rm_txt_all_just_load_masks(clear_state):
+    '''
     main_window.open_project(QUrl(
         'file://' + os.path.abspath('./fixture/all_have_masks/')
     ))
+    '''
+    open_project('./fixture/all_have_masks/')
     prev_masks = fp.lmap(cv2.imread, state.mask_paths)
     main_window.rm_txt_all()
 
@@ -101,9 +118,12 @@ def test_all_imgs_have_mask_then_rm_txt_all_just_load_masks(clear_state):
         assert np.array_equal(prev_mask,now_mask)
 
 def test_if_some_imgs_hasnt_mask_then_generate_mask_for_them_in_rm_txt_all(clear_state):
+    '''
     main_window.open_project(QUrl(
         'file://' + os.path.abspath('./fixture/some_hasnt_mask/')
     ))
+    '''
+    open_project('./fixture/some_hasnt_mask/')
     saved_mpaths = fp.lfilter( 
         lambda p: Path(p).exists(), state.mask_paths )
     main_window.rm_txt_all()

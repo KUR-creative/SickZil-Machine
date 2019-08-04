@@ -76,12 +76,14 @@ def set_project(prj_dirpath):
         fu.children, 
         fp.filter(iu.is_img_file),
         fu.human_sorted, 
+        fp.map(lambda pstr: pstr.replace('\\','/')),
         tuple
     )
     mask_paths = tuple(fp.map(
         fp.pipe(
             fu.replace1(consts.IMGDIR, consts.MASKDIR),
-            Path, lambda p:p.with_suffix('.png'), str 
+            Path, lambda p:p.with_suffix('.png'), str,
+            fp.map(lambda pstr: pstr.replace('\\','/'))
         ),
         img_paths
     ))

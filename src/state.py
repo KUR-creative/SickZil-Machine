@@ -4,7 +4,6 @@
 from pathlib import Path
 from collections import namedtuple
 import shutil
-import funcy as F
 
 import consts
 import utils.fp as fp
@@ -43,10 +42,10 @@ def project():
 
 def img_mask_pairs():
     global img_paths, mask_paths
-    return F.tap(tuple(fp.map(
+    return tuple(fp.map(
         namedtuple('PathPair', 'img mask'),
         img_paths, mask_paths
-    )))
+    ))
 
 #-----------------------------------------------
 def new_project(imgdir, projdir):

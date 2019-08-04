@@ -3,9 +3,9 @@ SickZil-Machine
 <sup>English | [한국어](#식질머신)</sup>
 
 ![szmc-0.1.0](doc/szmc-0.1.0.gif)
-
-SickZil-Machine **automates texts removal** during manga/comics translation(Scanlation) process.\
 <sup>(source: [manga109](http://www.manga109.org), © Kanno Hiroshi, © Okuda Momoko, © Kato Masaki)</sup>
+
+SickZil-Machine **automates texts removal** during manga/comics translation(Scanlation) process.
 </br></br>
   
 ![SeisinkiVulnus_028](doc/1.jpg)
@@ -48,9 +48,9 @@ future works
 <sup>[English](#SickZil-Machine) | 한국어</sup>
 
 ![szmc-0.1.0](doc/szmc-0.1.0.gif)
-
-식질머신은 식자 작업에서 **글자 제거 작업**을 **자동화**합니다.\
 <sup>(출처: [manga109](http://www.manga109.org), © Kanno Hiroshi, © Okuda Momoko, © Kato Masaki)</sup>
+
+식질머신은 식자 작업에서 **글자 제거 작업**을 **자동화**합니다.
 </br></br>
 
 ![SeisinkiVulnus_028](doc/1.jpg)

@@ -38,7 +38,7 @@ def mask2segmap(mask):
     '''
     return fp.go(
         mask,
-        lambda m4: np.sum(m4, axis=-1),
+        lambda m4: np.sum(m4[:,:,:3], axis=-1, dtype=np.uint8),
         lambda m1: np.expand_dims(m1, axis=-1),
         lambda m1: cv2.merge((m1,m1,m1))
     )

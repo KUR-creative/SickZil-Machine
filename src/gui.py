@@ -3,6 +3,7 @@ from PyQt5.QtQuick import QQuickImageProvider, QQuickItemGrabResult
 from PyQt5.QtCore import QVariant
 from PyQt5.QtWidgets import QFileDialog
 
+from tqdm import tqdm
 import utils.fp as fp
 from ImListModel import ImListModel
 import imgio as io
@@ -170,9 +171,11 @@ class MainWindow(QObject):
         '''
         if state.now_image() is None: return None
 
-        masks = fp.lmap(imgpath2mask, state.img_paths)
+        masks = fp.map(imgpath2mask, state.img_paths)
 
-        for path,mask in zip(state.mask_paths,masks):
+        for path,mask in tqdm(zip(state.mask_paths, masks),
+                              total=len(state.img_paths),
+                              desc='Generate Masks'):
             io.save(path, mask)
         self.update_gui()
 
@@ -195,7 +198,9 @@ class MainWindow(QObject):
             lambda p: imgpath2mask(p.img),
             no_mask_path_pairs
         )
-        for mask,pair in zip(new_masks,no_mask_path_pairs):
+        for mask,pair in tqdm(zip(new_masks, no_mask_path_pairs),
+                              total=len(no_mask_path_pairs),
+                              desc='Generate Masks'):
             io.save(pair.mask, mask)
 
         img_paths,mask_paths = state.project()
@@ -203,7 +208,9 @@ class MainWindow(QObject):
         masks = fp.map(lambda p: io.load(p, io.MASK), mask_paths)
         inpainteds = fp.map(core.inpainted, images,masks)
 
-        for ipath,inpainted in zip(img_paths,inpainteds):
+        for ipath,inpainted in tqdm(zip(img_paths, inpainteds),
+                                    total=len(img_paths),
+                                    desc='  Remove Texts'):
             io.save(ipath, inpainted) 
         self.update_gui()
 

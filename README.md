@@ -5,7 +5,8 @@ SickZil-Machine
 ![szmc-0.1.0](doc/szmc-0.1.0.gif)
 
 SickZil-Machine **automates texts removal** during manga/comics translation(Scanlation) process.
-
+</br></br>
+  
 ![SeisinkiVulnus_028](doc/1.jpg)
 
 ![LoveHina_vol14_003](doc/2.jpg)
@@ -36,6 +37,10 @@ future works
 - Open manga text segmentation mask dataset
 - Automate typesetting(calligraphy style learning)
 
+</br>
+</br>
+</br>
+</br>
 
 식질머신
 ========
@@ -43,8 +48,8 @@ future works
 
 ![szmc-0.1.0](doc/szmc-0.1.0.gif)
 
-
 식질머신은 식자 작업에서 **글자 제거 작업**을 **자동화**합니다.
+</br></br>
 
 ![SeisinkiVulnus_028](doc/1.jpg)
 

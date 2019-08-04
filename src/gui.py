@@ -94,9 +94,9 @@ class MainWindow(QObject):
         )
 
         projdir,_ = QFileDialog.getSaveFileName(
-            caption="Create New Manga Project Folder", 
+            caption=consts.config["new_project_dialog"]["caption"],
             directory=default_projdir,
-            filter="Directory"
+            filter=consts.config["new_project_dialog"]["filter"]
         )
 
         new_projdir = state.new_project(imgdir, projdir)

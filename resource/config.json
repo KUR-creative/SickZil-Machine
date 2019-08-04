@@ -7,6 +7,10 @@
     "imgsToProjWarnDialog": {
         "title": "Flat Image folder -> Manga Project folder",
         "text": "You have chosen a folder that contains some images.\nWould you like to create a \"Manga project folder\" with these images?" },
+    "new_project_dialog": {
+        "caption": "Create New Manga Project Folder", 
+        "filter": "Directory"
+    },
 
     "projectOpenDialog": {
         "title": "Select Manga Project Folder" },

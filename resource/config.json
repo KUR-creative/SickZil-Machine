@@ -31,7 +31,7 @@
         "text": "It can take a long time. Would you still like to create a mask for all images?\nNOTE: All previously saved masks will be OVERWRITTEN." },
 
     "rmtxt_all_btn": {
-        "tooltip": "RmTxtAll: Remove texts of all images\nIf there are saved masks, use them. If not, create them\nbefore removing texts."},
+        "tooltip": "RmTxtAll: Remove texts of all images\nIf there are saved masks, use them. If not, generate them\nbefore removing texts."},
     "rmTxtAllBtnImg": {
         "source": "../resource/rmtxt_all_btn.png" },
     "rmTxtAllDialog": {
@@ -47,7 +47,7 @@
         "text": "WARNING: Edited mask will be overwritten!\nDo you want to generate mask anyway?" },
 
     "rm_txt_btn": {
-        "tooltip": "RmTxt [Enter]: Remove text of the currently displayed image"},
+        "tooltip": "RmTxt [Enter]: Remove text of the currently displayed image\nIf there is saved mask, use it. If not, generate new mask\nbefore removing texts."},
     "rmTxtBtnImg": {
         "source": "../resource/rmtxt_btn.png" },
 
@@ -76,7 +76,7 @@
         "rect_off": "../resource/tools/rect_tool_off.png" },
 
     "panningToolBtn": {
-        "tooltip": "PanningTool: [MouseWheel] to move the canvase\nNote - button is not clickable(in this version)"},
+        "tooltip": "PanningTool: Hold [MouseWheel] and drag to move the canvas\nNote - button is not clickable(in this version)"},
     "panning_tool": {
         "panning_on":  "../resource/tools/panning_on.png",
         "panning_off": "../resource/tools/panning_off.png" },

@@ -4,6 +4,9 @@
     "language": "English",
     "startup_image": "../resource/startup.png",
 
+    "seg_limit": 4000000,
+    "compl_limit": 657666,
+
     "imgsToProjWarnDialog": {
         "title": "Flat Image folder -> Manga Project folder",
         "text": "You have chosen a folder that contains some images.\nWould you like to create a \"Manga project folder\" with these images?" },

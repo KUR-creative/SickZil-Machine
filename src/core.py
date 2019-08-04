@@ -7,6 +7,13 @@ import numpy as np
 import utils.imutils as iu
 import utils.fp as fp
 
+seg_limit = 4000000 # dev-machine: state, and init with user info...
+compl_limit = 657666 #  then.. what is the optimal size?
+def set_limits(slimit, climit):
+    global seg_limit, compl_limit
+    seg_limit = slimit # dev-machine: state, and init with user info...
+    compl_limit = climit #  then.. what is the optimal size?
+
 def load_model(mpath, version):
     #graph_def = tf.GraphDef()
     graph_def = tf.compat.v1.GraphDef()
@@ -42,7 +49,6 @@ def segment_or_oom(segnet, inp, modulo=16):
         return None
         '''
 
-seg_limit = 4000000 # dev-machine: state, and init with user info...
 def segment(segnet, inp, modulo=16):
     ''' oom-free segmentation '''
     global seg_limit
@@ -128,7 +134,6 @@ def inpaint_or_oom(complnet, image, segmap):
 #compl_limit = 1525920 # it didn't crash, but SLOWER! why..?
 #lab-machine #1525920
 #compl_limit = 9999999 # 
-compl_limit = 657666 #  then.. what is the optimal size?
 def inpaint(complnet, img, mask):
     ''' oom-free inpainting '''
     global compl_limit

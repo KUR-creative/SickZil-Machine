@@ -10,9 +10,15 @@ from PyQt5.QtWidgets import QApplication
 from PyQt5.QtQml import QQmlApplicationEngine
 import gui
 import consts
+import core
 
 if __name__ == '__main__':
     consts.load_config('../resource/config.json')
+    core.set_limits(
+        consts.config['seg_limit'],
+        consts.config['compl_limit']
+    )
+
     app = QApplication(sys.argv)
 
     engine = QQmlApplicationEngine()

@@ -17,7 +17,7 @@ All of the above images were edited automatically without human intervention.\
 
 How it works??
 -----
-fig2
+![szmc-structure-eng](doc/szmc-structure-eng.png)
 
 SickZil-Machine finds out the texts in manga/comics and erases it naturally to match the background.\
 **Both processes are completely automatic**, without any additional human intervention.\
@@ -59,10 +59,10 @@ future works
 위 이미지들은 모두 사람의 개입 없이 자동으로 편집되었습니다.\
 <sup>(출처: [manga109](http://www.manga109.org), © Shimazaki Yuzuru, © Akamatsu Ken, © Kobayashi Yuki)</sup>
 
-~어케했노
+~어케했누
 -----
 
-그림 2
+![szmc-structure-kor](doc/szmc-structure-kor.png)
 
 식질머신은 만화에서 텍스트를 찾아내고, 자연스럽게 지워냅니다.\
 두 과정 모두 사람의 개입 없이 **완전히 자동으로 진행**됩니다.\

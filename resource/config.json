@@ -15,48 +15,67 @@
     "openMenu": {
         "title": "Open" },
 
-    "gen_mask_all": { },
+    "gen_mask_all": { 
+        "tooltip": "GenMaskAll: Generate masks of all images\nCaution - Previously generated masks will be overwritten."},
     "genMaskAllBtnImg": {
         "source": "../resource/mask_all_btn.png" },
     "genMaskAllDialog": {
         "title": "Generate Mask All",
         "text": "It can take a long time. Would you still like to create a mask for all images?\nNOTE: All previously saved masks will be OVERWRITTEN." },
 
+    "rmtxt_all_btn": {
+        "tooltip": "RmTxtAll: Remove texts of all images\nIf there are saved masks, use them. If not, create them\nbefore removing texts."},
     "rmTxtAllBtnImg": {
         "source": "../resource/rmtxt_all_btn.png" },
     "rmTxtAllDialog": {
         "title": "Remove Text All",
         "text": "It can take a long time. Do you still want to remove the text of all images?" },
 
+    "genMaskBtn": {
+        "tooltip": "GenMask: Generate a mask of the currently displayed image"},
     "genMaskBtnImg": {
         "source": "../resource/mask_btn.png" },
     "genMaskDialog": {
         "title": "Generate Mask",
         "text": "WARNING: Edited mask will be overwritten!\nDo you want to generate mask anyway?" },
 
+    "rm_txt_btn": {
+        "tooltip": "RmTxt [Enter]: Remove text of the currently displayed image"},
     "rmTxtBtnImg": {
         "source": "../resource/rmtxt_btn.png" },
-    
+
+    "maskToggleBtn" : {
+        "tooltip": "ToggleMask [SpaceBar]: Click to show/hide masks"},
     "mask_toggle_btn": {
         "on_img":  "../resource/mask_on.png",
         "off_img": "../resource/mask_off.png" },
 
+    "toggleDrawEraseBtn": {
+        "tooltip": "[T]oggleDrawErase: Click to set whether tools draw/erase mask"},
     "pen_toggle_btn": {
         "pen": "../resource/pen.png",
         "eraser": "../resource/eraser.png" },
 
+    "penToolBtn": {
+        "tooltip": "Pe[N]Tool: Draw/Erase mask with current pen size\n[+,=] to increase pen size\n[-] to decrease pen size\n[Y] to change to the previous tool(Rect tool in this version)"},
     "pen_tool": {
         "pen_on":  "../resource/tools/pen_tool_on.png",
         "pen_off": "../resource/tools/pen_tool_off.png" },
 
+    "rectToolBtn": {
+        "tooltip": "[R]ectTool: Draw/Erase mask in rectangle\n[Y] to change to the previous tool(Pen tool in this version)" },
     "rect_tool": {
         "rect_on":  "../resource/tools/rect_tool_on.png",
         "rect_off": "../resource/tools/rect_tool_off.png" },
 
+    "panningToolBtn": {
+        "tooltip": "PanningTool: [MouseWheel] to move the canvase\nNote - button is not clickable(in this version)"},
     "panning_tool": {
         "panning_on":  "../resource/tools/panning_on.png",
         "panning_off": "../resource/tools/panning_off.png" },
 
+    "revertBtn": {
+        "tooltip": "RevertImage: Click to revert to unedited original image\nCaution - Current image will be overwritten"},
     "restoreBtnImg": {
         "source": "../resource/restore_btn.png" },
     "restorePrevImgDialog": {

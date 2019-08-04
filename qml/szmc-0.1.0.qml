@@ -188,7 +188,7 @@ ApplicationWindow {
             ToolButton {
                 id: gen_mask_all
                 objectName: "gen_mask_all"
-                tooltip: "Generate Masks of all images" // TODO: remove
+                tooltip: main.config(objectName)["tooltip"]
                 Image {
                     id: genMaskAllBtnImg
                     objectName: "genMaskAllBtnImg"
@@ -213,6 +213,8 @@ ApplicationWindow {
             }
             ToolButton {
                 id: rmtxt_all_btn
+                objectName: "rmtxt_all_btn"
+                tooltip: main.config(objectName)["tooltip"]
                 Image {
                     id: rmTxtAllBtnImg
                     objectName: "rmTxtAllBtnImg"
@@ -240,6 +242,9 @@ ApplicationWindow {
             //---------------------------------------------
             // 'single image' tools
             ToolButton {
+                id: genMaskBtn
+                objectName: "genMaskBtn"
+                tooltip: main.config(objectName)["tooltip"]
                 Image {
                     id: genMaskBtnImg
                     objectName: "genMaskBtnImg"
@@ -273,6 +278,8 @@ ApplicationWindow {
             }
             ToolButton {
                 id: rm_txt_btn
+                objectName: "rm_txt_btn"
+                tooltip: main.config(objectName)["tooltip"]
                 Image {
                     id: rmTxtBtnImg
                     objectName: "rmTxtBtnImg"
@@ -288,10 +295,13 @@ ApplicationWindow {
                     set_visibility(mask, false)
                 }
             }
-            // toggle buttons
+            // toggle buttons // TODO: change naming convention coherently
             ToolButton {
+                id: maskToggleBtn
+                objectName: "maskToggleBtn"
+                tooltip: main.config(objectName)["tooltip"]
                 Image {
-                    id: mask_toggle_btn
+                    id: mask_toggle_btn 
                     objectName: "mask_toggle_btn"
                     property bool mask_on: true
                     readonly property string on_img:  main.config(objectName)["on_img"]
@@ -307,6 +317,9 @@ ApplicationWindow {
                 }
             }
             ToolButton {
+                id: toggleDrawEraseBtn
+                objectName: "toggleDrawEraseBtn"
+                tooltip: main.config(objectName)["tooltip"]
                 Image {
                     id: pen_toggle_btn
                     objectName: "pen_toggle_btn"
@@ -328,6 +341,9 @@ ApplicationWindow {
             }
             // tools
             ToolButton {
+                id: penToolBtn
+                objectName: "penToolBtn"
+                tooltip: main.config(objectName)["tooltip"]
                 Image {
                     id: pen_tool
                     objectName: "pen_tool"
@@ -346,6 +362,9 @@ ApplicationWindow {
                 }
             }
             ToolButton {
+                id: rectToolBtn
+                objectName: "rectToolBtn"
+                tooltip: main.config(objectName)["tooltip"]
                 Image {
                     id: rect_tool
                     objectName: "rect_tool"
@@ -364,6 +383,9 @@ ApplicationWindow {
                 }
             }
             ToolButton {
+                id: panningToolBtn
+                objectName: "panningToolBtn"
+                tooltip: main.config(objectName)["tooltip"]
                 Image {
                     id: panning_tool
                     objectName: "panning_tool"
@@ -386,6 +408,9 @@ ApplicationWindow {
             Rectangle { Layout.leftMargin: 3.5; width: 2; height: h_all+2; color:"gray"}
             //---------------------------------------------
             ToolButton {
+                id: revertBtn
+                objectName: "revertBtn"
+                tooltip: main.config(objectName)["tooltip"]
                 Image {
                     id: restoreBtnImg
                     objectName: "restoreBtnImg"

@@ -82,6 +82,20 @@
         "title": "Restore Previously Saved Image",
         "text": "WARNING: Current image will be overwritten!\nDo you want to restore previous image anyway?" },
 
+    "toolStyle": {
+        "draw": {
+            "strokeStyle": "#008888",
+            "lineDash": [],
+            "lineWidth": 1.5
+        },
+        "erase": {
+            "strokeStyle": "#00FF00",
+            "lineDash": [2, 2],
+            "lineWidth": 1.5
+        }
+    },
+
     "image": {
         "source": "../resource/startup.png" }
+
 }

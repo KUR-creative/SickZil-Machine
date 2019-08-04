@@ -5,6 +5,7 @@
  [ALL STATES]
 window.state
 window.tool
+window.painting
 mask.is_dirty
 mask.visible
 */
@@ -491,6 +492,13 @@ ApplicationWindow {
             // tools keys
             else if(event.key == Qt.Key_N) { set_tool(window.pen) }  // peN
             else if(event.key == Qt.Key_R) { set_tool(window.rect) } // Rect
+            else if(event.key == Qt.Key_Y) { // toggle Pen <-> Rect
+                if(window.tool == window.pen) {
+                    set_tool(window.rect) 
+                }else if(window.tool == window.rect) {
+                    set_tool(window.pen) 
+                }
+            } 
         }
         Keys.onReleased: {
             // to prevent image loading error
@@ -681,13 +689,21 @@ ApplicationWindow {
                     property int released_x: 0
                     property int released_y: 0
 
+                    readonly property variant tool_style: main.config("toolStyle")
+
                     onPaint: {
                         var ctx = getContext("2d");
                         ctx.reset();
                         if(window.tool == window.pen) {
-                            ctx.strokeStyle = "#008888";
-                            ctx.setLineDash([3, 1]);
-                            ctx.lineWidth = 1.5;
+                            if(window.painting){
+                                ctx.strokeStyle = tool_style["draw"]["strokeStyle"]
+                                ctx.setLineDash(tool_style["draw"]["lineDash"]);
+                                ctx.lineWidth = tool_style["draw"]["lineWidth"];
+                            }else{
+                                ctx.strokeStyle = tool_style["erase"]["strokeStyle"];
+                                ctx.setLineDash(tool_style["erase"]["lineDash"]);
+                                ctx.lineWidth = tool_style["erase"]["lineWidth"];
+                            }
 
                             ctx.beginPath();
                             ctx.arc(
@@ -700,8 +716,15 @@ ApplicationWindow {
                             ctx.closePath();
                         } else if(window.tool == window.rect) {
                             if(drawing){
-                                ctx.strokeStyle = "#00FF00";
-                                ctx.lineWidth = 1.5;
+                                if(window.painting){
+                                    ctx.strokeStyle = tool_style["draw"]["strokeStyle"]
+                                    ctx.setLineDash(tool_style["draw"]["lineDash"]);
+                                    ctx.lineWidth = tool_style["draw"]["lineWidth"];
+                                }else{
+                                    ctx.strokeStyle = tool_style["erase"]["strokeStyle"];
+                                    ctx.setLineDash(tool_style["erase"]["lineDash"]);
+                                    ctx.lineWidth = tool_style["erase"]["lineWidth"];
+                                }
 
                                 ctx.beginPath();
                                 ctx.rect(

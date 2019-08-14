@@ -1,3 +1,4 @@
+import pytest
 import os,sys
 sys.path.append( os.path.abspath('../src') )
 
@@ -8,6 +9,8 @@ def posix_abspath(path):
     return(abspath.replace('\\','/') if '\\' in abspath
       else abspath)
 
+import platform
+@pytest.mark.skipif(platform.system() == 'Linux', reason='only for LAB MACHINE, Windows.')
 def test_imread_kor_path():
     path = posix_abspath(
         "./fixture/한국어경로real/images/bgr1.png")

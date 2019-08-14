@@ -1,3 +1,4 @@
+import os
 from PyQt5.QtGui import QImage
 import cv2
 import numpy as np
@@ -5,10 +6,9 @@ import imghdr
 
 #---------------------------------------------------------------------------------
 def is_img_file(fpath):
-    try:
-        return (imghdr.what(fpath) != None)
-    except:
-        return False
+    return(not(imread(fpath) is None) 
+        if os.path.isfile(fpath)
+      else False)
 
 def unique_colors(img):
     ''' 
@@ -44,18 +44,20 @@ def modulo_padded(img, modulo=16):
         return np.pad(img, [(0,h_padding),(0,w_padding)], mode='reflect')
 
 #---------------------------------------------------------------------------------
-def imread(path):
+def imread(fpath):
     '''
-    Path could be windows path (even includes unicode!) 
-    (cv2.imread cannott work with unicode and windows path)
+    `fpath` could be windows path (even includes unicode!) 
+    (cv2.imread cannot work with unicode and windows path)
     If no file or can't decode with cv2.imdecode, then return None.
+
+    Assert that fpath is not directory.
+    If data of fpath is invalid image(or not an image), then return None
     '''
-    with open(path,'rb') as stream: 
+    with open(fpath,'rb') as stream: 
         bytes = bytearray(stream.read())
         nparr = np.asarray(bytes, dtype=np.uint8)
-        img = cv2.imdecode(nparr, cv2.IMREAD_UNCHANGED)
-        if img is not None:
-            return img
+        if len(nparr):
+            return cv2.imdecode(nparr, cv2.IMREAD_UNCHANGED)
 
 def nparr2qimg(cvimg):
     ''' convert cv2 bgr image -> rgb qimg '''

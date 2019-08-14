@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import pytest
 import os,sys
 sys.path.append( os.path.abspath('../src') )
 
@@ -108,6 +109,15 @@ def test_set_project_kor_path():
         fpath_real(prjdir, consts.PREV_MASKDIR,'2.png'), 
         fpath_real(prjdir, consts.PREV_MASKDIR,'3.png')
     )
+
+@pytest.mark.skipif(
+    not os.path.exists('./private_fixtures/broken_imghdr_partial/'), 
+    reason='If it skipped, add proper broken_imghdr_partial in private_fixtures directory.')
+def test_load_only_image_files(tmpdir):
+    imgdir = './private_fixtures/broken_imghdr_partial/'
+    state.new_project(imgdir, tmpdir)
+    state.set_project(tmpdir)
+    assert len(state.img_paths) == 3 # dependent to fixture..
 
 '''
 def test_clear_all():

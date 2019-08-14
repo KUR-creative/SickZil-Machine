@@ -10,3 +10,4 @@ tags
 
 !.gitignore
 !.gitkeep
+test/private_fixtures/

@@ -49,17 +49,19 @@ def img_mask_pairs():
 
 #-----------------------------------------------
 def new_project(imgdir, projdir):
-    # create folder structure
-    Path(projdir, consts.IMGDIR).mkdir(parents=True, exist_ok=True)
-    Path(projdir, consts.MASKDIR).mkdir(parents=True, exist_ok=True)
-    Path(projdir, consts.PREV_IMGDIR).mkdir(parents=True, exist_ok=True)
-    Path(projdir, consts.PREV_MASKDIR).mkdir(parents=True, exist_ok=True)
-    # copy imgs
-    imgpaths = filter(iu.is_img_file, fu.children(imgdir))
-    for imgpath in imgpaths:
-        shutil.copy( str(imgpath), Path(projdir, consts.IMGDIR))
-        shutil.copy( str(imgpath), Path(projdir, consts.PREV_IMGDIR))
-    return projdir
+    if imgdir and projdir:
+        # create folder structure
+        Path(projdir, consts.IMGDIR).mkdir(parents=True, exist_ok=True)
+        Path(projdir, consts.MASKDIR).mkdir(parents=True, exist_ok=True)
+        Path(projdir, consts.PREV_IMGDIR).mkdir(parents=True, exist_ok=True)
+        Path(projdir, consts.PREV_MASKDIR).mkdir(parents=True, exist_ok=True)
+        # copy imgs
+        imgpaths = filter(iu.is_img_file, fu.children(imgdir))
+        for imgpath in imgpaths:
+            shutil.copy( str(imgpath), Path(projdir, consts.IMGDIR))
+            shutil.copy( str(imgpath), Path(projdir, consts.PREV_IMGDIR))
+        return projdir
+    #else: None
 
 def set_project(prj_dirpath):
     assert Path(prj_dirpath, consts.IMGDIR).exists()

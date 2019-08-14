@@ -29,8 +29,12 @@ Of course, if you want, you can also specify text area you want to erase.
 
 Release
 -----
-**We released 0.1.0 pre-release version!** \
-You can download it [here](https://github.com/KUR-creative/SickZil-Machine/releases).
+**We released 0.1.1 pre-release version!** \
+You can download SZMC [here](https://github.com/KUR-creative/SickZil-Machine/releases).
+
+SickZil-Machine is not a perfect program. We need your help. \
+If you find a bug or have a suggestion, please open a [Github issue](https://github.com/KUR-creative/SickZil-Machine/issues) or send us an <a href="mailto:kur.creative.org@gmail.com">email</a>.
+
 
 future works
 -----
@@ -72,9 +76,12 @@ future works
 
 Release
 -----
-**현재 0.1.0 pre-release 버전을 배포하고 있습니다!** \
-[여기](https://github.com/KUR-creative/SickZil-Machine/releases)서 다운로드할 수 있습니다.
+**현재 0.1.1 pre-release 버전을 배포하고 있습니다!** \
+[여기](https://github.com/KUR-creative/SickZil-Machine/releases)서 다운로드할 수 있습니다.  
 
+현재 식질머신은 완벽하지 않습니다. 사용자 여러분의 도움이 필요합니다. \
+혹시 버그를 발견하셨거나 제안이 있으시다면 [깃헙 이슈](https://github.com/KUR-creative/SickZil-Machine/issues)를 열어 제보해 주시거나 <a href="mailto:kur.creative.org@gmail.com">이메일</a>을 보내주세요.\
+특히 이슈의 경우, 영어를 모르시면 그냥 한국어로 쓰셔도 됩니다.    
 
 future works
 -----

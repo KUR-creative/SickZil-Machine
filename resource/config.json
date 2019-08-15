@@ -1,7 +1,7 @@
 {
-    "program_name": "SickZil-Machine",
-    "version": "0.1.0", 
     "language": "English",
+    "program_name": "SickZil-Machine",
+    "version": "0.1.1-pre0", 
     "startup_image": "../resource/startup.png",
 
     "seg_limit": 4000000,

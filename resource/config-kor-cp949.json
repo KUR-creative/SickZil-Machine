@@ -1,0 +1,107 @@
+{
+    "language": "Korean",
+    "program_name": "식질머신",
+    "version": "0.1.1-pre0", 
+    "startup_image": "../resource/startup.png",
+
+    "seg_limit": 4000000,
+    "compl_limit": 657666,
+
+    "imgsToProjWarnDialog": {
+        "title": "단순 이미지 폴더 -> 만화 프로젝트 폴더",
+        "text": "이미지가 존재하는 폴더를 선택하셨습니다.\n이 이미지들로 \"만화 프로젝트 폴더\"를 생성하시겠습니까?" },
+    "new_project_dialog": {
+        "caption": "새 만화 프로젝트 폴더 생성", 
+        "filter": "폴더"
+    },
+
+    "projectOpenDialog": {
+        "title": "만화 프로젝트 폴더 선택" },
+    "openProjectAction": {
+        "text": "만화 프로젝트 폴더 열기" },
+    "openMenu": {
+        "title": "열기" },
+
+    "gen_mask_all": { 
+        "tooltip": "GenMaskAll: 모든 이미지의 마스크를 생성합니다.\n경고: 기존에 편집한 모든 마스크가 덮어씌워집니다!"},
+    "genMaskAllBtnImg": {
+        "source": "../resource/mask_all_btn.png" },
+    "genMaskAllDialog": {
+        "title": "모든 이미지의 마스크 생성",
+        "text": "작업에 오랜 시간이 걸릴 수 있습니다.\n정말로 모든 이미지의 마스크를 생성하시겠습니까?\n경고: 기존에 편집한 모든 마스크가 덮어씌워집니다!" },
+
+    "rmtxt_all_btn": {
+        "tooltip": "RmTxtAll: 모든 이미지의 텍스트를 제거합니다.\n이미지에 대응하여 저장된 마스크가 있다면 텍스트 제거에 사용합니다.\n저장된 마스크가 없다면 새로 생성하여 텍스트를 제거합니다."},
+    "rmTxtAllBtnImg": {
+        "source": "../resource/rmtxt_all_btn.png" },
+    "rmTxtAllDialog": {
+        "title": "모든 이미지의 텍스트 제거",
+        "text": "작업에 오랜 시간이 걸릴 수 있습니다.\n정말로 모든 이미지의 텍스트를 제거하시겠습니까?\n" },
+
+    "genMaskBtn": {
+        "tooltip": "GenMask: 현재 표시하고 있는 이미지의 마스크를 생성합니다."},
+    "genMaskBtnImg": {
+        "source": "../resource/mask_btn.png" },
+    "genMaskDialog": {
+        "title": "마스크 생성",
+        "text": "경고: 편집한 마스크가 덮어씌워집니다!\n정말로 마스크를 생성하시겠습니까?" },
+
+    "rm_txt_btn": {
+        "tooltip": "RmTxt [Enter]: 현재 표시하고 있는 이미지의 텍스트를 제거합니다.\n저장된 마스크가 있다면 텍스트 제거에 사용합니다.\n저장된 마스크가 없다면 새로 생성하여 텍스트를 제거합니다."},
+    "rmTxtBtnImg": {
+        "source": "../resource/rmtxt_btn.png" },
+
+    "maskToggleBtn" : {
+        "tooltip": "ToggleMask [SpaceBar]: 클릭하여 마스크를 표시하거나/숨깁니다."},
+    "mask_toggle_btn": {
+        "on_img":  "../resource/mask_on.png",
+        "off_img": "../resource/mask_off.png" },
+
+    "toggleDrawEraseBtn": {
+        "tooltip": "[T]oggleDrawErase: 클릭하여 마스크 그리기/지우기를 전환합니다."},
+    "pen_toggle_btn": {
+        "pen": "../resource/pen.png",
+        "eraser": "../resource/eraser.png" },
+
+    "penToolBtn": {
+        "tooltip": "Pe[N]Tool: 현재의 펜 사이즈로 마스크를 그리거나/지웁니다.\n[+,=] 펜 사이즈 확대\n[-] 펜 사이즈 축소\n[Y] 이전 도구로 돌아갑니다(이 버전에서는 사각형 툴로 돌아갑니다)"},
+    "pen_tool": {
+        "pen_on":  "../resource/tools/pen_tool_on.png",
+        "pen_off": "../resource/tools/pen_tool_off.png" },
+
+    "rectToolBtn": {
+        "tooltip": "[R]ectTool: 사각형으로 마스크를 그리거나/지웁니다.\n[Y] 이전 도구로 돌아갑니다(이 버전에서는 펜 툴로 돌아갑니다)" },
+    "rect_tool": {
+        "rect_on":  "../resource/tools/rect_tool_on.png",
+        "rect_off": "../resource/tools/rect_tool_off.png" },
+
+    "panningToolBtn": {
+        "tooltip": "PanningTool: [MouseWheel]을 누르고 드래그하여 캔버스를 이동합니다.\n주의: 이 버튼을 눌러서 사용할 수 없습니다."},
+    "panning_tool": {
+        "panning_on":  "../resource/tools/panning_on.png",
+        "panning_off": "../resource/tools/panning_off.png" },
+
+    "revertBtn": {
+        "tooltip": "RevertImage: 클릭하여 현재 표시중인 이미지를 편집되지 않은 원본 이미지로 복원합니다.\n경고: 현재 이미지가 덮어씌워집니다."},
+    "restoreBtnImg": {
+        "source": "../resource/restore_btn.png" },
+    "restorePrevImgDialog": {
+        "title": "원본 이미지로 복원하기",
+        "text": "경고: 현재 이미지가 덮어씌워집니다!\n정말로 원본 이미지로 복원하시겠습니까?" },
+
+    "toolStyle": {
+        "draw": {
+            "strokeStyle": "#008888",
+            "lineDash": [],
+            "lineWidth": 1.5
+        },
+        "erase": {
+            "strokeStyle": "#00FF00",
+            "lineDash": [2, 2],
+            "lineWidth": 1.5
+        }
+    },
+
+    "image": {
+        "source": "../resource/startup.png" }
+}

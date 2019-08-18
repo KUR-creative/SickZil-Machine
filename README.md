@@ -49,13 +49,23 @@ The dataset will only be used for research purposes.
 Release
 -----
 **We released 0.1.1 pre-release version!** \
-You can download SZMC [here](https://github.com/KUR-creative/SickZil-Machine/releases).
+[You can download SZMC here](https://github.com/KUR-creative/SickZil-Machine/releases).
 
 SickZil-Machine is not a perfect program. We need your help. \
 If you find a bug or have a suggestion, please open a [Github issue](https://github.com/KUR-creative/SickZil-Machine/issues) or send us an <a href="mailto:kur.creative.org@gmail.com">email</a>.
 
+Run the code(for developers)
+----
 
-future works
+You need NVIDIA driver 410.x, CUDA 10.0, CUDNN (>= 7.4.1). (tensorflow 1.13.0 requirements)
+
+0. `git clone https://github.com/KUR-creative/SickZil-Machine.git; cd SickZil-Machine`
+1. Download one of release zip files from [here](https://github.com/KUR-creative/SickZil-Machine/releases).
+2. Unzip the release file and copy `SickZil-Machine-0.1.1-pre0-win64-cpu-eng/resource/cnet` and `SickZil-Machine-0.1.1-pre0-win64-cpu-eng/resource/snet` directories to `SickZil-Machine/resource`.
+3. `pip install -r requirements.txt`
+4. `cd src; python main.py`
+
+Future works
 -----
 - Increase text segmentation performance
 - Open manga text segmentation mask dataset
@@ -116,13 +126,24 @@ SegNet으로 [U-net](https://arxiv.org/abs/1505.04597)을 적용했고, ComplNet
 Release
 -----
 **현재 0.1.1 pre-release 버전을 배포하고 있습니다!** \
-[여기](https://github.com/KUR-creative/SickZil-Machine/releases)서 다운로드할 수 있습니다.  
+[여기서 다운로드할 수 있습니다.](https://github.com/KUR-creative/SickZil-Machine/releases)
 
 현재 식질머신은 완벽하지 않습니다. 사용자 여러분의 도움이 필요합니다. \
 혹시 버그를 발견하셨거나 제안이 있으시다면 [깃헙 이슈](https://github.com/KUR-creative/SickZil-Machine/issues)를 열어 제보해 주시거나 <a href="mailto:kur.creative.org@gmail.com">이메일</a>을 보내주세요.\
 특히 이슈의 경우, 영어를 모르시면 그냥 한국어로 쓰셔도 됩니다.    
 
-future works
+Run the code(for developers)
+----
+
+NVIDIA driver 410.x, CUDA 10.0, CUDNN (>= 7.4.1)이 필요합니다(텐서플로우 1.13.0 요구사항).
+
+0. `git clone https://github.com/KUR-creative/SickZil-Machine.git; cd SickZil-Machine`
+1. [여기](https://github.com/KUR-creative/SickZil-Machine/releases)서 릴리즈 빌드 중 하나를 다운로드합니다.
+2. 압축을 풀고 `SickZil-Machine-0.1.1-pre0-win64-cpu-eng/resource/cnet` 과 `SickZil-Machine-0.1.1-pre0-win64-cpu-eng/resource/snet` 폴더를 `SickZil-Machine/resource`폴더로 복사합니다.
+3. `pip install -r requirements.txt`
+4. `cd src; python main.py`
+
+Future works
 -----
 - 만화 텍스트 세그멘테이션 성능 높이기
 - 만화 텍스트 세그멘테이션 마스크 데이터셋 공개하기

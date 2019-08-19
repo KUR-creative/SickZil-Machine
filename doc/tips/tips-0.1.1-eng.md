@@ -1,11 +1,11 @@
 Install
 ----
 
-![1.png](tips/tip-images/1.png)
+![1.png](tip-images/1.png)
 
 Not this
 
-![2.png](tips/tip-images/2.png)
+![2.png](tip-images/2.png)
 
 https://github.com/KUR-creative/SickZil-Machine/releases \
 Download SZMC here. \
@@ -21,11 +21,11 @@ Go to Google's office and lay down </sub>
 Execution
 ----
 
-![3.png](tips/tip-images/3.png)
+![3.png](tip-images/3.png)
 
 Double click `SickZil-Machine-0.1.1-pre0-win64-gpu-eng.cmd` or
 
-![4.png](tips/tip-images/4.png)
+![4.png](tip-images/4.png)
 
 Double click the `SickZil-Machine-0.1.1-pre0-win64-gpu-eng.exe` file in the `main` folder to run SZMC.
 
@@ -39,7 +39,7 @@ Create manga project folder
 SZMC always work by opening the "**Manga Project Folder**". \
 The manga project folder is a folder that contains four folders: **images, masks, prev_images, prev_masks**.
 
-![5.png](tips/tip-images/5.png)
+![5.png](tip-images/5.png)
 
 
 **images** stores all of the images you edit on SZMC. \
@@ -62,14 +62,14 @@ Then you can create a **new comic project folder**.
 
 Click [Open] - [Open Manga Project Folder].
 
-![6.png](tips/tip-images/6.png)
+![6.png](tip-images/6.png)
 
 
 If you press choose button, you will be asked to create a manga project folder.
 
 then
 
-![7.png](tips/tip-images/7.png)
+![7.png](tip-images/7.png)
 
 
  
@@ -77,13 +77,13 @@ then
 By default, the name of the output folder is `input folder name` + \_mproj. \
 Press Save to create new manga project folder.
 
-![8.png](tips/tip-images/8.png)
+![8.png](tip-images/8.png)
 
 
 
 And then images are copied.
 
-![9.png](tips/tip-images/9.png)
+![9.png](tip-images/9.png)
 
 
 
@@ -94,7 +94,7 @@ And then images are copied.
 In the future, you can then open(or load) manga project folder you created.
 
 
-![10.png](tips/tip-images/10.png)
+![10.png](tip-images/10.png)
 
 
  
@@ -125,7 +125,7 @@ Dataset Contribution
 In fact, the cumbersome work of 4. is because the accuracy of SZMC is not good enough. \
 If you provide data to us, SZMC can learn more and diverse images.
 
-![11.png](tips/tip-images/11.png)
+![11.png](tip-images/11.png)
 
 
 There are 3 (+1) pieces of data needed for SZMC.
@@ -165,7 +165,7 @@ We will post a tutorial on YouTube including the above tips.
 And we request: \
 Please insert next watermark
 
-![12.png](tips/tip-images/12.png)
+![12.png](tip-images/12.png)
 
 and git repository URL
 
@@ -177,7 +177,7 @@ It's for promotional purposes. (You can put shrinked watermark)
 But some people said that the watermark was bad.
 
 
-![13.png](tips/tip-images/13.png)
+![13.png](tip-images/13.png)
  
 
 Well.. we admit it.

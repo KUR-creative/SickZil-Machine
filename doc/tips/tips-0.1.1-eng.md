@@ -36,7 +36,7 @@ Double click the `SickZil-Machine-0.1.1-pre0-win64-gpu-eng.exe` file in the `mai
 Create manga project folder
 ----
 
-SZMC always work by opening the "**Manga Project Folder**". \
+SZMC always work with "**Manga Project Folder**". \
 The manga project folder is a folder that contains four folders: **images, masks, prev_images, prev_masks**.
 
 ![5.png](tip-images/5.png)
@@ -55,8 +55,8 @@ prev_masks has no features yet and is always empty.
 
 
 If you open a folder other than the manga project folder, \
-If there is at least one image in a folder (this is called a "simple image folder") \
-Then you can create a **new comic project folder**.
+If there is at least one image in a folder (this is called a "flat image folder") \
+Then you can create a **new manga project folder**.
 
 
 
@@ -65,7 +65,7 @@ Click [Open] - [Open Manga Project Folder].
 ![6.png](tip-images/6.png)
 
 
-If you press choose button, you will be asked to create a manga project folder.
+If you press `choose` button, you will be asked to create a manga project folder.
 
 then
 

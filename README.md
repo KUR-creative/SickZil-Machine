@@ -49,7 +49,8 @@ The dataset will only be used for research purposes.
 Release
 -----
 **We released 0.1.1 pre-release version!** \
-[You can download SZMC here](https://github.com/KUR-creative/SickZil-Machine/releases).
+[You can download SZMC here](https://github.com/KUR-creative/SickZil-Machine/releases). \
+[Tutorials and Tips here.](https://github.com/KUR-creative/SickZil-Machine/blob/master/doc/tips/tips-0.1.1-eng.md)
 
 SickZil-Machine is not a perfect program. We need your help. \
 If you find a bug or have a suggestion, please open a [Github issue](https://github.com/KUR-creative/SickZil-Machine/issues) or send us an <a href="mailto:kur.creative.org@gmail.com">email</a>.
@@ -126,7 +127,8 @@ SegNet으로 [U-net](https://arxiv.org/abs/1505.04597)을 적용했고, ComplNet
 Release
 -----
 **현재 0.1.1 pre-release 버전을 배포하고 있습니다!** \
-[여기서 다운로드할 수 있습니다.](https://github.com/KUR-creative/SickZil-Machine/releases)
+[여기서 다운로드할 수 있습니다.](https://github.com/KUR-creative/SickZil-Machine/releases) \
+[사용방법과 팁](https://github.com/KUR-creative/SickZil-Machine/blob/master/doc/tips/tips-0.1.1-kor.md)
 
 현재 식질머신은 완벽하지 않습니다. 사용자 여러분의 도움이 필요합니다. \
 혹시 버그를 발견하셨거나 제안이 있으시다면 [깃헙 이슈](https://github.com/KUR-creative/SickZil-Machine/issues)를 열어 제보해 주시거나 <a href="mailto:kur.creative.org@gmail.com">이메일</a>을 보내주세요.\

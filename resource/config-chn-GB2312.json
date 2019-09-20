@@ -9,85 +9,85 @@
 
     "imgsToProjWarnDialog": {
         "title": "Flat Image folder -> Manga Project folder",
-        "text": "ä½ é€‰æ‹©äº†ä¸€ä¸ªåŒ…å«æ¼«ç”»çš„æ–‡ä»¶å¤¹.\nä½ å‡†å¤‡ç”¨è¿™äº›æ¼«ç”»å»ºç«‹ä¸€ä¸ªæ–°çš„\"æ¼«ç”»å·¥ç¨‹æ–‡ä»¶å¤¹\" å—?" },
+        "text": "ÄãÑ¡ÔñÁËÒ»¸ö°üº¬Âş»­µÄÎÄ¼ş¼Ğ.\nÄã×¼±¸ÓÃÕâĞ©Âş»­½¨Á¢Ò»¸öĞÂµÄ\"Âş»­¹¤³ÌÎÄ¼ş¼Ğ\" Âğ?" },
     "new_project_dialog": {
-        "caption": "å»ºç«‹ä¸€ä¸ªæ–°çš„æ¼«ç”»å·¥ç¨‹æ–‡ä»¶å¤¹", 
+        "caption": "½¨Á¢Ò»¸öĞÂµÄÂş»­¹¤³ÌÎÄ¼ş¼Ğ", 
         "filter": "Directory"
     },
 
     "projectOpenDialog": {
-        "title": "é€‰æ‹©æ¼«ç”»å·¥ç¨‹æ–‡ä»¶å¤¹" },
+        "title": "Ñ¡ÔñÂş»­¹¤³ÌÎÄ¼ş¼Ğ" },
     "openProjectAction": {
-        "text": "æ‰“å¼€æ¼«ç”»å·¥ç¨‹æ–‡ä»¶å¤¹" },
+        "text": "´ò¿ªÂş»­¹¤³ÌÎÄ¼ş¼Ğ" },
     "openMenu": {
-        "title": "æ‰“å¼€" },
+        "title": "´ò¿ª" },
 
     "gen_mask_all": { 
-        "tooltip": "GenMaskAll: å¯¹å…¨éƒ¨å›¾åƒåˆ›å»ºè¦†ç›–æ–‡å­—çš„è’™ç‰ˆ\nè­¦å‘Šï¼šè¿™å°†ä¼šå¯¼è‡´æ‰€æœ‰ä¹‹å‰ç”Ÿæˆçš„è’™ç‰ˆè¢«è¦†ç›–."},
+        "tooltip": "GenMaskAll: ¶ÔÈ«²¿Í¼Ïñ´´½¨¸²¸ÇÎÄ×ÖµÄÃÉ°æ\n¾¯¸æ£ºÕâ½«»áµ¼ÖÂËùÓĞÖ®Ç°Éú³ÉµÄÃÉ°æ±»¸²¸Ç."},
     "genMaskAllBtnImg": {
         "source": "../resource/mask_all_btn.png" },
     "genMaskAllDialog": {
         "title": "Generate Mask All",
-        "text": "è¿™å°†ä¼šèŠ±è´¹å¾ˆé•¿çš„æ—¶é—´. ä½ ä»ç„¶æƒ³è¦å¯¹æ‰€æœ‰å›¾åƒåˆ›å»ºè’™ç‰ˆå—?\nè­¦å‘Šï¼šè¿™å°†ä¼šå¯¼è‡´æ‰€æœ‰ä¹‹å‰ç”Ÿæˆçš„è’™ç‰ˆè¢«è¦†ç›–." },
+        "text": "Õâ½«»á»¨·ÑºÜ³¤µÄÊ±¼ä. ÄãÈÔÈ»ÏëÒª¶ÔËùÓĞÍ¼Ïñ´´½¨ÃÉ°æÂğ?\n¾¯¸æ£ºÕâ½«»áµ¼ÖÂËùÓĞÖ®Ç°Éú³ÉµÄÃÉ°æ±»¸²¸Ç." },
 
     "rmtxt_all_btn": {
-        "tooltip": "RmTxtAll: å¯¹å…¨éƒ¨å›¾åƒæ¶ˆé™¤è’™ç‰ˆæ‰€è¦†ç›–çš„åœ°æ–¹\nå¹¶ç”±AIè‡ªåŠ¨ç”Ÿæˆè¡¥é½ç¼ºå¤±éƒ¨åˆ†."},
+        "tooltip": "RmTxtAll: ¶ÔÈ«²¿Í¼ÏñÏû³ıÃÉ°æËù¸²¸ÇµÄµØ·½\n²¢ÓÉAI×Ô¶¯Éú³É²¹ÆëÈ±Ê§²¿·Ö."},
     "rmTxtAllBtnImg": {
         "source": "../resource/rmtxt_all_btn.png" },
     "rmTxtAllDialog": {
         "title": "Remove Text All",
-        "text": "è¿™å°†ä¼šèŠ±è´¹å¾ˆé•¿çš„æ—¶é—´. ä½ ä»ç„¶æƒ³è¦å¯¹æ‰€æœ‰å›¾åƒæ¶ˆé™¤è’™ç‰ˆå¹¶ç”±AIè¡¥é½å—?" },
+        "text": "Õâ½«»á»¨·ÑºÜ³¤µÄÊ±¼ä. ÄãÈÔÈ»ÏëÒª¶ÔËùÓĞÍ¼ÏñÏû³ıÃÉ°æ²¢ÓÉAI²¹ÆëÂğ?" },
 
     "genMaskBtn": {
-        "tooltip": "GenMask: å¯¹å½“å‰å›¾åƒåˆ›å»ºè¦†ç›–æ–‡å­—çš„è’™ç‰ˆ"},
+        "tooltip": "GenMask: ¶Ôµ±Ç°Í¼Ïñ´´½¨¸²¸ÇÎÄ×ÖµÄÃÉ°æ"},
     "genMaskBtnImg": {
         "source": "../resource/mask_btn.png" },
     "genMaskDialog": {
-        "title": "ç”Ÿæˆè’™ç‰ˆ",
-        "text": "è­¦å‘Šï¼šå½“å‰å·²è¢«ç¼–è¾‘çš„è’™ç‰ˆå°†è¢«è¦†ç›–!\nä½ ä»ç„¶æƒ³ç”±AIç”Ÿæˆè’™ç‰ˆå—?" },
+        "title": "Éú³ÉÃÉ°æ",
+        "text": "¾¯¸æ£ºµ±Ç°ÒÑ±»±à¼­µÄÃÉ°æ½«±»¸²¸Ç!\nÄãÈÔÈ»ÏëÓÉAIÉú³ÉÃÉ°æÂğ?" },
 
     "rm_txt_btn": {
-        "tooltip": "RmTxt [Enteré”®]: å¯¹å½“å‰å›¾åƒæ¶ˆé™¤è’™ç‰ˆæ‰€è¦†ç›–çš„åœ°æ–¹\nå¹¶ç”±AIè‡ªåŠ¨ç”Ÿæˆè¡¥é½ç¼ºå¤±éƒ¨åˆ†."},
+        "tooltip": "RmTxt [Enter¼ü]: ¶Ôµ±Ç°Í¼ÏñÏû³ıÃÉ°æËù¸²¸ÇµÄµØ·½\n²¢ÓÉAI×Ô¶¯Éú³É²¹ÆëÈ±Ê§²¿·Ö."},
     "rmTxtBtnImg": {
         "source": "../resource/rmtxt_btn.png" },
 
     "maskToggleBtn" : {
-        "tooltip": "ToggleMask [ç©ºæ ¼é”®]: ç‚¹å‡»æ˜¾ç¤ºæˆ–éšè—è’™ç‰ˆ"},
+        "tooltip": "ToggleMask [¿Õ¸ñ¼ü]: µã»÷ÏÔÊ¾»òÒş²ØÃÉ°æ"},
     "mask_toggle_btn": {
         "on_img":  "../resource/mask_on.png",
         "off_img": "../resource/mask_off.png" },
 
     "toggleDrawEraseBtn": {
-        "tooltip": "ToggleDrawErase[Té”®]: ç‚¹å‡»åˆ‡æ¢ç»˜åˆ¶æˆ–åˆ é™¤è’™ç‰ˆ"},
+        "tooltip": "ToggleDrawErase[T¼ü]: µã»÷ÇĞ»»»æÖÆ»òÉ¾³ıÃÉ°æ"},
     "pen_toggle_btn": {
         "pen": "../resource/pen.png",
         "eraser": "../resource/eraser.png" },
 
     "penToolBtn": {
-        "tooltip": "PenTool[Né”®]: ä½¿ç”¨å½“å‰é’¢ç¬”å¤§å°ç»˜åˆ¶æˆ–åˆ é™¤è’™ç‰ˆ\næŒ‰[+,=]å¢åŠ ç²—åº¦\næŒ‰[-]å‡å°‘ç²—åº¦\næŒ‰[Y]åˆ‡æ¢åˆ°RectTool"},
+        "tooltip": "PenTool[N¼ü]: Ê¹ÓÃµ±Ç°¸Ö±Ê´óĞ¡»æÖÆ»òÉ¾³ıÃÉ°æ\n°´[+,=]Ôö¼Ó´Ö¶È\n°´[-]¼õÉÙ´Ö¶È\n°´[Y]ÇĞ»»µ½RectTool"},
     "pen_tool": {
         "pen_on":  "../resource/tools/pen_tool_on.png",
         "pen_off": "../resource/tools/pen_tool_off.png" },
 
     "rectToolBtn": {
-        "tooltip": "RectTool[Ré”®]: ä½¿ç”¨çŸ©å½¢å·¥å…·ç»˜åˆ¶æˆ–åˆ é™¤è’™ç‰ˆ\næŒ‰[Y]åˆ‡æ¢åˆ°PenTool" },
+        "tooltip": "RectTool[R¼ü]: Ê¹ÓÃ¾ØĞÎ¹¤¾ß»æÖÆ»òÉ¾³ıÃÉ°æ\n°´[Y]ÇĞ»»µ½PenTool" },
     "rect_tool": {
         "rect_on":  "../resource/tools/rect_tool_on.png",
         "rect_off": "../resource/tools/rect_tool_off.png" },
 
     "panningToolBtn": {
-        "tooltip": "PanningTool: æŒ‰ä½é¼ æ ‡ä¸­é”®æ‹–åŠ¨ç”»å¸ƒ\næ³¨æ„ï¼šå½“å‰ç‰ˆæœ¬ç‚¹å‡»è¯¥æŒ‰é’®æ— æ•ˆ"},
+        "tooltip": "PanningTool: °´×¡Êó±êÖĞ¼üÍÏ¶¯»­²¼\n×¢Òâ£ºµ±Ç°°æ±¾µã»÷¸Ã°´Å¥ÎŞĞ§"},
     "panning_tool": {
         "panning_on":  "../resource/tools/panning_on.png",
         "panning_off": "../resource/tools/panning_off.png" },
 
     "revertBtn": {
-        "tooltip": "RevertImage: æ¢å¤åˆ°åŸå§‹çš„å›¾åƒ\nè­¦å‘Šï¼šè¿™ä¼šå¯¼è‡´å½“å‰å›¾åƒè¢«è¦†ç›–"},
+        "tooltip": "RevertImage: »Ö¸´µ½Ô­Ê¼µÄÍ¼Ïñ\n¾¯¸æ£ºÕâ»áµ¼ÖÂµ±Ç°Í¼Ïñ±»¸²¸Ç"},
     "restoreBtnImg": {
         "source": "../resource/restore_btn.png" },
     "restorePrevImgDialog": {
         "title": "Restore Previously Saved Image",
-        "text": "è­¦å‘Šï¼šè¿™ä¼šå¯¼è‡´å½“å‰å›¾åƒè¢«è¦†ç›–!\nä½ ä»ç„¶æƒ³è¦æ¢å¤åˆ°ä¹‹å‰æœªç¼–è¾‘è¿‡çš„å›¾åƒå—?" },
+        "text": "¾¯¸æ£ºÕâ»áµ¼ÖÂµ±Ç°Í¼Ïñ±»¸²¸Ç!\nÄãÈÔÈ»ÏëÒª»Ö¸´µ½Ö®Ç°Î´±à¼­¹ıµÄÍ¼ÏñÂğ?" },
 
     "toolStyle": {
         "draw": {

@@ -1,0 +1,107 @@
+{
+    "language": "Chinese",
+    "program_name": "SickZil-Machine",
+    "version": "0.1.1-pre0", 
+    "startup_image": "../resource/startup.png",
+
+    "seg_limit": 4000000,
+    "compl_limit": 657666,
+
+    "imgsToProjWarnDialog": {
+        "title": "Flat Image folder -> Manga Project folder",
+        "text": "你选择了一个包含漫画的文件夹.\n你准备用这些漫画建立一个新的\"漫画工程文件夹\" 吗?" },
+    "new_project_dialog": {
+        "caption": "建立一个新的漫画工程文件夹", 
+        "filter": "Directory"
+    },
+
+    "projectOpenDialog": {
+        "title": "选择漫画工程文件夹" },
+    "openProjectAction": {
+        "text": "打开漫画工程文件夹" },
+    "openMenu": {
+        "title": "打开" },
+
+    "gen_mask_all": { 
+        "tooltip": "GenMaskAll: 对全部图像创建覆盖文字的蒙版\n警告：这将会导致所有之前生成的蒙版被覆盖."},
+    "genMaskAllBtnImg": {
+        "source": "../resource/mask_all_btn.png" },
+    "genMaskAllDialog": {
+        "title": "Generate Mask All",
+        "text": "这将会花费很长的时间. 你仍然想要对所有图像创建蒙版吗?\n警告：这将会导致所有之前生成的蒙版被覆盖." },
+
+    "rmtxt_all_btn": {
+        "tooltip": "RmTxtAll: 对全部图像消除蒙版所覆盖的地方\n并由AI自动生成补齐缺失部分."},
+    "rmTxtAllBtnImg": {
+        "source": "../resource/rmtxt_all_btn.png" },
+    "rmTxtAllDialog": {
+        "title": "Remove Text All",
+        "text": "这将会花费很长的时间. 你仍然想要对所有图像消除蒙版并由AI补齐吗?" },
+
+    "genMaskBtn": {
+        "tooltip": "GenMask: 对当前图像创建覆盖文字的蒙版"},
+    "genMaskBtnImg": {
+        "source": "../resource/mask_btn.png" },
+    "genMaskDialog": {
+        "title": "生成蒙版",
+        "text": "警告：当前已被编辑的蒙版将被覆盖!\n你仍然想由AI生成蒙版吗?" },
+
+    "rm_txt_btn": {
+        "tooltip": "RmTxt [Enter键]: 对当前图像消除蒙版所覆盖的地方\n并由AI自动生成补齐缺失部分."},
+    "rmTxtBtnImg": {
+        "source": "../resource/rmtxt_btn.png" },
+
+    "maskToggleBtn" : {
+        "tooltip": "ToggleMask [空格键]: 点击显示或隐藏蒙版"},
+    "mask_toggle_btn": {
+        "on_img":  "../resource/mask_on.png",
+        "off_img": "../resource/mask_off.png" },
+
+    "toggleDrawEraseBtn": {
+        "tooltip": "ToggleDrawErase[T键]: 点击切换绘制或删除蒙版"},
+    "pen_toggle_btn": {
+        "pen": "../resource/pen.png",
+        "eraser": "../resource/eraser.png" },
+
+    "penToolBtn": {
+        "tooltip": "PenTool[N键]: 使用当前钢笔大小绘制或删除蒙版\n按[+,=]增加粗度\n按[-]减少粗度\n按[Y]切换到RectTool"},
+    "pen_tool": {
+        "pen_on":  "../resource/tools/pen_tool_on.png",
+        "pen_off": "../resource/tools/pen_tool_off.png" },
+
+    "rectToolBtn": {
+        "tooltip": "RectTool[R键]: 使用矩形工具绘制或删除蒙版\n按[Y]切换到PenTool" },
+    "rect_tool": {
+        "rect_on":  "../resource/tools/rect_tool_on.png",
+        "rect_off": "../resource/tools/rect_tool_off.png" },
+
+    "panningToolBtn": {
+        "tooltip": "PanningTool: 按住鼠标中键拖动画布\n注意：当前版本点击该按钮无效"},
+    "panning_tool": {
+        "panning_on":  "../resource/tools/panning_on.png",
+        "panning_off": "../resource/tools/panning_off.png" },
+
+    "revertBtn": {
+        "tooltip": "RevertImage: 恢复到原始的图像\n警告：这会导致当前图像被覆盖"},
+    "restoreBtnImg": {
+        "source": "../resource/restore_btn.png" },
+    "restorePrevImgDialog": {
+        "title": "Restore Previously Saved Image",
+        "text": "警告：这会导致当前图像被覆盖!\n你仍然想要恢复到之前未编辑过的图像吗?" },
+
+    "toolStyle": {
+        "draw": {
+            "strokeStyle": "#008888",
+            "lineDash": [],
+            "lineWidth": 1.5
+        },
+        "erase": {
+            "strokeStyle": "#00FF00",
+            "lineDash": [2, 2],
+            "lineWidth": 1.5
+        }
+    },
+
+    "image": {
+        "source": "../resource/startup.png" }
+}

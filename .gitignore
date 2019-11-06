@@ -1,6 +1,5 @@
 *.zip
 *.vim
-.*
 *.odt
 
 __pycache__/

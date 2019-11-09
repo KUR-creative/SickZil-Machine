@@ -11,9 +11,9 @@ jobs:
     - uses: actions/checkout@v1
     - name: Download Model Files
       run: |
-        Invoke-WebRequest https://github.com/KUR-creative/SickZil-Machine/releases/download/v0.1.1-pre0/SickZil-Machine-0.1.1-pre0-win64-cpu-eng.zip
-        UnZip SickZil-Machine-0.1.1-pre0-win64-cpu-eng.zip
-        Set-Location SickZil-Machine-0.1.1-pre0-win64-cpu-eng
+        Invoke-WebRequest https://github.com/KUR-creative/SickZil-Machine/releases/download/v0.1.1-pre0/SickZil-Machine-0.1.1-pre0-win64-cpu-eng.zip -Outfile szRelease.zip
+        UnZip szRelease.zip
+        Set-Location szRelease
         Move-Item resource/cnet ../resource
         Move-item resource/snet ../resource
         Move-Item ..

@@ -19,7 +19,7 @@ posix_fpath = posix_abspath("./fixture/한국어경로real/images/bgr1.png")
     reason='Skipped due to file non-existent, or Operating System(not Windows)')
 def test_imread_kor_posix_path():
     global posix_fpath
-    img = iu.imread(path)
+    img = iu.imread(posix_fpath)
 
 window_fpath = 'C:/Users/KUR/Documents/카카오톡 받은 파일/새 폴더_mproj/masks/magi-2163285.png'
 @pytest.mark.skipif(platform.system() == 'Linux'

@@ -1,17 +1,22 @@
-name: Linux CPU
+name: Windows CPU
 
 on: [push]
 
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v1
-    - name: Install required packages
+    - name: Download Model Files
       run: |
-        apt install wget unzip
+        Invoke-WebRequest Invoke-WebRequest https://github.com/KUR-creative/SickZil-Machine/releases/download/v0.1.1-pre0/SickZil-Machine-0.1.1-pre0-win64-cpu-eng.zip
+        UnZip SickZil-Machine-0.1.1-pre0-win64-cpu-eng.zip
+        Set-Location SickZil-Machine-0.1.1-pre0-win64-cpu-eng
+        Move-Item resource/cnet ../resource
+        Move-item resource/snet ../resource
+        Move-Item ..
     - name: Set up Python 3.7
       uses: actions/setup-python@v1
       with:
@@ -27,14 +32,6 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Download model files
-      run: |
-        wget https://github.com/0x00000FF/SickZil-Machine/archive/v0.1.1-pre0.zip
-        unzip v0.1.1-pre0.zip
-        cd v0.1.1-pre0
-        mv snet ../resource
-        mv cnet ../resource
-    
     - name: Test with pytest
       run: |
         pip install pytest

@@ -11,17 +11,23 @@ def posix_abspath(path):
       else abspath)
 
 import platform
-@pytest.mark.skipif(platform.system() == 'Linux', 
-    reason='only for LAB MACHINE, Windows.')
-def test_imread_kor_path():
-    path = posix_abspath(
-        "./fixture/한국어경로real/images/bgr1.png")
-    if os.path.isfile(path):
-        img = iu.imread(path)
-    
-    path = 'C:/Users/KUR/Documents/카카오톡 받은 파일/새 폴더_mproj/masks/magi-2163285.png'
-    if os.path.isfile(path):
-        img = iu.imread(path)
+
+
+posix_fpath = posix_abspath("./fixture/한국어경로real/images/bgr1.png")
+@pytest.mark.skipif(platform.system() == 'Linux'
+    or not os.path.isfile(posix_fpath), 
+    reason='Skipped due to file non-existent, or Operating System(not Windows)')
+def test_imread_kor_posix_path():
+    global posix_fpath
+    img = iu.imread(path)
+
+window_fpath = 'C:/Users/KUR/Documents/카카오톡 받은 파일/새 폴더_mproj/masks/magi-2163285.png'
+@pytest.mark.skipif(platform.system() == 'Linux'
+    or not os.path.isfile(window_fpath),     
+    reason='Skipped due to file non-existent, or Operating System(not Windows)')
+def test_imread_kor_win_path():
+    global window_fpath
+    img = iu.imread(window_fpath)
 
 @pytest.mark.skipif(
     not os.path.exists('./private_fixtures/broken_imghdr/'), 

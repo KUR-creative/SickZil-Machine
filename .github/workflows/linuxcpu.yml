@@ -9,6 +9,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+    - name: Install required packages
+      run: |
+        apt install unzip
     - name: Set up Python 3.7
       uses: actions/setup-python@v1
       with:
@@ -24,6 +27,14 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    - name: Download model files
+      run: |
+        wget https://github.com/0x00000FF/SickZil-Machine/archive/v0.1.1-pre0.zip
+        unzip v0.1.1-pre0.zip
+        cd v0.1.1-pre0
+        mv snet ../resource
+        mv cnet ../resource
+    
     - name: Test with pytest
       run: |
         pip install pytest

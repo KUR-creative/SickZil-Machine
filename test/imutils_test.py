@@ -16,9 +16,12 @@ import platform
 def test_imread_kor_path():
     path = posix_abspath(
         "./fixture/한국어경로real/images/bgr1.png")
-    img = iu.imread(path)
+    if os.path.isfile(path):
+        img = iu.imread(path)
+    
     path = 'C:/Users/KUR/Documents/카카오톡 받은 파일/새 폴더_mproj/masks/magi-2163285.png'
-    img = iu.imread(path)
+    if os.path.isfile(path):
+        img = iu.imread(path)
 
 @pytest.mark.skipif(
     not os.path.exists('./private_fixtures/broken_imghdr/'), 

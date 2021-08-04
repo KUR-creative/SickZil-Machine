@@ -2,10 +2,13 @@ SickZil-Machine
 ===============
 <sup>English | [한국어](README.ko_kr.md)</sup>
 
-|         | CPU Build | GPU Build |
-|---------|-----------|-----------|
-| Linux   | ![Build Status](https://github.com/kur-creative/Sickzil-machine/workflows/Linux%20CPU/badge.svg)   |           |
-| Windows | ![Build Status](https://github.com/kur-creative/Sickzil-machine/workflows/Windows%20CPU/badge.svg) |           |
+Notice
+------
+[SZMC 0.1.1](https://github.com/KUR-creative/SickZil-Machine/releases) - Fixed link \
+[Tutorials and Tips](https://github.com/KUR-creative/SickZil-Machine/blob/master/doc/tips/tips-0.1.1-eng.md)
+
+Currently, I am still working on the SickZil-Machine. It is just laying the groundwork invisible to users. I'm building the system I need for more effective training data collection, more efficient deep learning model training, faster experimentation and analysis, model serving and deployment automation, etc. \
+I will go to the distance. I appreciate if you could wait a little longer. Thank you.
 
 ![szmc-0.1.0](doc/szmc-0.1.0.gif)
 <sup>(source: [manga109](http://www.manga109.org), © Kanno Hiroshi, © Okuda Momoko, © Kato Masaki)</sup>

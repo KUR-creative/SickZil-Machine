@@ -18,7 +18,7 @@ PyQt5-sip==4.19.18
 six==1.12.0
 tensorboard==1.14.0
 tensorflow-estimator==1.14.0
-tensorflow-gpu==1.14.0
+tensorflow-gpu==2.5.3
 termcolor==1.1.0
 tqdm==4.33.0
 Werkzeug==0.15.5
